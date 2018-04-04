@@ -3,9 +3,10 @@
 //
 
 #include <iostream>
+#include "testing/hello_world.h"
 using namespace std;
+int main(){
 
-int hello_world(){
-    return 98;
-
+   hello_world();
 }
+
