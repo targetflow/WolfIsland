@@ -6,6 +6,6 @@
 using namespace std;
 
 int hello_world(){
-    return 98;
+    return 2;
 
 }

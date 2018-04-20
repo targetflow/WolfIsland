@@ -4,9 +4,10 @@
 
 #include <iostream>
 #include "testing/hello_world.h"
+#include "console/program.h"
 using namespace std;
 int main(){
 
-   hello_world();
+   program();
 }
 
