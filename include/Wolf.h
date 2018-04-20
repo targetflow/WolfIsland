@@ -4,5 +4,14 @@
 
 #ifndef CPP_WOLF_H
 #define CPP_WOLF_H
+class Wolf: public Animal{
+private:
+public:
+    float health;
+    void move();
+    void TryToEatOrDie();
 
+protected:
+
+};
 #endif //CPP_WOLF_H

@@ -4,5 +4,15 @@
 
 #ifndef CPP_CELL_H
 #define CPP_CELL_H
+class Cell{
+public:
+    int coordinates[2];
+    Wolf_M wolf_m[];
+    Wolf_W wolf_w[];
+    Rabbit rabbit[];
+    int fence[7];
 
+private:
+protected:
+};
 #endif //CPP_CELL_H

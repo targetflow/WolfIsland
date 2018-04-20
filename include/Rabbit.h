@@ -4,5 +4,13 @@
 
 #ifndef CPP_RABBIT_H
 #define CPP_RABBIT_H
+class Rabbit: public Animal{
+private:
+public:
+    void move();
+    void spread();
 
+protected:
+
+};
 #endif //CPP_RABBIT_H
