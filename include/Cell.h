@@ -4,6 +4,9 @@
 
 #ifndef CPP_CELL_H
 #define CPP_CELL_H
+#include "Wolf_W.h"
+#include "Wolf_M.h"
+
 class Cell{
 public:
     int coordinates[2];

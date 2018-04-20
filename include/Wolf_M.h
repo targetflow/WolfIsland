@@ -4,6 +4,7 @@
 
 #ifndef CPP_WOLF_M_H
 #define CPP_WOLF_M_H
+#include "Animal.h"
 class Wolf_M: public Animal{
 private:
 public:

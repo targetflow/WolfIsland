@@ -4,6 +4,7 @@
 
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
+#include "Cell.h"
 class Field{
 public:
     Cell * cells[400];

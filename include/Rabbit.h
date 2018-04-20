@@ -4,6 +4,7 @@
 
 #ifndef CPP_RABBIT_H
 #define CPP_RABBIT_H
+#include "Animal.h"
 class Rabbit: public Animal{
 private:
 public:
