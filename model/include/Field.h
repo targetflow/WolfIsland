@@ -4,16 +4,15 @@
 
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
-//#include "Cell.h"
-
+#include "Cell.h"
 
 class Field{
 private:
-
+    Cell* cells;
 public:
     Field();
     ~Field();
-    //Cell * cells[400];
+    Cell* getCells();
 protected:
 };
 
