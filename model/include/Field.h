@@ -9,13 +9,10 @@
 
 class Field{
 private:
-    Field(); // Disallow instantiation outside of the class.
-public:
 
-    static auto instance(){
-        static Field field;
-        return field;
-    }
+public:
+    Field(); // Disallow instantiation outside of the class.
+
     Cell * cells[400];
 protected:
 };
