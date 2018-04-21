@@ -3,11 +3,13 @@
 //
 
 #include "controller/Controller.h"
-#include "model/include/Field.h"
 
 int main(){
-    Field field = Field();
-    Controller controller = Controller(field);
+    int nRabbits = 12;
+    int nMWolves = 4;
+    int nWWolves = 3;
+    int cOfFences = 30;
+    Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
     controller.execute(7);
 
 }

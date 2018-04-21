@@ -9,14 +9,13 @@
 #include "Rabbit.h"
 
 class Cell{
-public:
+private:
     int coordinates[2];
     Wolf_M wolf_m[];
     Wolf_W wolf_w[];
     Rabbit rabbit[];
     int fence[8];
-
-private:
+public:
 protected:
 };
 #endif //CPP_CELL_H

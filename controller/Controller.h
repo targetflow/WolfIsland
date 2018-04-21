@@ -9,7 +9,7 @@
 
 class Controller {
 public:
-    Controller(Field field);
+    explicit Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences);
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
