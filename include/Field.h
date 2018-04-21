@@ -5,11 +5,11 @@
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
 #include "Cell.h"
-
+//https://codereview.stackexchange.com/questions/173929/modern-c-singleton-template/173935#173935
 
 class Field{
 private:
-    Field(); // Disallow instantiation outside of the class.
+    Field();
 public:
 
     static auto instance(){
