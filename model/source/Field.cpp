@@ -6,20 +6,18 @@
 
 Field::Field()
 {
-    cells = new Cell[400];
-    for(int i = 0; i < 400; i++)
+    for(int i = 1; i <= 400; i++)
     {
-        cells[i] = Cell();
+        cells.emplace_back(Cell());
     }
 }
 
 Field::~Field()
 {
-    if(cells)
-        delete[] cells;
+    cells.clear();
 }
 
-Cell* Field::getCells()
+std::vector <Cell> Field::getCells()
 {
     return cells;
 }

@@ -7,15 +7,20 @@
 #include "Wolf_W.h"
 #include "Wolf_M.h"
 #include "Rabbit.h"
+#include <vector>
 
 class Cell{
 private:
-    int coordinates[2];
-    Wolf_M wolf_m[];
-    Wolf_W wolf_w[];
-    Rabbit rabbit[];
-    int fence[8];
+    std::vector <int> coordinates;
+    std::vector <Rabbit> rabbits;
+//    Wolf_M wolf_m[];
+//    Wolf_W wolf_w[];
+//    int fence[8];
 public:
+    Cell();
+    ~Cell();
+    std::vector <int> getCoordinates();
+    std::vector <Rabbit> getRabbits();
 protected:
 };
 #endif //CPP_CELL_H
