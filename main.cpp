@@ -6,9 +6,9 @@
 #include "model/include/Field.h"
 
 int main(){
-    Field field;
+    Field field = Field();
     Controller controller = Controller(field);
-    controller.execute();
+    controller.execute(7);
 
 }
 

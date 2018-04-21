@@ -4,16 +4,17 @@
 
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
-#include "Cell.h"
+//#include "Cell.h"
 
 
 class Field{
 private:
 
 public:
-    Field(); // Disallow instantiation outside of the class.
-
-    Cell * cells[400];
+    Field();
+    ~Field();
+    double length;
+    //Cell * cells[400];
 protected:
 };
 
