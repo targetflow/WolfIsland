@@ -13,7 +13,6 @@ private:
 public:
     Field();
     ~Field();
-    double length;
     //Cell * cells[400];
 protected:
 };
