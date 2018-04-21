@@ -5,10 +5,9 @@
 #ifndef CPP_ANIMAL_H
 #define CPP_ANIMAL_H
 class Animal{
-private:
-    float health;
 public:
     virtual void move()=0;
 protected:
+    float health;
 };
 #endif //CPP_ANIMAL_H

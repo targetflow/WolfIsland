@@ -7,6 +7,7 @@
 #include "Wolf_W.h"
 #include "Wolf_M.h"
 #include "Rabbit.h"
+
 class Cell{
 public:
     int coordinates[2];
