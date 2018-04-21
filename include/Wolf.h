@@ -9,8 +9,8 @@ class Wolf: public Animal{
 private:
 public:
     float health;
-    void move();
-    void TryToEatOrDie();
+    virtual void move()=0;
+    virtual void TryToEatOrDie()=0;
 
 protected:
 

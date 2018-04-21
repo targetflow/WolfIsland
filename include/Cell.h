@@ -13,7 +13,7 @@ public:
     Wolf_M wolf_m[];
     Wolf_W wolf_w[];
     Rabbit rabbit[];
-    int fence[7];
+    int fence[8];
 
 private:
 protected:

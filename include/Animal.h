@@ -10,7 +10,7 @@ class Animal{
 private:
 public:
     float health;
-    void move();
+     virual void move()=0;
 protected:
 
 
