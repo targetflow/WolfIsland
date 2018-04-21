@@ -7,12 +7,10 @@
 #include "Animal.h"
 class Wolf: public Animal{
 private:
-public:
     float health;
+public:
     virtual void move()=0;
     virtual void TryToEatOrDie()=0;
-
 protected:
-
 };
 #endif //CPP_WOLF_H

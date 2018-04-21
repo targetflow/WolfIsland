@@ -4,6 +4,5 @@
 
 #include "../include/Wolf_W.h"
 void Wolf_W :: move(){}
-void Wolf_W :: TryToEarOrDie(){}
-float Wolf_W :: health = 1;
-void Wolf_W :: TrytoMakeOffspring(){}
+void Wolf_W :: TryToEatOrDie(){}
+void Wolf_W :: TryToMakeOffspring(){}
