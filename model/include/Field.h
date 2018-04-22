@@ -9,11 +9,11 @@
 
 class Field{
 private:
-    std::vector <Cell> cells;
+    std::vector<Cell> cells;
 public:
     Field();
     ~Field();
-    std::vector <Cell> getCells();
+    std::vector<Cell> getCells();
 protected:
 };
 

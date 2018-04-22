@@ -17,7 +17,7 @@ private:
 //    Wolf_W wolf_w[];
 //    int fence[8];
 public:
-    Cell();
+    Cell(std::vector <int> acquiredCoordinates);
     ~Cell();
     std::vector <int> getCoordinates();
     std::vector <Rabbit> getRabbits();

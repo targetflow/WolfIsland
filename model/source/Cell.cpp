@@ -4,12 +4,13 @@
 
 #include "../include/Cell.h"
 
-Cell::Cell()
+Cell::Cell(std::vector <int> acquiredCoordinates)
 {
-    for(int i = 1; i <= 2; i++)
+    for(int i = 0; i < 2; i++)
     {
-        coordinates.emplace_back(); //pass actual coords here
+        coordinates.emplace_back(acquiredCoordinates[i]); //pass actual coords here
     }
+
 }
 
 Cell::~Cell()
