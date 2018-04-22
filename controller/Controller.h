@@ -16,7 +16,7 @@ public:
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
-    std::vector<int> calculateNeighbours(int cellNumb);
+    std::vector<int> calculateNeighbourCells(int cellNumb);
 private:
     Field field;
     void initializeField(int nRabbits);

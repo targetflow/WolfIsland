@@ -14,7 +14,7 @@ int main(){
     Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
     //controller.execute(countOfSteps);
     std::vector<int> testVec;
-    testVec = controller.calculateNeighbours(399);
+    testVec = controller.calculateNeighbourCells(399);
     for (int &i : testVec)
         std::cout << i << ' ';
 

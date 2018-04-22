@@ -56,11 +56,11 @@ void Controller::nextStep(unsigned long numberOfStep) {
 
 std::vector<int> *Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
 //    std::vector<int> listOfAvailableStepsForRabbit;
-    //return calculateNeighbours(cellNumb);
+    //return calculateNeighbourCells(cellNumb);
     return nullptr;
 }
 
-std::vector<int> Controller::calculateNeighbours(int cellNumb) {
+std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
     std::vector<int> listOfNeighbours;
     // lambdas
     auto east = [](int numb) { return numb % 20 == 19 ? numb - 19 : numb + 1; };
