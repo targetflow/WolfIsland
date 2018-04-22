@@ -14,9 +14,9 @@ public:
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
-
 private:
     Field field;
+    void initializeField(int nRabbits);
 };
 
 
