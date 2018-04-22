@@ -4,6 +4,16 @@
 
 #include "../include/Rabbit.h"
 
+Rabbit::Rabbit()
+{
+
+}
+
+Rabbit::~Rabbit()
+{
+
+}
+
 void Rabbit :: move(){
 
 }

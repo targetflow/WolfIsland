@@ -9,6 +9,8 @@
 class Rabbit: public Animal{
 private:
 public:
+    Rabbit();
+    ~Rabbit();
     void move();
     void spread();
 protected:
