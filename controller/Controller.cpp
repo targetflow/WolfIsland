@@ -54,10 +54,9 @@ void Controller::nextStep(unsigned long numberOfStep) {
     printFieldToConsole();
 }
 
-std::vector<int> *Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
+std::vector<int> Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
 //    std::vector<int> listOfAvailableStepsForRabbit;
-    //return calculateNeighbourCells(cellNumb);
-    return nullptr;
+    return calculateNeighbourCells(cellNumb);
 }
 
 std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
@@ -78,5 +77,3 @@ std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
     listOfNeighbours.emplace_back(west(north(cellNumb)));
     return listOfNeighbours;
 }
-
-int east(int numb) {  }
