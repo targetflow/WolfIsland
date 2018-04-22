@@ -20,6 +20,7 @@ private:
     Field field;
     void initializeField(int nRabbits);
     void printFieldToConsole();
+    void nextStep(unsigned long numberOfStep);
 };
 
 

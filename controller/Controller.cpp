@@ -7,20 +7,13 @@
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
     initializeField(nRabbits);
-//    field.getCells()->getRabbits()[1].move();
 }
 
 Controller::~Controller() = default;
 
 void Controller::execute(int numberOfSteps) {
-//    for (int i = 0; i < numberOfSteps; i++)
-//        std::cout << " Perform step: " << i << std::endl;
-
-    for (unsigned long i = 0; i < 400; i++)
-        if(!field.getCells()->at(i).getRabbits()->empty())
-            std::cout << " There's 1+ rabbit in cell [" << field.getCells()->at(i).getCoordinates()[0] << ", " <<
-                      field.getCells()->at(i).getCoordinates()[1] << "]." << std::endl;
-
+    for (unsigned long i = 0; i < numberOfSteps; i++)
+        nextStep(i+1);
 }
 
 void Controller::initializeField(int nRabbits)
@@ -38,11 +31,16 @@ void Controller::initializeField(int nRabbits)
 //        std::cout << field.getCells()->at(index).getRabbits()->size() << std::endl;
     }
 
-    std::cout << "Field initialized" << std::endl;
+    std::cout << "Field initialized." << std::endl;
     printFieldToConsole();
 }
 
 void Controller::printFieldToConsole() {
     ConsoleView consoleView = ConsoleView();
     consoleView.printFieldToConsole(this->field);
+}
+
+void Controller::nextStep(unsigned long numberOfStep) {
+    std::cout << "Step №" << numberOfStep << std::endl;
+    printFieldToConsole();
 }

@@ -5,12 +5,14 @@
 #include "controller/Controller.h"
 
 int main(){
-    int nRabbits = 12;
-    int nMWolves = 4;
-    int nWWolves = 3;
-    int cOfFences = 30;
+    const int nRabbits = 12;
+    const int nMWolves = 4;
+    const int nWWolves = 3;
+    const int cOfFences = 30;
+    const int countOfSteps = 3;
+
     Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
-    controller.execute(7);
+    controller.execute(countOfSteps);
 
 }
 
