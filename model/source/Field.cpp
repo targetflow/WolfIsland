@@ -37,8 +37,9 @@ void Field::initialize(int nRabbits)
     for(int i = 0; i < nRabbits; i++)
     {
         int index = uni(rng);
-        cells[index].getRabbits().emplace_back(Rabbit());
-        std::cout << "Rabbit added to: [" << cells[index].getCoordinates()[0] << ", " << cells[index].getCoordinates()[1] << "]." << std::endl;
+        cells[index].getRabbits()->emplace_back(Rabbit());
+//        std::cout << "Rabbit added to: [" << cells[index].getCoordinates()[0] << ", " << cells[index].getCoordinates()[1] << "]." << std::endl;
+//        std::cout << cells[index].getRabbits()->size() << std::endl;
     }
 
     std::cout << "Field initialized" << std::endl;

@@ -5,6 +5,7 @@
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
 #include "Cell.h"
+#include "Rabbit.h"
 #include <vector>
 
 class Field{

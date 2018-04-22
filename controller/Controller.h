@@ -6,6 +6,7 @@
 #define CPP_CONTROLLER_H
 
 #include "../model/include/Field.h"
+#include <iostream>
 
 class Controller {
 public:

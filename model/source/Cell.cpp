@@ -24,7 +24,7 @@ std::vector <int> Cell::getCoordinates()
     return coordinates;
 }
 
-std::vector <Rabbit> Cell::getRabbits()
+std::vector<Rabbit> * Cell::getRabbits()
 {
-    return rabbits;
+    return &rabbits;
 }
