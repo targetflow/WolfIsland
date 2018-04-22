@@ -6,6 +6,8 @@
 #define CPP_CONTROLLER_H
 
 #include "../model/include/Field.h"
+#include "../view/ConsoleView.h"
+#include <random>
 #include <iostream>
 
 class Controller {
@@ -17,6 +19,7 @@ public:
 private:
     Field field;
     void initializeField(int nRabbits);
+    void printFieldToConsole();
 };
 
 

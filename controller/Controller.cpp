@@ -3,9 +3,6 @@
 //
 
 #include "Controller.h"
-#include "../model/include/Field.h"
-#include <random>
-#include <iostream>
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
@@ -36,10 +33,16 @@ void Controller::initializeField(int nRabbits)
     {
         unsigned long index = uni(rng);
         field.getCells()->at(index).getRabbits()->emplace_back(Rabbit());
-        std::cout << "Rabbit added to: [" << field.getCells()->at(index).getCoordinates()[0] << ", " <<
-                  field.getCells()->at(index).getCoordinates()[1] << "]." << std::endl;
-        std::cout << field.getCells()->at(index).getRabbits()->size() << std::endl;
+//        std::cout << "Rabbit added to: [" << field.getCells()->at(index).getCoordinates()[0] << ", " <<
+//                  field.getCells()->at(index).getCoordinates()[1] << "]." << std::endl;
+//        std::cout << field.getCells()->at(index).getRabbits()->size() << std::endl;
     }
 
     std::cout << "Field initialized" << std::endl;
+    printFieldToConsole();
+}
+
+void Controller::printFieldToConsole() {
+    ConsoleView consoleView = ConsoleView();
+    consoleView.printFieldToConsole(this->field);
 }
