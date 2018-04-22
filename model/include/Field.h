@@ -14,6 +14,7 @@ public:
     Field();
     ~Field();
     std::vector<Cell> getCells();
+    void initialize(int nRabbits);
 protected:
 };
 

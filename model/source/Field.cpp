@@ -3,6 +3,8 @@
 //
 
 #include "../include/Field.h"
+#include <random>
+#include <iostream>
 
 Field::Field()
 {
@@ -24,4 +26,18 @@ Field::~Field()
 std::vector<Cell> Field::getCells()
 {
     return cells;
+}
+
+void Field::initialize(int nRabbits)
+{
+    std::random_device rd;     // only used once to initialise (seed) engine
+    std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+    std::uniform_int_distribution<int> uni(0, 399); // guaranteed unbiased
+
+    for(int i = 0; i < nRabbits; i++)
+    {
+        cells[uni(rng)].getRabbits().emplace_back(Rabbit());
+    }
+
+    std::cout << "Field initialized" << std::endl;
 }
