@@ -43,9 +43,14 @@ void Controller::printFieldToConsole() {
 void Controller::nextStep(unsigned long numberOfStep) {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++)
     {
+        // perform Rabbits stuff
         if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->empty())
         {
-            makeListOfAvailableStepsForRabbit(cellNumb);
+            for (Rabbit &rabbit : *field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits())
+            {
+                rabbit.move();
+            }
+            //makeListOfAvailableStepsForRabbit(cellNumb);
         }
 
             //listOfAvailableStepsForRabbit.emplace_back(cellNumb);

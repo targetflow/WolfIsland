@@ -12,11 +12,13 @@ int main(){
     const int countOfSteps = 3;
 
     Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
-    //controller.execute(countOfSteps);
-    std::vector<int> testVec;
-    testVec = controller.makeListOfAvailableStepsForRabbit(399);
-    for (int &i : testVec)
-        std::cout << i << ' ';
+    controller.execute(countOfSteps);
+
+    // test
+//    std::vector<int> testVec;
+//    testVec = controller.makeListOfAvailableStepsForRabbit(399);
+//    for (int &i : testVec)
+//        std::cout << i << ' ';
 
 }
 
