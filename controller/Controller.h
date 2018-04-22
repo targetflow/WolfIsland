@@ -16,11 +16,14 @@ public:
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
+    std::vector<int> calculateNeighbours(int cellNumb);
 private:
     Field field;
     void initializeField(int nRabbits);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
+    std::vector<int>* makeListOfAvailableStepsForRabbit(int cellNumb);
+
 };
 
 

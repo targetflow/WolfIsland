@@ -13,7 +13,6 @@ Field::Field()
         acquiredCoordinates.emplace_back((i%20)+1);
         cells.emplace_back(Cell(acquiredCoordinates));
     }
-
 }
 
 Field::~Field()

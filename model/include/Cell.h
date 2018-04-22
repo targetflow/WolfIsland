@@ -20,7 +20,7 @@ public:
     Cell(std::vector <int> acquiredCoordinates);
     ~Cell();
     std::vector <int> getCoordinates();
-    std::vector<Rabbit> * getRabbits();
+    std::vector <Rabbit>* getRabbits();
 protected:
 };
 #endif //CPP_CELL_H

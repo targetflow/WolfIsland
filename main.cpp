@@ -12,7 +12,11 @@ int main(){
     const int countOfSteps = 3;
 
     Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
-    controller.execute(countOfSteps);
+    //controller.execute(countOfSteps);
+    std::vector<int> testVec;
+    testVec = controller.calculateNeighbours(399);
+    for (int &i : testVec)
+        std::cout << i << ' ';
 
 }
 

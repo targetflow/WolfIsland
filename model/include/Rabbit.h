@@ -8,7 +8,6 @@
 
 class Rabbit: public Animal{
 private:
-    float health;
 public:
     Rabbit();
     ~Rabbit();
