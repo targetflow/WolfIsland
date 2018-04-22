@@ -8,11 +8,11 @@
 
 Field::Field()
 {
-    for(int i = 1; i <= 400; i++)
+    for(int i = 0; i < 400; i++)
     {
         std::vector <int> acquiredCoordinates;
-        acquiredCoordinates.emplace_back(i);
         acquiredCoordinates.emplace_back((i/20)+1);
+        acquiredCoordinates.emplace_back((i%20)+1);
         cells.emplace_back(Cell(acquiredCoordinates));
     }
 
