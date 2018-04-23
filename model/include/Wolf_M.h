@@ -4,15 +4,14 @@
 
 #ifndef CPP_WOLF_M_H
 #define CPP_WOLF_M_H
-#include "Animal.h"
-class Wolf_M: public Animal{
+#include "Wolf.h"
+
+class Wolf_M: public Wolf{
 private:
-public:
     float health;
-    void move();
+public:
+    int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     void TryToEatOrDie();
-
 protected:
-
 };
 #endif //CPP_WOLF_M_H

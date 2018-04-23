@@ -4,15 +4,12 @@
 
 #ifndef CPP_ANIMAL_H
 #define CPP_ANIMAL_H
+#include <vector>
+
 class Animal{
-    Animal();
-    virtual ~Animal();
-private:
 public:
-    float health;
-     virual void move()=0;
+    virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps)=0;
 protected:
-
-
+    float health;
 };
 #endif //CPP_ANIMAL_H
