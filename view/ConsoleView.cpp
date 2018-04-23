@@ -25,7 +25,7 @@ void ConsoleView::printFieldToConsole(Field field) {
         }
         else
         {
-            cellContent = "";
+            cellContent = " ";
         }
 
         //construct Field
