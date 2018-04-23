@@ -4,6 +4,6 @@
 
 #include "../include/Wolf_W.h"
 
-void Wolf_W :: move(){}
+int Wolf_W :: chooseMoveDirection(std::vector<int> listOfAvailableSteps){}
 void Wolf_W :: TryToEatOrDie(){}
 void Wolf_W :: TryToMakeOffspring(){}

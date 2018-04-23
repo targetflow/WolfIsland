@@ -23,6 +23,9 @@ private:
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
     std::vector<int> calculateNeighbourCells(int cellNumb);
+
+    void calculateMoveDecisions();
+    void performMoves();
 };
 
 

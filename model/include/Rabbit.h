@@ -5,13 +5,17 @@
 #ifndef CPP_RABBIT_H
 #define CPP_RABBIT_H
 #include "Animal.h"
+#include <vector>
 
 class Rabbit: public Animal{
 private:
+    int chosenMoveDirection;
 public:
     Rabbit();
     ~Rabbit();
-    void move();
+    int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
+    int getChosenMoveDirection();
+    void setChosenMoveDirection(int direction);
     void spread();
 protected:
 };

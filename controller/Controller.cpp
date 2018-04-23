@@ -37,31 +37,21 @@ void Controller::initializeField(int nRabbits)
 
 void Controller::printFieldToConsole() {
     ConsoleView consoleView = ConsoleView();
-    consoleView.printFieldToConsole(this->field);
+    consoleView.printFieldToConsole(field);
 }
 
 void Controller::nextStep(unsigned long numberOfStep) {
-    for(int cellNumb = 0; cellNumb < 400; cellNumb++)
-    {
-        // perform Rabbits stuff
-        if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->empty())
-        {
-            for (Rabbit &rabbit : *field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits())
-            {
-                rabbit.move();
-            }
-            //makeListOfAvailableStepsForRabbit(cellNumb);
-        }
-
-            //listOfAvailableStepsForRabbit.emplace_back(cellNumb);
-    }
+    // calculate decisions
+    calculateMoveDecisions(); // фаза прийняття рішень
+    performMoves(); // фаза переходів
     std::cout << "Step №" << numberOfStep << std::endl;
     printFieldToConsole();
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
-//    std::vector<int> listOfAvailableStepsForRabbit;
-    return calculateNeighbourCells(cellNumb);
+    auto listOfAvailableStepsForRabbit = calculateNeighbourCells(cellNumb);
+    listOfAvailableStepsForRabbit.emplace_back(cellNumb);
+    return listOfAvailableStepsForRabbit;
 }
 
 std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
@@ -81,4 +71,55 @@ std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
     listOfNeighbours.emplace_back(east(north(cellNumb)));
     listOfNeighbours.emplace_back(west(north(cellNumb)));
     return listOfNeighbours;
+}
+
+void Controller::calculateMoveDecisions()
+{
+    std::cout << "Calc start" << std::endl;
+    for(int cellNumb = 0; cellNumb < 400; cellNumb++)
+    {
+        // Rabbits
+        auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
+        if(!rabbitVec->empty())
+        {
+            for (auto & rabbit : *rabbitVec)
+            {
+                rabbit.chooseMoveDirection(makeListOfAvailableStepsForRabbit(cellNumb));
+            }
+            //std::cout << field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->at(0).getChosenMoveDirection() << std::endl;
+        }
+    }
+    std::cout << "Calc end" << std::endl;
+}
+
+void Controller::performMoves()
+{
+    for(int cellNumb = 0; cellNumb < 400; cellNumb++)
+    {
+        // Rabbits
+        auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
+        if(!rabbitVec->empty())
+        {
+            for (auto & rabbit : *rabbitVec)
+            {
+                std::cout << "Curr cell: " << cellNumb << std::endl;
+                std::cout << "Curr v size: " << rabbitVec->size() << std::endl;
+                // якщо заєць вирішує лишитись тут же, то скіпнути виконання поточної ітерації щоб уникнути зайвих операцій
+                int rabbitDecision = rabbit.getChosenMoveDirection();
+                std::cout << "Rabbit decision is: " << rabbitDecision << std::endl;
+                if(rabbitDecision == cellNumb or rabbitDecision < 0)
+                    continue;
+                else {
+                    auto *destRabbitList = field.getCells()->at(static_cast<unsigned long>(rabbitDecision)).getRabbits();
+                    std::cout << "Rabbit decision - go to: " << rabbitDecision << std::endl;
+                    std::cout << "Dest v size: " << destRabbitList->size() << std::endl;
+                    destRabbitList->insert(destRabbitList->end(), std::make_move_iterator(rabbitVec->begin()), std::make_move_iterator(rabbitVec->begin()+1));
+                    std::cout << "Dest v size after insertion: " << destRabbitList->size() << std::endl;
+                    rabbitVec->erase(rabbitVec->begin(), rabbitVec->begin()+1);
+                    std::cout << "Curr v size after deletion: " << rabbitVec->size() << std::endl;
+                    rabbit.setChosenMoveDirection(-2); // впевнитись, що цей кріль вже не буде задіяний в move на поточній ітерації.
+                }
+            }
+        }
+    }
 }

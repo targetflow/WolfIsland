@@ -10,7 +10,7 @@ class Wolf_W: public Wolf{
 private:
     float health;
 public:
-    void move();
+    int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     void TryToEatOrDie();
     void TryToMakeOffspring();
 protected:
