@@ -4,8 +4,8 @@
 
 #include "Controller.h"
 #include <ctime>
-#include <random>
-#include "../utils/utils.cpp"
+//#include <random>
+#include "../utils/utils.h"
 
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
