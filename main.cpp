@@ -41,5 +41,8 @@ int main(){
 //    for (int &i : testVec)
 //        std::cout << i << ' ';
 
+//srand(time(NULL));
+//long i = random()%5;
+//std::cout<<i;
 }
 

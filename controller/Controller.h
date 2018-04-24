@@ -22,6 +22,7 @@ private:
     void initializeField(int nRabbits);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
+    void rabbit_spread();
     std::vector<int> calculateNeighbourCells(int cellNumb);
 
     void calculateMoveDecisions();

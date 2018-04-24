@@ -3,6 +3,8 @@
 //
 
 #include "Controller.h"
+#include <ctime>
+#include <random>
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
@@ -42,6 +44,7 @@ void Controller::printFieldToConsole() {
 
 void Controller::nextStep(unsigned long numberOfStep) {
     // calculate decisions
+    //rabbit_spread();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
     std::cout << "Step №" << numberOfStep << std::endl;
@@ -123,3 +126,19 @@ void Controller::performMoves()
         }
     }
 }
+void Controller::rabbit_spread() {
+    for(int cellNumb = 0; cellNumb < 400; cellNumb++){
+        srand(time(NULL));
+        long i = random()%5;
+        if(i==1){
+            auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
+
+            if(rabbitVec->size()==1){
+                field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->emplace_back(Rabbit());
+            }
+            else{
+                continue;
+            }
+        }
+
+    }}
