@@ -38,3 +38,9 @@ void Wolf_W :: TryToEatOrDie(){
 void Wolf_W :: TryToMakeOffspring(){
 
 }
+void Wolf_W::sethealth(int _health) {
+    health = _health;
+}
+float Wolf_W::gethealth() {
+    return health;
+}

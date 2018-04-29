@@ -192,5 +192,22 @@ void Controller:: Wolf_WMoveDecisions(){
     }
 }
 void Controller::performMovesforWolf_W() {
-
+for(int cellNumber = 0;cellNumber<400;cellNumber++){
+    auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
+    if(!Wolf_WVec->empty()){
+        for(auto & wolf_w:*Wolf_WVec){
+            int chosenNumber=wolf_w.getChosenMoveDirection() ;
+            field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
+            Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
+            auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
+            if(rabbitVec->empty()){
+                wolf_w.sethealth((wolf_w.gethealth()-0,1));
+            }
+            else{
+                rabbitVec->pop_back();
+                wolf_w.sethealth((wolf_w.gethealth()+1));
+            }
+        }
+    }
+}
 }

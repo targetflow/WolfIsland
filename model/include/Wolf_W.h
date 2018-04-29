@@ -13,6 +13,8 @@ private:
 public:
     Wolf_W();
     ~Wolf_W();
+    float gethealth();
+    void sethealth(int _health);
     int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
     void TryToEatOrDie();
     int getChosenMoveDirection();
