@@ -8,10 +8,15 @@
 
 class Wolf_W: public Wolf{
 private:
+    int chosenMoveDirection;
     float health;
 public:
-    int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
+    Wolf_W();
+    ~Wolf_W();
+    int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
     void TryToEatOrDie();
+    int getChosenMoveDirection();
+    void setChosenMoveDirection(int direction);
     void TryToMakeOffspring();
 protected:
 };

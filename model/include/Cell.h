@@ -13,6 +13,7 @@ class Cell{
 private:
     std::vector <int> coordinates;
     std::vector <Rabbit> rabbits;
+    std::vector <Wolf_W> wolf_w;
 //    Wolf_M wolf_m[];
 //    Wolf_W wolf_w[];
 //    int fence[8];
@@ -21,6 +22,7 @@ public:
     ~Cell();
     std::vector <int> getCoordinates();
     std::vector <Rabbit>* getRabbits();
+    std::vector <Wolf_W>* getWolf_W();
 protected:
 };
 #endif //CPP_CELL_H

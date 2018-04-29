@@ -28,3 +28,7 @@ std::vector<Rabbit> * Cell::getRabbits()
 {
     return &rabbits;
 }
+
+std::vector<Wolf_W> * Cell::getWolf_W(){
+    return & wolf_w;
+}

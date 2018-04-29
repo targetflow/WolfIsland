@@ -17,16 +17,20 @@ public:
 
     void execute(int numberOfSteps = 0);
     std::vector<int> makeListOfAvailableStepsForRabbit(int cellNumb);
+    std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
+
 private:
     Field field;
-    void initializeField(int nRabbits);
+    void performMovesforWolf_W();
+    void initializeField(int nRabbits, int nWWolves);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
     void rabbit_spread();
     std::vector<int> calculateNeighbourCells(int cellNumb);
-
+    void Wolf_WMoveDecisions();
     void calculateMoveDecisions();
     void performMoves();
+    int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
 };
 
 

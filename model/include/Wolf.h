@@ -12,5 +12,6 @@ public:
     virtual void TryToEatOrDie()=0;
 protected:
     float health;
+    int chosenMoveDirection = -1;
 };
 #endif //CPP_WOLF_H
