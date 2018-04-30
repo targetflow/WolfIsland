@@ -8,9 +8,7 @@
 #include "../model/include/Field.h"
 #include "../view/ConsoleView.h"
 #include "../utils/utils.h"
-#include <random>
 #include <iostream>
-#include <ctime>
 
 class Controller {
 public:
