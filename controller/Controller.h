@@ -9,6 +9,7 @@
 #include "../view/ConsoleView.h"
 #include "../utils/utils.h"
 #include <iostream>
+#include <algorithm>
 
 class Controller {
 public:
@@ -25,7 +26,7 @@ private:
     void initializeField(int nRabbits, int nWWolves, int cOfFences);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
-    std::vector<int> calculateNeighbourCells(int cellNumb);
+    std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
     void calculateMoveDecisions();
     void performMoves();

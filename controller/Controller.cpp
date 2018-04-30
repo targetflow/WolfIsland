@@ -54,10 +54,10 @@ void Controller::nextStep(unsigned long numberOfStep) {
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
-    auto neighbourCells = calculateNeighbourCells(cellNumb); // (інти) номери доступних клітин з поточної
+    auto neighbourCells = calculateNeighbourCellsWithoutFences(cellNumb); // (інти) номери доступних клітин з поточної
     std::vector<int> listOfAvailableStepsForWolf_W;
     bool rabbitExplored = false;
-    for (auto& cllNmb: neighbourCells){
+    for (auto& cllNmb: neighbourCells) {
         // якщо є хочаб один заєць на горизонті
         if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
         {
@@ -72,12 +72,12 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
-    auto listOfAvailableStepsForRabbit = calculateNeighbourCells(cellNumb);
+    auto listOfAvailableStepsForRabbit = calculateNeighbourCellsWithoutFences(cellNumb);
     listOfAvailableStepsForRabbit.emplace_back(cellNumb);
     return listOfAvailableStepsForRabbit;
 }
 
-std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
+std::vector<int> Controller::calculateNeighbourCellsWithoutFences(int cellNumb) {
     std::vector<int> listOfNeighbours;
     // lambdas
     auto east = [](int numb) { return numb % 20 == 19 ? numb - 19 : numb + 1; };
@@ -93,6 +93,13 @@ std::vector<int> Controller::calculateNeighbourCells(int cellNumb) {
     listOfNeighbours.emplace_back(west(south(cellNumb)));
     listOfNeighbours.emplace_back(east(north(cellNumb)));
     listOfNeighbours.emplace_back(west(north(cellNumb)));
+
+    for (auto& cllNmb: listOfNeighbours) {
+        if (field.getCells()->at(static_cast<unsigned long>(cllNmb)).isFence()) {
+            auto vec = listOfNeighbours;
+            vec.erase(std::remove(vec.begin(), vec.end(), cllNmb), vec.end());
+        }
+    }
     return listOfNeighbours;
 }
 
