@@ -209,6 +209,8 @@ void Controller::rabbit_spread() {
 }
 
 void Controller::wolfTryToEatOrDie(){
+    std::vector<Wolf_W>::iterator it;
+
     for (int cellNumber = 0; cellNumber < 400; cellNumber++){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
         if(!Wolf_WVec->empty()){
@@ -221,11 +223,24 @@ void Controller::wolfTryToEatOrDie(){
                 else{
                     wolf_w.sethealth(static_cast<float>(wolf_w.gethealth() - 0.1));
                 }
-                float wolf_w_health = wolf_w.gethealth();
-                if(wolf_w.gethealth() == 0.0){
-                    Wolf_WVec->erase(std::remove(Wolf_WVec->begin(),Wolf_WVec->end(), wolf_w, Wolf_WVec->end()));
+//                float wolf_w_health = wolf_w.gethealth();
+//                if(wolf_w.gethealth() == 0.0){
+//                    std::cout << "Before: " << Wolf_WVec->size() << std::endl;
+//                    Wolf_WVec->erase(std::remove(Wolf_WVec->begin(), Wolf_WVec->end(), *&wolf_w), Wolf_WVec->end());
+//                    std::cout << "After: " << Wolf_WVec->size() << std::endl;
+//                }
+            }
+
+            for ( it = Wolf_WVec->begin(); it != Wolf_WVec->end(); ) {
+                if( (*it).gethealth() == 0.0f ) {
+                    //delete * it;
+                    it = Wolf_WVec->erase(it);
+                }
+                else {
+                    ++it;
                 }
             }
+
         }
     }
 }
