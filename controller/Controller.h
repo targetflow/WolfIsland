@@ -31,7 +31,7 @@ private:
     void performMoves();
 
     // rabbits stuff
-    void rabbit_spread();
+    void rabbitSpread();
 
     // wolves stuff
     void performMovesforWolf_W();

@@ -39,7 +39,7 @@ void Controller::printFieldToConsole() {
 
 void Controller::nextStep(unsigned long numberOfStep) {
     // calculate decisions
-    rabbit_spread();
+    rabbitSpread();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
 //    Wolf_WMoveDecisions();
@@ -154,7 +154,7 @@ void Controller::performMoves()
     }
 }
 
-void Controller::rabbit_spread() {
+void Controller::rabbitSpread() {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++) {
         long i = random_number(1, 5);
         if(i == 1) {
