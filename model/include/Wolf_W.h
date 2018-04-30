@@ -15,7 +15,7 @@ public:
     Wolf_W();
     ~Wolf_W();
     float gethealth();
-    void sethealth(int _health);
+    void sethealth(float _health);
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     void TryToEatOrDie();
     int getChosenMoveDirection();

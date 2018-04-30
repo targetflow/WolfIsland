@@ -4,6 +4,7 @@
 
 #include "Controller.h"
 #include <ctime>
+#include <algorithm>
 //#include <random>
 #include "../utils/utils.h"
 
@@ -52,6 +53,8 @@ void Controller::printFieldToConsole() {
 void Controller::nextStep(unsigned long numberOfStep) {
     // calculate decisions
     rabbit_spread();
+
+    wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
 //    Wolf_WMoveDecisions();
@@ -204,28 +207,25 @@ void Controller::rabbit_spread() {
 
     }
 }
-//
-//void Controller::performMovesforWolf_W() {
-//    for(int cellNumber = 0;cellNumber<400;cellNumber++){
-//        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
-//        if(!Wolf_WVec->empty())
-//        {
-//            for(auto & wolf_w:*Wolf_WVec)
-//            {
-//                int chosenNumber = wolf_w.getChosenMoveDirection() ;
-//                field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
-//                Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
-//                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
-//                if(rabbitVec->empty())
-//                {
-//                    wolf_w.sethealth((wolf_w.gethealth()-0,1));
-//                }
-//                else
-//                    {
-//                    rabbitVec->pop_back();
-//                    wolf_w.sethealth((wolf_w.gethealth()+1));
-//                }
-//            }
-//        }
-//    }
-//}
+
+void Controller::wolfTryToEatOrDie(){
+    for (int cellNumber = 0; cellNumber < 400; cellNumber++){
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
+        if(!Wolf_WVec->empty()){
+            for(auto& wolf_w:*Wolf_WVec){
+                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getRabbits();
+                if(!rabbitVec->empty()){
+                    wolf_w.sethealth(wolf_w.gethealth()+1) ;
+                    rabbitVec->pop_back();
+                }
+                else{
+                    wolf_w.sethealth(static_cast<float>(wolf_w.gethealth() - 0.1));
+                }
+                float wolf_w_health = wolf_w.gethealth();
+                if(wolf_w.gethealth() == 0.0){
+                    Wolf_WVec->erase(std::remove(Wolf_WVec->begin(),Wolf_WVec->end(), wolf_w, Wolf_WVec->end()));
+                }
+            }
+        }
+    }
+}

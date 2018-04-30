@@ -34,6 +34,7 @@ private:
     void rabbit_spread();
 
     // wolves stuff
+    void wolfTryToEatOrDie();
 };
 
 

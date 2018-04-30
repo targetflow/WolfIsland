@@ -33,7 +33,7 @@ void Wolf_W :: TryToEatOrDie()
 {
 
 }
-void Wolf_W::sethealth(int _health)
+void Wolf_W::sethealth(float _health)
 {
     health = _health;
 }
