@@ -5,6 +5,7 @@
 #ifndef CPP_WOLF_W_H
 #define CPP_WOLF_W_H
 #include "Wolf.h"
+#include "../../utils/utils.h"
 
 class Wolf_W: public Wolf{
 private:
@@ -15,7 +16,7 @@ public:
     ~Wolf_W();
     float gethealth();
     void sethealth(int _health);
-    int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
+    int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     void TryToEatOrDie();
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);

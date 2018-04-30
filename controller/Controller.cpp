@@ -201,7 +201,7 @@ void Controller:: Wolf_WMoveDecisions(){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
         if(!Wolf_WVec->empty()){
             for(auto & wolf_w:*Wolf_WVec){
-                wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumber), cellNumber) ;
+                wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumber));
             }
         }
     }
