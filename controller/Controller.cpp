@@ -167,8 +167,7 @@ void Controller::performMoves()
 
 void Controller::rabbitSpread() {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++) {
-        long i = random_number(1, 5);
-        if(i == 1) {
+        if(random_number(1, 5) == 1) {
             auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
             if(rabbitVec->size() == 1) {
                 field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->emplace_back(Rabbit());
