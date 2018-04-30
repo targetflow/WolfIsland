@@ -22,7 +22,7 @@ public:
 private:
     Field field;
 
-    void initializeField(int nRabbits, int nWWolves);
+    void initializeField(int nRabbits, int nWWolves, int cOfFences);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
     std::vector<int> calculateNeighbourCells(int cellNumb);

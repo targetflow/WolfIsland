@@ -14,14 +14,20 @@ void ConsoleView::printFieldToConsole(Field field) {
     unsigned long countOfRabbits;
     for (unsigned long i = 0; i < 400; i++) {
         //construct Cell contents
-        if(!field.getCells()->at(i).getRabbits()->empty()) {
-            countOfRabbits = field.getCells()->at(i).getRabbits()->size();
-            for (unsigned long j = 0; j < countOfRabbits; j++) {
-                cellContent += "R";
-            }
+
+        if (field.getCells()->at(i).isFence()) {
+            cellContent += "F";
         }
         else {
-            cellContent = " ";
+            if(!field.getCells()->at(i).getRabbits()->empty()) {
+                countOfRabbits = field.getCells()->at(i).getRabbits()->size();
+                for (unsigned long j = 0; j < countOfRabbits; j++) {
+                    cellContent += "R";
+                }
+            }
+            else {
+                cellContent = " ";
+            }
         }
 
         //construct Field

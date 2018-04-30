@@ -6,7 +6,7 @@
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
-    initializeField(nRabbits, nWWolves);
+    initializeField(nRabbits, nWWolves, cOfFences);
 }
 
 Controller::~Controller() = default;
@@ -16,16 +16,20 @@ void Controller::execute(int numberOfSteps) {
         nextStep(i+1);
 }
 
-void Controller::initializeField(int nRabbits, int nWWolves)
+void Controller::initializeField(int nRabbits, int nWWolves, int cOfFences)
 {
-    for(int i = 0; i < nRabbits; i++)
-    {
-        int index = random_number(0,399);
+    int index;
+    for(int i = 0; i < nRabbits; i++) {
+        index = random_number(0, 399);
         field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->emplace_back(Rabbit());
     }
-    for(int i = 0; i < nWWolves; i++){
-        int index = random_number(0,399);
+    for(int i = 0; i < nWWolves; i++) {
+        index = random_number(0, 399);
         field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->emplace_back(Wolf_W());
+    }
+    for(int i = 0; i < cOfFences; i++) {
+        index = random_number(0, 399);
+        field.getCells()->at(static_cast<unsigned long>(index)).setFence(true);
     }
 
     std::cout << "Field initialized." << std::endl;

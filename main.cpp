@@ -8,7 +8,7 @@ int main(){
     const int nRabbits = 12;
     const int nMWolves = 4;
     const int nWWolves = 3;
-    const int cOfFences = 30;
+    const int cOfFences = 5;
     const int countOfSteps = 3;
 
     Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);

@@ -14,13 +14,17 @@ private:
     std::vector <int> coordinates;
     std::vector <Rabbit> rabbits;
     std::vector <Wolf_W> wolf_w;
+    bool _isFence;
 //    Wolf_M wolf_m[];
 //    Wolf_W wolf_w[];
 //    int fence[8];
 public:
     Cell(std::vector <int> acquiredCoordinates);
     ~Cell();
-    std::vector <int> getCoordinates();
+
+    void setFence(bool isFence);
+    bool isFence();
+
     std::vector <Rabbit>* getRabbits();
     std::vector <Wolf_W>* getWolf_W();
 protected:

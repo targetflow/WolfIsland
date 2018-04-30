@@ -10,6 +10,7 @@ Cell::Cell(std::vector<int> acquiredCoordinates)
     {
         coordinates.emplace_back(acquiredCoordinates[i]); //pass actual coords here
     }
+    _isFence = false;
 }
 
 Cell::~Cell()
@@ -18,16 +19,18 @@ Cell::~Cell()
     rabbits.clear();
 }
 
-std::vector<int> Cell::getCoordinates()
-{
-    return coordinates;
+void Cell::setFence(bool isFence) {
+    _isFence = isFence;
 }
 
-std::vector<Rabbit>* Cell::getRabbits()
-{
+bool Cell::isFence() {
+    return _isFence;
+}
+
+std::vector<Rabbit>* Cell::getRabbits() {
     return &rabbits;
 }
 
-std::vector<Wolf_W>* Cell::getWolf_W(){
+std::vector<Wolf_W>* Cell::getWolf_W() {
     return &wolf_w;
 }
