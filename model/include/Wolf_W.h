@@ -20,7 +20,6 @@ public:
     void TryToEatOrDie();
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);
-    void TryToMakeOffspring();
 protected:
 };
 #endif //CPP_WOLF_W_H

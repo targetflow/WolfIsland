@@ -122,7 +122,8 @@ void Controller::calculateMoveDecisions()
 
         //Wolf_W
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
-        if(!Wolf_WVec->empty()){
+        if(!Wolf_WVec->empty())
+        {
             for(auto & wolf_w:*Wolf_WVec)
             {
                 wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumb));

@@ -12,6 +12,7 @@ private:
 public:
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     void TryToEatOrDie();
+    void TryToMakeOffspring();
 protected:
 };
 #endif //CPP_WOLF_M_H
