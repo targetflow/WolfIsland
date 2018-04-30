@@ -3,14 +3,10 @@
 //
 
 #include "Controller.h"
-#include <ctime>
-//#include <random>
-#include "../utils/utils.h"
-
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
-    initializeField(nRabbits, nWWolves );
+    initializeField(nRabbits, nWWolves);
 }
 
 Controller::~Controller() = default;
@@ -22,22 +18,14 @@ void Controller::execute(int numberOfSteps) {
 
 void Controller::initializeField(int nRabbits, int nWWolves)
 {
-//    std::random_device rd;     // only used once to initialise (seed) engine
-//    std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
-//    std::uniform_int_distribution<unsigned long> uni(0, 399); // guaranteed unbiased
-
     for(int i = 0; i < nRabbits; i++)
     {
         unsigned long index = random_number(0,399);
         field.getCells()->at(index).getRabbits()->emplace_back(Rabbit());
-//        std::cout << "Rabbit added to: [" << field.getCells()->at(index).getCoordinates()[0] << ", " <<
-//                  field.getCells()->at(index).getCoordinates()[1] << "]." << std::endl;
-//        std::cout << field.getCells()->at(index).getRabbits()->size() << std::endl;
     }
-    for(int i=0;i<nWWolves;i++){
+    for(int i = 0; i < nWWolves; i++){
         unsigned long index = random_number(0,399);
         field.getCells()->at(index).getWolf_W()->emplace_back(Wolf_W());
-
     }
 
     std::cout << "Field initialized." << std::endl;
@@ -65,7 +53,7 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
     auto neighbourCells = calculateNeighbourCells(cellNumb); // (інти) номери доступних клітин з поточної
     std::vector<int> listOfAvailableStepsForWolf_W;
     bool rabbitExplored = false;
-    for (auto & cllNmb: neighbourCells){
+    for (auto& cllNmb: neighbourCells){
         // якщо є хочаб один заєць на горизонті
         if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
         {
@@ -113,24 +101,20 @@ void Controller::calculateMoveDecisions()
         auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
         if(!rabbitVec->empty())
         {
-            for (auto & rabbit : *rabbitVec)
+            for (auto& rabbit: *rabbitVec)
             {
                 rabbit.chooseMoveDirection(makeListOfAvailableStepsForRabbit(cellNumb));
             }
-            //std::cout << field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->at(0).getChosenMoveDirection() << std::endl;
         }
 
         //Wolf_W
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
         if(!Wolf_WVec->empty()){
-            for(auto & wolf_w:*Wolf_WVec)
+            for(auto& wolf_w: *Wolf_WVec)
             {
                 wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumb));
             }
         }
-
-
-
     }
     std::cout << "Calc end" << std::endl;
 }
@@ -143,7 +127,7 @@ void Controller::performMoves()
         auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
         if(!rabbitVec->empty())
         {
-            for (auto & rabbit : *rabbitVec)
+            for (auto& rabbit: *rabbitVec)
             {
                 std::cout << "Curr cell: " << cellNumb << std::endl;
                 std::cout << "Curr v size: " << rabbitVec->size() << std::endl;
@@ -164,42 +148,44 @@ void Controller::performMoves()
                 }
             }
         }
+
+        //Wolf_W
+
     }
 }
 
 void Controller::rabbit_spread() {
-    for(int cellNumb = 0; cellNumb < 400; cellNumb++){
+    for(int cellNumb = 0; cellNumb < 400; cellNumb++) {
         srand(time(NULL));
         long i = random()%5;
-        if(i==1){
+        if(i==1) {
             auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
 
-            if(rabbitVec->size()==1){
+            if(rabbitVec->size()==1) {
                 field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->emplace_back(Rabbit());
             }
-            else{
+            else {
                 continue;
             }
         }
-
     }
 }
 
 void Controller::performMovesforWolf_W() {
-    for(int cellNumber = 0;cellNumber<400;cellNumber++){
+    for(int cellNumber = 0; cellNumber < 400; cellNumber++) {
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
-        if(!Wolf_WVec->empty()){
-            for(auto & wolf_w:*Wolf_WVec){
-                int chosenNumber=wolf_w.getChosenMoveDirection() ;
+        if(!Wolf_WVec->empty()) {
+            for(auto& wolf_w: *Wolf_WVec) {
+                int chosenNumber = wolf_w.getChosenMoveDirection();
                 field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
                 Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
                 auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
-                if(rabbitVec->empty()){
-                    wolf_w.sethealth((wolf_w.gethealth()-0,1));
+                if(rabbitVec->empty()) {
+                    wolf_w.setHealth((wolf_w.getHealth() - 0, 1));
                 }
                 else{
                     rabbitVec->pop_back();
-                    wolf_w.sethealth((wolf_w.gethealth()+1));
+                    wolf_w.setHealth((wolf_w.getHealth() + 1));
                 }
             }
         }

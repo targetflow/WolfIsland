@@ -4,5 +4,5 @@
 
 #include "../include/Wolf_M.h"
 
-int Wolf_M :: chooseMoveDirection(std::vector<int> listOfAvailableSteps){}
-void Wolf_M :: TryToEatOrDie(){}
+int Wolf_M::chooseMoveDirection(std::vector<int> listOfAvailableSteps) {}
+void Wolf_M::TryToEatOrDie(){}

@@ -14,7 +14,7 @@ private:
 public:
     Field();
     ~Field();
-    std::vector<Cell> * getCells();
+    std::vector<Cell>* getCells();
 protected:
 };
 

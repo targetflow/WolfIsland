@@ -14,12 +14,12 @@ private:
 public:
     Wolf_W();
     ~Wolf_W();
-    float gethealth();
-    void sethealth(int _health);
+    float getHealth();
+    void setHealth(int _health);
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
-    void TryToEatOrDie();
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);
+    void TryToEatOrDie();
     void TryToMakeOffspring();
 protected:
 };

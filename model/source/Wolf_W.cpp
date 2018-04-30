@@ -4,39 +4,37 @@
 
 #include "../include/Wolf_W.h"
 
-
-
-Wolf_W::Wolf_W()
-{
+Wolf_W::Wolf_W() {
     chosenMoveDirection = -1;
 }
-Wolf_W::~Wolf_W()
-= default;
 
-int Wolf_W :: chooseMoveDirection(std::vector<int> listOfAvailableSteps){
-    chosenMoveDirection = listOfAvailableSteps.at(random_number(0,listOfAvailableSteps.size()-1));
+Wolf_W::~Wolf_W() = default;
+
+int Wolf_W::chooseMoveDirection(std::vector<int> listOfAvailableSteps) {
+    chosenMoveDirection = listOfAvailableSteps.at(random_number(0, listOfAvailableSteps.size()-1));
     return chosenMoveDirection;
 }
 
-int Wolf_W :: getChosenMoveDirection()
-{
+int Wolf_W::getChosenMoveDirection() {
     return chosenMoveDirection;
 }
 
-void Wolf_W :: setChosenMoveDirection(int direction)
-{
+void Wolf_W::setChosenMoveDirection(int direction) {
     chosenMoveDirection = direction;
 }
 
-void Wolf_W :: TryToEatOrDie(){
+void Wolf_W::TryToEatOrDie() {
 
 }
-void Wolf_W :: TryToMakeOffspring(){
+
+void Wolf_W::TryToMakeOffspring() {
 
 }
-void Wolf_W::sethealth(int _health) {
+
+void Wolf_W::setHealth(int _health) {
     health = _health;
 }
-float Wolf_W::gethealth() {
+
+float Wolf_W::getHealth() {
     return health;
 }

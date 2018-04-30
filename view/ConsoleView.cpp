@@ -12,19 +12,15 @@ void ConsoleView::printFieldToConsole(Field field) {
     std::string fieldView;
     std::string cellContent;
     unsigned long countOfRabbits;
-    for (unsigned long i = 0; i < 400; i++)
-    {
+    for (unsigned long i = 0; i < 400; i++) {
         //construct Cell contents
-        if(!field.getCells()->at(i).getRabbits()->empty())
-        {
+        if(!field.getCells()->at(i).getRabbits()->empty()) {
             countOfRabbits = field.getCells()->at(i).getRabbits()->size();
-            for (unsigned long j = 0; j < countOfRabbits; j++)
-            {
+            for (unsigned long j = 0; j < countOfRabbits; j++) {
                 cellContent += "R";
             }
         }
-        else
-        {
+        else {
             cellContent = " ";
         }
 
@@ -32,7 +28,7 @@ void ConsoleView::printFieldToConsole(Field field) {
         fieldView.append("[");
         fieldView.append(cellContent);
         fieldView.append("] ");
-        if ((i+1)%20 == 0)
+        if ((i+1) % 20 == 0)
             fieldView += "\n";
 
         // clear-up interation vars

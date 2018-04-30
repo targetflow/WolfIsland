@@ -4,13 +4,12 @@
 
 #include "../include/Cell.h"
 
-Cell::Cell(std::vector <int> acquiredCoordinates)
+Cell::Cell(std::vector<int> acquiredCoordinates)
 {
     for(int i = 0; i < 2; i++)
     {
         coordinates.emplace_back(acquiredCoordinates[i]); //pass actual coords here
     }
-
 }
 
 Cell::~Cell()
@@ -19,16 +18,16 @@ Cell::~Cell()
     rabbits.clear();
 }
 
-std::vector <int> Cell::getCoordinates()
+std::vector<int> Cell::getCoordinates()
 {
     return coordinates;
 }
 
-std::vector<Rabbit> * Cell::getRabbits()
+std::vector<Rabbit>* Cell::getRabbits()
 {
     return &rabbits;
 }
 
-std::vector<Wolf_W> * Cell::getWolf_W(){
-    return & wolf_w;
+std::vector<Wolf_W>* Cell::getWolf_W(){
+    return &wolf_w;
 }

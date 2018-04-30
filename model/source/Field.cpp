@@ -9,8 +9,8 @@ Field::Field()
     for(int i = 0; i < 400; i++)
     {
         std::vector <int> acquiredCoordinates;
-        acquiredCoordinates.emplace_back((i/20)+1);
-        acquiredCoordinates.emplace_back((i%20)+1);
+        acquiredCoordinates.emplace_back((i/20) + 1);
+        acquiredCoordinates.emplace_back((i%20) + 1);
         cells.emplace_back(Cell(acquiredCoordinates));
     }
 }
@@ -20,7 +20,7 @@ Field::~Field()
     cells.clear();
 }
 
-std::vector<Cell> * Field::getCells()
+std::vector<Cell>* Field::getCells()
 {
     return &cells;
 }

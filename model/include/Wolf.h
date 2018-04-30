@@ -8,8 +8,8 @@
 
 class Wolf: public Animal{
 public:
-    virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps)=0;
-    virtual void TryToEatOrDie()=0;
+    virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps) = 0;
+    virtual void TryToEatOrDie() = 0;
 protected:
     float health;
     int chosenMoveDirection = -1;

@@ -8,7 +8,7 @@
 
 class Animal{
 public:
-    virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps)=0;
+    virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps) = 0;
 protected:
     float health;
 };
