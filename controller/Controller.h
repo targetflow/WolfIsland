@@ -34,9 +34,7 @@ private:
     void rabbit_spread();
 
     // wolves stuff
-    void Wolf_WMoveDecisions();
     void performMovesforWolf_W();
-    int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
 };
 
 
