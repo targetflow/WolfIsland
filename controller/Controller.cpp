@@ -165,6 +165,26 @@ void Controller::performMoves()
                 }
             }
         }
+
+        // Wolf_W
+
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
+        if(!Wolf_WVec->empty())
+        {
+            for (auto &wolf_w:*Wolf_WVec)
+            {
+                int wolf_w_decision = wolf_w.getChosenMoveDirection();
+                if(wolf_w_decision == cellNumb or wolf_w_decision < 0)
+                    continue;
+                else{
+                    field.getCells()->at(static_cast<unsigned long>(wolf_w_decision)).getWolf_W()->emplace_back(Wolf_W());//додаєм вовчицю з вектор вовчиць по вказаному номеру клітини
+                    Wolf_WVec->pop_back();//видаляєм останній елемент з вектора
+                    wolf_w.setChosenMoveDirection(-2);
+
+                }
+
+            }
+        }
     }
 }
 
@@ -174,7 +194,6 @@ void Controller::rabbit_spread() {
         long i = random()%5;
         if(i==1){
             auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
-
             if(rabbitVec->size()==1){
                 field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->emplace_back(Rabbit());
             }
@@ -185,24 +204,28 @@ void Controller::rabbit_spread() {
 
     }
 }
-
-void Controller::performMovesforWolf_W() {
-    for(int cellNumber = 0;cellNumber<400;cellNumber++){
-        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
-        if(!Wolf_WVec->empty()){
-            for(auto & wolf_w:*Wolf_WVec){
-                int chosenNumber=wolf_w.getChosenMoveDirection() ;
-                field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
-                Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
-                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
-                if(rabbitVec->empty()){
-                    wolf_w.sethealth((wolf_w.gethealth()-0,1));
-                }
-                else{
-                    rabbitVec->pop_back();
-                    wolf_w.sethealth((wolf_w.gethealth()+1));
-                }
-            }
-        }
-    }
-}
+//
+//void Controller::performMovesforWolf_W() {
+//    for(int cellNumber = 0;cellNumber<400;cellNumber++){
+//        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
+//        if(!Wolf_WVec->empty())
+//        {
+//            for(auto & wolf_w:*Wolf_WVec)
+//            {
+//                int chosenNumber = wolf_w.getChosenMoveDirection() ;
+//                field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
+//                Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
+//                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
+//                if(rabbitVec->empty())
+//                {
+//                    wolf_w.sethealth((wolf_w.gethealth()-0,1));
+//                }
+//                else
+//                    {
+//                    rabbitVec->pop_back();
+//                    wolf_w.sethealth((wolf_w.gethealth()+1));
+//                }
+//            }
+//        }
+//    }
+//}
