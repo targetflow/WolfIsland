@@ -6,6 +6,6 @@
 #define CPP_UTILS_H
 #include <random>
 
-unsigned long random_number(unsigned long begin, unsigned long end);
+int random_number(int begin, int end);
 
 #endif //CPP_UTILS_H

@@ -20,12 +20,12 @@ void Controller::initializeField(int nRabbits, int nWWolves)
 {
     for(int i = 0; i < nRabbits; i++)
     {
-        unsigned long index = random_number(0,399);
-        field.getCells()->at(index).getRabbits()->emplace_back(Rabbit());
+        int index = random_number(0,399);
+        field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->emplace_back(Rabbit());
     }
     for(int i = 0; i < nWWolves; i++){
-        unsigned long index = random_number(0,399);
-        field.getCells()->at(index).getWolf_W()->emplace_back(Wolf_W());
+        int index = random_number(0,399);
+        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->emplace_back(Wolf_W());
     }
 
     std::cout << "Field initialized." << std::endl;
