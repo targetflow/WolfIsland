@@ -6,6 +6,8 @@
 #define CPP_RABBIT_H
 #include "Animal.h"
 #include <vector>
+#include <iostream>
+#include "../../utils/utils.h"
 
 class Rabbit: public Animal{
 private:
