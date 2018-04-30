@@ -11,21 +11,29 @@ ConsoleView::~ConsoleView() = default;
 void ConsoleView::printFieldToConsole(Field field) {
     std::string fieldView;
     std::string cellContent;
-    unsigned long countOfRabbits;
-    for (unsigned long i = 0; i < 400; i++) {
+    int countOfRabbits, countOfWolvesW;
+    for (int i = 0; i < 400; i++) {
         //construct Cell contents
 
-        if (field.getCells()->at(i).isFence()) {
+        if (field.getCells()->at(static_cast<unsigned long>(i)).isFence()) {
             cellContent += "F";
         }
         else {
-            if(!field.getCells()->at(i).getRabbits()->empty()) {
-                countOfRabbits = field.getCells()->at(i).getRabbits()->size();
-                for (unsigned long j = 0; j < countOfRabbits; j++) {
+            if(!field.getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
+                countOfRabbits = static_cast<int>(field.getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
+                for (int j = 0; j < countOfRabbits; j++) {
                     cellContent += "R";
                 }
             }
-            else {
+
+            if(!field.getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
+                countOfWolvesW = static_cast<int>(field.getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
+                for (int j = 0; j < countOfWolvesW; j++) {
+                    cellContent += "W";
+                }
+            }
+
+            if (cellContent.empty()) {
                 cellContent = " ";
             }
         }
