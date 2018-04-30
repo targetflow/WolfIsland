@@ -60,12 +60,25 @@ void Controller::nextStep(unsigned long numberOfStep) {
     std::cout << "Step №" << numberOfStep << std::endl;
     printFieldToConsole();
 }
-std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
-    auto listOfAvailableStepsForWolf_W = calculateNeighbourCells(cellNumb);
-    listOfAvailableStepsForWolf_W.emplace_back(cellNumb);
-    return listOfAvailableStepsForWolf_W;
 
+std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
+    auto neighbourCells = calculateNeighbourCells(cellNumb); // (інти) номери доступних клітин з поточної
+    std::vector<int> listOfAvailableStepsForWolf_W;
+    bool rabbitExplored = false;
+    for (auto & cllNmb: neighbourCells){
+        // якщо є хочаб один заєць на горизонті
+        if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
+        {
+            listOfAvailableStepsForWolf_W.emplace_back(cllNmb);
+            rabbitExplored = true;
+        }
+    }
+    if (rabbitExplored)
+        return listOfAvailableStepsForWolf_W;
+    else
+        return neighbourCells;
 }
+
 std::vector<int> Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
     auto listOfAvailableStepsForRabbit = calculateNeighbourCells(cellNumb);
     listOfAvailableStepsForRabbit.emplace_back(cellNumb);
@@ -188,7 +201,7 @@ void Controller:: Wolf_WMoveDecisions(){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
         if(!Wolf_WVec->empty()){
             for(auto & wolf_w:*Wolf_WVec){
-                wolf_w.chooseMoveDirectionforWolf_W(makeListOfAvailableStepsForWolf_W(cellNumber), cellNumber) ;
+                wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumber), cellNumber) ;
             }
         }
     }
