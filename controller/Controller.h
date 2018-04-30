@@ -21,15 +21,21 @@ public:
 
 private:
     Field field;
-    void performMovesforWolf_W();
+
     void initializeField(int nRabbits, int nWWolves);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
-    void rabbit_spread();
     std::vector<int> calculateNeighbourCells(int cellNumb);
-    void Wolf_WMoveDecisions();
+
     void calculateMoveDecisions();
     void performMoves();
+
+    // rabbits stuff
+    void rabbit_spread();
+
+    // wolves stuff
+    void Wolf_WMoveDecisions();
+    void performMovesforWolf_W();
     int chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber);
 };
 

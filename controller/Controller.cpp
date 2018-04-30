@@ -54,8 +54,8 @@ void Controller::nextStep(unsigned long numberOfStep) {
     rabbit_spread();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
-    Wolf_WMoveDecisions();
-    performMovesforWolf_W();
+//    Wolf_WMoveDecisions();
+//    performMovesforWolf_W();
 
     std::cout << "Step №" << numberOfStep << std::endl;
     printFieldToConsole();
@@ -106,6 +106,8 @@ void Controller::calculateMoveDecisions()
             }
             //std::cout << field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->at(0).getChosenMoveDirection() << std::endl;
         }
+
+
     }
     std::cout << "Calc end" << std::endl;
 }
@@ -141,6 +143,7 @@ void Controller::performMoves()
         }
     }
 }
+
 void Controller::rabbit_spread() {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++){
         srand(time(NULL));
@@ -156,7 +159,8 @@ void Controller::rabbit_spread() {
             }
         }
 
-    }}
+    }
+}
 
 int Controller::chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSteps, int cellNumber){
     for(int i=0;i<listOfAvailableSteps.size();i++){
@@ -179,8 +183,6 @@ int Controller::chooseMoveDirectionforWolf_W(std::vector<int> listOfAvailableSte
     }
 }
 
-
-
 void Controller:: Wolf_WMoveDecisions(){
     for(int cellNumber = 0;cellNumber<400;cellNumber++){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
@@ -191,23 +193,24 @@ void Controller:: Wolf_WMoveDecisions(){
         }
     }
 }
+
 void Controller::performMovesforWolf_W() {
-for(int cellNumber = 0;cellNumber<400;cellNumber++){
-    auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
-    if(!Wolf_WVec->empty()){
-        for(auto & wolf_w:*Wolf_WVec){
-            int chosenNumber=wolf_w.getChosenMoveDirection() ;
-            field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
-            Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
-            auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
-            if(rabbitVec->empty()){
-                wolf_w.sethealth((wolf_w.gethealth()-0,1));
-            }
-            else{
-                rabbitVec->pop_back();
-                wolf_w.sethealth((wolf_w.gethealth()+1));
+    for(int cellNumber = 0;cellNumber<400;cellNumber++){
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
+        if(!Wolf_WVec->empty()){
+            for(auto & wolf_w:*Wolf_WVec){
+                int chosenNumber=wolf_w.getChosenMoveDirection() ;
+                field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
+                Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
+                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
+                if(rabbitVec->empty()){
+                    wolf_w.sethealth((wolf_w.gethealth()-0,1));
+                }
+                else{
+                    rabbitVec->pop_back();
+                    wolf_w.sethealth((wolf_w.gethealth()+1));
+                }
             }
         }
     }
-}
 }
