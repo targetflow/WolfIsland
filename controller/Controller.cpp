@@ -131,7 +131,18 @@ void Controller::calculateMoveDecisions()
                 wolf_w.chooseMoveDirection(makeListOfAvailableStepsForWolf_W(cellNumb));
             }
         }
+
+        //Wolf_M
+        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M();
+        if(!Wolf_MVec->empty()){
+            for(auto& wolf_m: *Wolf_MVec)
+            {
+                wolf_m.chooseMoveDirection(makeListOfAvailableStepsForWolf_M(cellNumb));
+            }
+        }
     }
+
+
     std::cout << "Calc end" << std::endl;
 }
 
