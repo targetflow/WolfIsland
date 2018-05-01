@@ -48,7 +48,7 @@ void Controller::printFieldToConsole() {
 void Controller::nextStep(unsigned long numberOfStep) {
     // calculate decisions
     rabbitSpread();
-
+    Wolf_MMakeOffspring();
     wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
@@ -322,6 +322,47 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
             }
 
     }
+}
 
+void Controller::Wolf_MMakeOffspring(){
+    for (int cellNumb = 0; cellNumb < 399;cellNumb++){
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
+        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M();
+        int Wolf_WSize = static_cast<int>(Wolf_WVec->size());
+        int Wolf_MSize = static_cast<int>(Wolf_MVec->size());
+        bool wolf_wFound = false;
+        if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W()->empty()){
+            wolf_wFound = true;
+        }
+        bool wolf_mFound = false;
+        if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M()->empty()){
+            wolf_mFound = true;
+        }
+        bool rabbitFound = false;
+        if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->empty()){
+            rabbitFound = true;
+        }
+        int BabyCount = 0;
+        if(wolf_wFound && wolf_mFound && !rabbitFound){
+            if(Wolf_MSize == Wolf_WSize){
+                BabyCount = Wolf_MSize;
+            }
+            if(Wolf_MSize > Wolf_WSize){
+                BabyCount = Wolf_WSize;
+            }
+            if(Wolf_MSize < Wolf_WSize){
+                BabyCount = Wolf_MSize;
+            }
+            for(int baby = 0; baby < BabyCount; baby++){
+                int gender = random_number(0,1);
+                if(gender == 0){
+                    field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W()->emplace_back(Wolf_W());
+                }
+                else{
+                    field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M()->emplace_back(Wolf_M());
+                }
+            }
+        }
 
+    }
 }

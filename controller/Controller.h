@@ -37,6 +37,7 @@ private:
 
     // wolves stuff
     void wolfTryToEatOrDie();
+    void Wolf_MMakeOffspring();
 };
 
 
