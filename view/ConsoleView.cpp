@@ -11,7 +11,7 @@ ConsoleView::~ConsoleView() = default;
 void ConsoleView::printFieldToConsole(Field field) {
     std::string fieldView;
     std::string cellContent;
-    int countOfRabbits, countOfWolvesW;
+    int countOfRabbits, countOfWolvesW, countOfWolvesM;
     for (int i = 0; i < 400; i++) {
         //construct Cell contents
 
@@ -32,6 +32,13 @@ void ConsoleView::printFieldToConsole(Field field) {
                     cellContent += "W";
                 }
             }
+            if(!field.getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
+                countOfWolvesM = static_cast<int>(field.getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
+                for (int j = 0; j < countOfWolvesM; j++) {
+                    cellContent += "M";
+                }
+            }
+
 
             if (cellContent.empty()) {
                 cellContent = " ";

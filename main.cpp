@@ -43,11 +43,13 @@ int main(){
 
 //srand(time(NULL));
 //long i = random()%5;
-//std::cout<<i;
+////std::cout<<i;
 //    std::vector<int> myvector;
 //    myvector.push_back (100);
 //    myvector.push_back (200);
 //    myvector.push_back (300);
+//    int sie = static_cast<int>(myvector.size());
+//    std::cout<<sie<<std::endl;
 //    for (int i=0;i<myvector.size(); i++)
 //    std::cout<<myvector[i]<<std::endl;
 //    myvector.pop_back();
