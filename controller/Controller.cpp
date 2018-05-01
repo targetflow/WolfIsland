@@ -230,3 +230,38 @@ void Controller::wolfTryToEatOrDie() {
         }
     }
 }
+
+std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
+    auto neighbourCells = calculateNeighbourCellsWithoutFences(cellNumb);
+    std::vector<int> listOfAvailableStepsForWolf_M;
+    bool Wolf_WExplored = false;
+    for (auto& cllNmb: neighbourCells){
+        if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getWolf_W()->empty()){
+            listOfAvailableStepsForWolf_M.emplace_back(cllNmb);
+            Wolf_WExplored = true;
+        }
+    }
+    if(Wolf_WExplored){
+        return listOfAvailableStepsForWolf_M;
+    }
+    //якщо не знайшли в одному із восьми квадратів вовчицю, то перевіряєм на наявність кролів, якщо і кролів немає - то повертаєм просто список клітин куди можна піти
+    else{
+        bool rabbitExplored = false;
+            for (auto& cllNmb: neighbourCells) {
+                if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
+                {
+                    listOfAvailableStepsForWolf_M.emplace_back(cllNmb);
+                    rabbitExplored = true;
+                }
+            }
+        if(rabbitExplored){
+            return listOfAvailableStepsForWolf_M;
+            }
+        else{
+            return neighbourCells;
+            }
+
+    }
+
+
+}
