@@ -19,8 +19,6 @@ public:
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);
-    void TryToEatOrDie();
-    void TryToMakeOffspring();
 protected:
 };
 #endif //CPP_WOLF_W_H

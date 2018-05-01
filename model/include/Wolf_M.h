@@ -11,7 +11,6 @@ private:
     float health;
 public:
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
-    void TryToEatOrDie();
     void TryToMakeOffspring();
 protected:
 };

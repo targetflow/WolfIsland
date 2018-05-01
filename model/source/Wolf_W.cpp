@@ -23,14 +23,6 @@ void Wolf_W::setChosenMoveDirection(int direction) {
     chosenMoveDirection = direction;
 }
 
-void Wolf_W::TryToEatOrDie() {
-
-}
-
-void Wolf_W::TryToMakeOffspring() {
-
-}
-
 void Wolf_W::setHealth(float _health) {
     health = _health;
 }
