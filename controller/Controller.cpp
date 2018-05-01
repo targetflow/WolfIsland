@@ -234,6 +234,8 @@ void Controller::wolfTryToEatOrDie() {
     std::vector<Wolf_W>::iterator it;
 
     for (int cellNumber = 0; cellNumber < 400; cellNumber++){
+
+        //Wolf_W
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
         if (!Wolf_WVec->empty()) {
             for (auto& wolf_w: *Wolf_WVec) {
@@ -258,6 +260,34 @@ void Controller::wolfTryToEatOrDie() {
             }
 
         }
+        //Wolf_M
+
+        std::vector<Wolf_M>::iterator iter;
+        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_M();
+        if (!Wolf_MVec->empty()) {
+            for (auto& wolf_m: *Wolf_MVec) {
+                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getRabbits();
+                if (!rabbitVec->empty()) {
+                    wolf_m.setHealth(wolf_m.getHealth()+1) ;
+                    rabbitVec->pop_back();
+                }
+                else {
+                    wolf_m.setHealth(static_cast<float>(wolf_m.getHealth() - 0.1));
+                }
+            }
+
+            for ( iter = Wolf_MVec->begin(); iter != Wolf_MVec->end(); ) {
+                if ( (*iter).getHealth() == 0.0f ) {
+                    //delete * iter;
+                    iter = Wolf_MVec->erase(iter);
+                }
+                else {
+                    ++iter;
+                }
+            }
+
+        }
+
     }
 }
 
