@@ -35,7 +35,7 @@ private:
     void rabbitSpread();
 
     // wolves stuff
-    void performMovesforWolf_W();
+    void wolfTryToEatOrDie();
 };
 
 

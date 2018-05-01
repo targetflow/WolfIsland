@@ -44,6 +44,8 @@ void Controller::printFieldToConsole() {
 void Controller::nextStep(unsigned long numberOfStep) {
     // calculate decisions
     rabbitSpread();
+
+    wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
 //    Wolf_WMoveDecisions();
@@ -160,8 +162,24 @@ void Controller::performMoves()
             }
         }
 
-        //Wolf_W
+        // Wolf_W
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
+        if(!Wolf_WVec->empty())
+        {
+            for (auto &wolf_w:*Wolf_WVec)
+            {
+                int wolf_w_decision = wolf_w.getChosenMoveDirection();
+                if(wolf_w_decision == cellNumb or wolf_w_decision < 0)
+                    continue;
+                else{
+                    field.getCells()->at(static_cast<unsigned long>(wolf_w_decision)).getWolf_W()->emplace_back(Wolf_W());//додаєм вовчицю з вектор вовчиць по вказаному номеру клітини
+                    Wolf_WVec->pop_back();//видаляєм останній елемент з вектора
+                    wolf_w.setChosenMoveDirection(-2);
 
+                }
+
+            }
+        }
     }
 }
 
@@ -179,23 +197,39 @@ void Controller::rabbitSpread() {
     }
 }
 
-void Controller::performMovesforWolf_W() {
-    for(int cellNumber = 0; cellNumber < 400; cellNumber++) {
+void Controller::wolfTryToEatOrDie() {
+    std::vector<Wolf_W>::iterator it;
+
+    for (int cellNumber = 0; cellNumber < 400; cellNumber++){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
-        if(!Wolf_WVec->empty()) {
-            for(auto& wolf_w: *Wolf_WVec) {
-                int chosenNumber = wolf_w.getChosenMoveDirection();
-                field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getWolf_W()->emplace_back(Wolf_W());
-                Wolf_WVec->erase(Wolf_WVec->begin(), Wolf_WVec->begin()+1);
-                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(chosenNumber)).getRabbits();
-                if(rabbitVec->empty()) {
-                    wolf_w.setHealth((wolf_w.getHealth() - 0, 1));
-                }
-                else{
+        if (!Wolf_WVec->empty()) {
+            for (auto& wolf_w: *Wolf_WVec) {
+                auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getRabbits();
+                if (!rabbitVec->empty()) {
+                    wolf_w.setHealth(wolf_w.getHealth()+1) ;
                     rabbitVec->pop_back();
-                    wolf_w.setHealth((wolf_w.getHealth() + 1));
+                }
+                else {
+                    wolf_w.setHealth(static_cast<float>(wolf_w.getHealth() - 0.1));
+                }
+//                float wolf_w_health = wolf_w.gethealth();
+//                if(wolf_w.gethealth() == 0.0){
+//                    std::cout << "Before: " << Wolf_WVec->size() << std::endl;
+//                    Wolf_WVec->erase(std::remove(Wolf_WVec->begin(), Wolf_WVec->end(), *&wolf_w), Wolf_WVec->end());
+//                    std::cout << "After: " << Wolf_WVec->size() << std::endl;
+//                }
+            }
+
+            for ( it = Wolf_WVec->begin(); it != Wolf_WVec->end(); ) {
+                if ( (*it).getHealth() == 0.0f ) {
+                    //delete * it;
+                    it = Wolf_WVec->erase(it);
+                }
+                else {
+                    ++it;
                 }
             }
+
         }
     }
 }

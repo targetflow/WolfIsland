@@ -31,7 +31,7 @@ void Wolf_W::TryToMakeOffspring() {
 
 }
 
-void Wolf_W::setHealth(int _health) {
+void Wolf_W::setHealth(float _health) {
     health = _health;
 }
 

@@ -44,5 +44,15 @@ int main(){
 //srand(time(NULL));
 //long i = random()%5;
 //std::cout<<i;
+//    std::vector<int> myvector;
+//    myvector.push_back (100);
+//    myvector.push_back (200);
+//    myvector.push_back (300);
+//    for (int i=0;i<myvector.size(); i++)
+//    std::cout<<myvector[i]<<std::endl;
+//    myvector.pop_back();
+//    for (int i=0;i<myvector.size(); i++)
+//        std::cout<<myvector[i]<<std::endl;
+
 }
 
