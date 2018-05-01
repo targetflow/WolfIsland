@@ -186,9 +186,28 @@ void Controller::performMoves()
                 if(wolf_w_decision == cellNumb or wolf_w_decision < 0)
                     continue;
                 else{
-                    field.getCells()->at(static_cast<unsigned long>(wolf_w_decision)).getWolf_W()->emplace_back(Wolf_W());//додаєм вовчицю з вектор вовчиць по вказаному номеру клітини
+                    field.getCells()->at(static_cast<unsigned long>(wolf_w_decision)).getWolf_W()->emplace_back(Wolf_W());//додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
                     Wolf_WVec->pop_back();//видаляєм останній елемент з вектора
                     wolf_w.setChosenMoveDirection(-2);
+
+                }
+
+            }
+        }
+
+        //Wolf_M
+        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M();
+        if(!Wolf_MVec->empty())
+        {
+            for (auto &wolf_m:*Wolf_MVec)
+            {
+                int wolf_m_decision = wolf_m.getChosenMoveDirection();
+                if(wolf_m_decision == cellNumb or wolf_m_decision < 0)
+                    continue;
+                else{
+                    field.getCells()->at(static_cast<unsigned long>(wolf_m_decision)).getWolf_M()->emplace_back(Wolf_M());//додаєм вовка в вектор вовків по вказаному номеру клітини
+                    Wolf_MVec->pop_back();//видаляєм останній елемент з вектора
+                    wolf_m.setChosenMoveDirection(-2);
 
                 }
 
