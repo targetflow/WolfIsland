@@ -6,7 +6,7 @@
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
     this->field = Field();
-    initializeField(nRabbits, nWWolves, cOfFences);
+    initializeField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
 Controller::~Controller() = default;
@@ -16,7 +16,7 @@ void Controller::execute(int numberOfSteps) {
         nextStep(i+1);
 }
 
-void Controller::initializeField(int nRabbits, int nWWolves, int cOfFences)
+void Controller::initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
 {
     int index;
     for(int i = 0; i < nRabbits; i++) {
@@ -26,6 +26,10 @@ void Controller::initializeField(int nRabbits, int nWWolves, int cOfFences)
     for(int i = 0; i < nWWolves; i++) {
         index = random_number(0, 399);
         field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->emplace_back(Wolf_W());
+    }
+    for(int i = 0; i<nMWolves; i++){
+        index = random_number(0, 399);
+        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->emplace_back(Wolf_M());
     }
     for(int i = 0; i < cOfFences; i++) {
         index = random_number(0, 399);
@@ -48,8 +52,7 @@ void Controller::nextStep(unsigned long numberOfStep) {
     wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
-//    Wolf_WMoveDecisions();
-//    performMovesforWolf_W();
+
 
     std::cout << "Step №" << numberOfStep << std::endl;
     printFieldToConsole();
@@ -212,12 +215,6 @@ void Controller::wolfTryToEatOrDie() {
                 else {
                     wolf_w.setHealth(static_cast<float>(wolf_w.getHealth() - 0.1));
                 }
-//                float wolf_w_health = wolf_w.gethealth();
-//                if(wolf_w.gethealth() == 0.0){
-//                    std::cout << "Before: " << Wolf_WVec->size() << std::endl;
-//                    Wolf_WVec->erase(std::remove(Wolf_WVec->begin(), Wolf_WVec->end(), *&wolf_w), Wolf_WVec->end());
-//                    std::cout << "After: " << Wolf_WVec->size() << std::endl;
-//                }
             }
 
             for ( it = Wolf_WVec->begin(); it != Wolf_WVec->end(); ) {
