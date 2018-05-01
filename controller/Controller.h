@@ -19,11 +19,12 @@ public:
     void execute(int numberOfSteps = 0);
     std::vector<int> makeListOfAvailableStepsForRabbit(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
+    std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
 
 private:
     Field field;
 
-    void initializeField(int nRabbits, int nWWolves, int cOfFences);
+    void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
     void printFieldToConsole();
     void nextStep(unsigned long numberOfStep);
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
