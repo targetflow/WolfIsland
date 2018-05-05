@@ -27,10 +27,11 @@ public:
 private:
     Field field;
     BaseView* view;
+    int stepNumber;
 
     void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
     void displayField();
-    void nextStep(unsigned long numberOfStep);
+    void nextStep();
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
     void calculateMoveDecisions();

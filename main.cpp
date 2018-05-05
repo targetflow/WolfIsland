@@ -16,9 +16,12 @@ int main(){
 
 
     if (useGUI) {
+        // SFML Program starts here
         RenderWindow window(sf::VideoMode(640, 640), "Wolves Island simulation");
         window.setFramerateLimit(60); // без цього комп іде на взрив, проц ппц
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
+
+        Time delayTime = sf::seconds(1); // без цієї затримки натиснення клавіші побуджує більше ніж 1 виклик.
 
         while (window.isOpen())
         {
@@ -29,8 +32,9 @@ int main(){
                     window.close();
             }
 
-            if ((Keyboard::isKeyPressed(Keyboard::Left) )) {
-                controller.execute(countOfSteps);
+            if ((Keyboard::isKeyPressed(Keyboard::Left))) {
+                controller.execute(1);
+                sf::sleep(delayTime);
             }
 
             window.clear();

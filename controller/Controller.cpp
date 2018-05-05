@@ -6,6 +6,7 @@
 
 Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI) {
     this->field = Field();
+    stepNumber = 0;
 
     if(useGUI) {
         view = new GUIView(&field);
@@ -21,7 +22,7 @@ Controller::~Controller() {
 
 void Controller::execute(int numberOfSteps) {
     for (unsigned long i = 0; i < numberOfSteps; i++)
-        nextStep(i+1);
+        nextStep();
 }
 
 void Controller::initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
@@ -52,16 +53,16 @@ void Controller::displayField() {
     view->displayField();
 }
 
-void Controller::nextStep(unsigned long numberOfStep) {
+void Controller::nextStep() {
     // calculate decisions
     rabbitSpread();
     Wolf_MMakeOffspring();
     wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
+    stepNumber += 1;
 
-
-    std::cout << "Step №" << numberOfStep << std::endl;
+    std::cout << "Step №" << stepNumber << std::endl;
     displayField();
 }
 
