@@ -5,15 +5,19 @@
 #ifndef CPP_CONSOLEVIEW_H
 #define CPP_CONSOLEVIEW_H
 
-#include "../model/include/Field.h"
 #include <iostream>
+#include "../model/include/Field.h"
+#include "BaseView.h"
 
-class ConsoleView {
+class ConsoleView: public BaseView {
 public:
-    ConsoleView();
+    ConsoleView(Field* field);
     virtual ~ConsoleView();
 
-    void printFieldToConsole(Field field);
+    virtual void displayField();
+
+private:
+    Field* field;
 };
 
 

@@ -4,12 +4,20 @@
 
 #include "Controller.h"
 
-Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences) {
+Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI) {
     this->field = Field();
+
+    if(useGUI) {
+        view = new GUIView(&field);
+    } else {
+        view = new ConsoleView(&field);
+    }
     initializeField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
-Controller::~Controller() = default;
+Controller::~Controller() {
+    delete view;
+}
 
 void Controller::execute(int numberOfSteps) {
     for (unsigned long i = 0; i < numberOfSteps; i++)
@@ -37,12 +45,11 @@ void Controller::initializeField(int nRabbits, int nWWolves, int nMWolves, int c
     }
 
     std::cout << "Field initialized." << std::endl;
-    printFieldToConsole();
+    displayField();
 }
 
-void Controller::printFieldToConsole() {
-    ConsoleView consoleView = ConsoleView();
-    consoleView.printFieldToConsole(field);
+void Controller::displayField() {
+    view->displayField();
 }
 
 void Controller::nextStep(unsigned long numberOfStep) {
@@ -55,7 +62,7 @@ void Controller::nextStep(unsigned long numberOfStep) {
 
 
     std::cout << "Step №" << numberOfStep << std::endl;
-    printFieldToConsole();
+    displayField();
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {

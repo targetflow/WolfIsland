@@ -7,13 +7,16 @@
 
 #include "../model/include/Field.h"
 #include "../view/ConsoleView.h"
+#include "../view/GUIView.h"
+#include "../view/BaseView.h"
 #include "../utils/utils.h"
 #include <iostream>
 #include <algorithm>
 
+
 class Controller {
 public:
-    explicit Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences);
+    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI);
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
@@ -23,9 +26,10 @@ public:
 
 private:
     Field field;
+    BaseView* view;
 
     void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
-    void printFieldToConsole();
+    void displayField();
     void nextStep(unsigned long numberOfStep);
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 

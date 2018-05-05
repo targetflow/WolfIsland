@@ -10,8 +10,9 @@ int main(){
     const int nWWolves = 3;
     const int cOfFences = 5;
     const int countOfSteps = 3;
+    const bool useGUI = false;
 
-    Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences);
+    Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
     controller.execute(countOfSteps);
     // test2
 //    std::vector<int> a;
