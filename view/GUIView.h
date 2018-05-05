@@ -16,10 +16,10 @@ const int WIDTH_MAP = 20;
 
 class GUIView: public BaseView {
 public:
-    GUIView(Field *field);
-    virtual ~GUIView();
+    explicit GUIView(Field *field);
+    ~GUIView() override;
 
-    virtual void displayField();
+    void displayField() override;
 private:
     Field* field;
     static sf::String TileMap[HEIGHT_MAP];

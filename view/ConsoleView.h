@@ -11,10 +11,10 @@
 
 class ConsoleView: public BaseView {
 public:
-    ConsoleView(Field* field);
-    virtual ~ConsoleView();
+    explicit ConsoleView(Field* field);
+    ~ConsoleView() override;
 
-    virtual void displayField();
+    void displayField() override;
 
 private:
     Field* field;
