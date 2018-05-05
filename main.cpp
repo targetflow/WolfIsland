@@ -10,10 +10,38 @@ int main(){
     const int nWWolves = 3;
     const int cOfFences = 5;
     const int countOfSteps = 3;
-    const bool useGUI = false;
+    //const bool useGUI = false;
+    const bool useGUI = true;
 
-    Controller controller = Controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
-    controller.execute(countOfSteps);
+
+
+    if (useGUI) {
+        RenderWindow window(sf::VideoMode(640, 640), "Wolves Island simulation");
+        window.setFramerateLimit(60); // без цього комп іде на взрив, проц ппц
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
+
+        while (window.isOpen())
+        {
+            sf::Event event {};
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            if ((Keyboard::isKeyPressed(Keyboard::Left) )) {
+                controller.execute(countOfSteps);
+            }
+
+            window.clear();
+            window.display();
+        }
+    } else {
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
+        controller.execute(countOfSteps);
+    }
+
+
     // test2
 //    std::vector<int> a;
 //    std::vector<int> b;

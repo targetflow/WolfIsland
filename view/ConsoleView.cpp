@@ -27,7 +27,6 @@ void ConsoleView::displayField() {
                     cellContent += "R";
                 }
             }
-
             if(!field->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
                 countOfWolvesW = static_cast<int>(field->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
                 for (int j = 0; j < countOfWolvesW; j++) {
@@ -40,8 +39,6 @@ void ConsoleView::displayField() {
                     cellContent += "M";
                 }
             }
-
-
             if (cellContent.empty()) {
                 cellContent = " ";
             }

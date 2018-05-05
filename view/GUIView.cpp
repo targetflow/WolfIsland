@@ -5,7 +5,7 @@
 #include "GUIView.h"
 
 GUIView::GUIView(Field *field) {
-    this->field = field;
+    this->field = field;    
 }
 
 GUIView::~GUIView() = default;
