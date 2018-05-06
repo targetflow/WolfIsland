@@ -32,6 +32,14 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     // rabbitImg.loadFromFile("../resources/textures/rabbit/processed/FX13_rabbit-15x16.png");
     rabbitTxtr.loadFromImage(rabbitImg);
     rabbitSprt.setTexture(rabbitTxtr);
+
+    // вовка
+    // Варіанти текстур:
+    wolfMImg.loadFromFile("../resources/textures/WolfM/processed/Howling-Wolf-Silhouette-16x16.png"); // теж норм вовк
+    // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/doushouqi-wolf-16x16.png"); // так собі видно
+    // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/wolf16x17.png"); // наш старий вовк, непогано видно.
+    wolfMTxtr.loadFromImage(wolfMImg);
+    wolfMSprt.setTexture(wolfMTxtr);
 }
 
 GUIView::~GUIView() = default;
@@ -45,7 +53,7 @@ void GUIView::displayField() {
             countOfRabbits =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
             for (int j = 0; j < countOfRabbits; j++) {
-                rabbitSprt.setTextureRect(IntRect(0, 0, 16, 15));
+                rabbitSprt.setTextureRect(IntRect(0, 0, 16, 16));
                 rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - щоб огорожа була по центру клітинки.
                 // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
                 // 41 = [1][2]
@@ -63,7 +71,11 @@ void GUIView::displayField() {
             countOfWolvesM =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
             for (int j = 0; j < countOfWolvesM; j++) {
-                //cellContent += "M";
+                wolfMSprt.setTextureRect(IntRect(0, 0, 16, 16));
+                wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16); // +7 - щоб огорожа була по центру клітинки.
+                // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
+                // 41 = [1][2]
+                pWindow->draw(wolfMSprt);
             }
         }
     }
