@@ -4,11 +4,11 @@
 
 #include "Controller.h"
 
-Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *pWindow) {
+Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, sf::RenderWindow *pWindow) {
     this->field = Field();
     stepNumber = 0;
 
-    if(useGUI) {
+    if(pWindow) {
         pView = new GUIView(&field, pWindow);
     } else {
         pView = new ConsoleView(&field);
