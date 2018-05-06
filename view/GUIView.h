@@ -27,8 +27,18 @@ private:
     Texture grassTxtr; // текстура карти
     Image grassImg; // зображення для трави, що покриватиме клітинку карти
     Sprite fenceSprt; // спрайт огорожі
-    Texture fenceTxtr; // текстура огорожі
-    Image fenceImg; // зображення для огорожі
+    Texture fenceTxtr;
+    Image fenceImg;
+    Sprite rabbitSprt; // спрайт кроля
+    Texture rabbitTxtr;
+    Image rabbitImg;
+    Sprite wolfMSprt; // спрайт вовка
+    Texture wolfMTxtr;
+    Image wolfMImg;
+    Sprite wolfWSprt; // спрайт вовчиці
+    Texture wolfWTxtr;
+    Image wolfWImg;
+
 
     void drawMap();
 };
