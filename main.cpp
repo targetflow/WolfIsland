@@ -28,7 +28,7 @@ int main(){
         Sprite s_map;//создаём спрайт для карты
         s_map.setTexture(map);//заливаем текстуру спрайтом
 
-        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI, &window);
 
         Time delayTime = sf::seconds(1); // без цієї затримки натиснення клавіші побуджує більше ніж 1 виклик.
 
@@ -61,7 +61,7 @@ int main(){
         }
     } else {
         // console mode
-        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI, nullptr);
         controller.execute(countOfSteps);
     }
 

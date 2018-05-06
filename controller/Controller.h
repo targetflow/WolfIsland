@@ -5,18 +5,18 @@
 #ifndef CPP_CONTROLLER_H
 #define CPP_CONTROLLER_H
 
+#include <iostream>
+#include <algorithm>
+#include <SFML/Graphics.hpp>
 #include "../model/include/Field.h"
 #include "../view/ConsoleView.h"
 #include "../view/GUIView.h"
 #include "../view/BaseView.h"
 #include "../utils/utils.h"
-#include <iostream>
-#include <algorithm>
-
 
 class Controller {
 public:
-    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI);
+    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *window);
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);

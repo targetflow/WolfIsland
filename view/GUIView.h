@@ -16,12 +16,13 @@ using namespace sf;
 
 class GUIView: public BaseView {
 public:
-    explicit GUIView(Field *field);
+    explicit GUIView(Field *field, RenderWindow *pWindow);
     ~GUIView() override;
 
     void displayField() override;
 private:
     Field* field;
+    RenderWindow* pWindow;
     //static sf::String TileMap[HEIGHT_MAP];
 };
 

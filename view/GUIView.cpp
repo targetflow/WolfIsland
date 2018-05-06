@@ -4,8 +4,9 @@
 
 #include "GUIView.h"
 
-GUIView::GUIView(Field *field) {
-    this->field = field;    
+GUIView::GUIView(Field *field, RenderWindow *pWindow) {
+    this->field = field;
+    this->pWindow = pWindow;
 }
 
 GUIView::~GUIView() = default;
