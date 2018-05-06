@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "../model/include/Field.h"
 #include "BaseView.h"
+#include "map.h"
 
 using namespace sf;
 
@@ -23,7 +24,12 @@ public:
 private:
     Field* pField;
     RenderWindow* pWindow;
-    //static sf::String TileMap[HEIGHT_MAP];
+    Sprite grassSprt; // спрайт карти
+    Texture grassTxtr; // текстура карти
+    Image grassImg; // зображення для клітинки карти
+    //String TileMap[HEIGHT_MAP];
+
+    void drawMap();
 };
 
 #endif //CPP_GUIVIEW_H

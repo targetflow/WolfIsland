@@ -374,3 +374,7 @@ void Controller::Wolf_MMakeOffspring(){
 
     }
 }
+
+BaseView *Controller::getPView() {
+    return pView;
+}

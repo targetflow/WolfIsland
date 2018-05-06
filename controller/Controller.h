@@ -24,6 +24,7 @@ public:
     std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
 
+    BaseView* getPView();
 private:
     Field field;
     BaseView* pView;
@@ -44,6 +45,5 @@ private:
     void wolfTryToEatOrDie();
     void Wolf_MMakeOffspring();
 };
-
 
 #endif //CPP_CONTROLLER_H
