@@ -5,6 +5,7 @@
 #include "controller/Controller.h"
 
 int main(){
+    sf::String windowTitle = "Wolves Island simulation";
     const int nRabbits = 12;
     const int nMWolves = 4;
     const int nWWolves = 3;
@@ -14,7 +15,7 @@ int main(){
 
     if (useGUI) {
         // SFML Program starts here
-        RenderWindow window(sf::VideoMode(640, 640), "Wolves Island simulation");
+        RenderWindow window(sf::VideoMode(640, 640), windowTitle);
         window.setFramerateLimit(60); // без цього комп іде на взрив, проц ппц
 
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
