@@ -4,8 +4,8 @@
 
 #include "ConsoleView.h"
 
-ConsoleView::ConsoleView(Field *field) {
-    this->field = field;
+ConsoleView::ConsoleView(Field *_pField) {
+    this->pField = _pField;
 }
 
 ConsoleView::~ConsoleView() = default;
@@ -17,24 +17,24 @@ void ConsoleView::displayField() {
     for (int i = 0; i < 400; i++) {
         //construct Cell contents
 
-        if (field->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
+        if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
             cellContent += "F";
         }
         else {
-            if(!field->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
-                countOfRabbits = static_cast<int>(field->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
+            if(!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
+                countOfRabbits = static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
                 for (int j = 0; j < countOfRabbits; j++) {
                     cellContent += "R";
                 }
             }
-            if(!field->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
-                countOfWolvesW = static_cast<int>(field->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
+            if(!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
+                countOfWolvesW = static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
                 for (int j = 0; j < countOfWolvesW; j++) {
                     cellContent += "W";
                 }
             }
-            if(!field->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
-                countOfWolvesM = static_cast<int>(field->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
+            if(!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
+                countOfWolvesM = static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
                 for (int j = 0; j < countOfWolvesM; j++) {
                     cellContent += "M";
                 }

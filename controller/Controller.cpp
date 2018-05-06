@@ -4,20 +4,20 @@
 
 #include "Controller.h"
 
-Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *window) {
+Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *pWindow) {
     this->field = Field();
     stepNumber = 0;
 
     if(useGUI) {
-        view = new GUIView(&field, window);
+        pView = new GUIView(&field, pWindow);
     } else {
-        view = new ConsoleView(&field);
+        pView = new ConsoleView(&field);
     }
     initializeField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
 Controller::~Controller() {
-    delete view;
+    delete pView;
 }
 
 void Controller::execute(int numberOfSteps) {
@@ -50,7 +50,7 @@ void Controller::initializeField(int nRabbits, int nWWolves, int nMWolves, int c
 }
 
 void Controller::displayField() {
-    view->displayField();
+    pView->displayField();
 }
 
 void Controller::nextStep() {

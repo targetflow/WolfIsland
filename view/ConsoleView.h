@@ -11,13 +11,13 @@
 
 class ConsoleView: public BaseView {
 public:
-    explicit ConsoleView(Field* field);
+    explicit ConsoleView(Field* _pField);
     ~ConsoleView() override;
 
     void displayField() override;
 
 private:
-    Field* field;
+    Field* pField;
 };
 
 

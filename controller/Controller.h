@@ -16,7 +16,7 @@
 
 class Controller {
 public:
-    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *window);
+    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, bool useGUI, sf::RenderWindow *pWindow);
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
@@ -26,7 +26,7 @@ public:
 
 private:
     Field field;
-    BaseView* view;
+    BaseView* pView;
     int stepNumber;
 
     void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
