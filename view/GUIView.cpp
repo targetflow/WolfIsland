@@ -35,11 +35,20 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
 
     // вовка
     // Варіанти текстур:
-    wolfMImg.loadFromFile("../resources/textures/WolfM/processed/Howling-Wolf-Silhouette-16x16.png"); // теж норм вовк
+    // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/Howling-Wolf-Silhouette-16x16.png"); // теж норм вовк
     // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/doushouqi-wolf-16x16.png"); // так собі видно
-    // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/wolf16x17.png"); // наш старий вовк, непогано видно.
+    wolfMImg.loadFromFile("../resources/textures/WolfM/processed/wolf16x17.png"); // наш старий вовк, непогано видно.
     wolfMTxtr.loadFromImage(wolfMImg);
     wolfMSprt.setTexture(wolfMTxtr);
+
+    // вовчиці
+    // Варіанти текстур:
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Multispectral-Gem-Howling-Wolf-16x17.png"); // райдужна - так собі видно
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Crescent-Moon-Wolf-16x17.png"); // "вою на луну" - взагалі не видно
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/dibujo-26-16x17.png"); // так собі, сіре на зеленому не дуже
+    wolfWImg.loadFromFile("../resources/textures/WolfW/processed/blankwolfhead2-16x17.png");
+    wolfWTxtr.loadFromImage(wolfWImg);
+    wolfWSprt.setTexture(wolfWTxtr);
 }
 
 GUIView::~GUIView() = default;
@@ -64,7 +73,11 @@ void GUIView::displayField() {
             countOfWolvesW =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
             for (int j = 0; j < countOfWolvesW; j++) {
-                //cellContent += "W";
+                wolfWSprt.setTextureRect(IntRect(0, 0, 16, 16));
+                wolfWSprt.setPosition((i%20) * 32 + 16, (i/20) * 32 + 16);
+                // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
+                // 41 = [1][2]
+                pWindow->draw(wolfWSprt);
             }
         }
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
@@ -72,7 +85,7 @@ void GUIView::displayField() {
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
             for (int j = 0; j < countOfWolvesM; j++) {
                 wolfMSprt.setTextureRect(IntRect(0, 0, 16, 16));
-                wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16); // +7 - щоб огорожа була по центру клітинки.
+                wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16);
                 // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
                 // 41 = [1][2]
                 pWindow->draw(wolfMSprt);
