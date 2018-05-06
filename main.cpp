@@ -3,6 +3,7 @@
 //
 
 #include "controller/Controller.h"
+#include "view/map.h"
 
 int main(){
     const int nRabbits = 12;
@@ -19,6 +20,14 @@ int main(){
         // SFML Program starts here
         RenderWindow window(sf::VideoMode(640, 640), "Wolves Island simulation");
         window.setFramerateLimit(60); // без цього комп іде на взрив, проц ппц
+
+        Image map_image;//объект изображения для карты
+        map_image.loadFromFile("../resources/grass00.png");//загружаем файл для карты
+        Texture map;//текстура карты
+        map.loadFromImage(map_image);//заряжаем текстуру картинкой
+        Sprite s_map;//создаём спрайт для карты
+        s_map.setTexture(map);//заливаем текстуру спрайтом
+
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
 
         Time delayTime = sf::seconds(1); // без цієї затримки натиснення клавіші побуджує більше ніж 1 виклик.
@@ -38,9 +47,20 @@ int main(){
             }
 
             window.clear();
+            //малюєм карту
+            for (int i = 0; i < HEIGHT_MAP; i++)
+                for (int j = 0; j < WIDTH_MAP; j++)
+                {
+                    if((TileMap[i][j] == '0') ) s_map.setTextureRect(IntRect(0, 0, 32, 32));
+                    s_map.setPosition(j * 32, i * 32); //по сути раскидывает квадратики, превращая в карту. то есть задает
+                    // каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один
+                    // квадрат
+                    window.draw(s_map); //рисуем квадратики на экран
+                }
             window.display();
         }
     } else {
+        // console mode
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, useGUI);
         controller.execute(countOfSteps);
     }

@@ -11,8 +11,8 @@
 
 using namespace sf;
 
-const int HEIGHT_MAP = 20;
-const int WIDTH_MAP = 20;
+//const int HEIGHT_MAP = 20;
+//const int WIDTH_MAP = 20;
 
 class GUIView: public BaseView {
 public:
@@ -22,7 +22,7 @@ public:
     void displayField() override;
 private:
     Field* field;
-    static sf::String TileMap[HEIGHT_MAP];
+    //static sf::String TileMap[HEIGHT_MAP];
 };
 
 #endif //CPP_GUIVIEW_H
