@@ -36,7 +36,7 @@ int main(){
             }
 
             window.clear();
-            controller.getPView()->displayField(); // draw map
+            controller.getPView()->displayField(); // draw map // потім це має бути по таймеру
             window.display();
         }
     } else { // console mode

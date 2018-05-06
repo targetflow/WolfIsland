@@ -22,9 +22,13 @@ public:
 private:
     Field* pField;
     RenderWindow* pWindow;
+
     Sprite grassSprt; // спрайт карти
     Texture grassTxtr; // текстура карти
-    Image grassImg; // зображення для клітинки карти
+    Image grassImg; // зображення для трави, що покриватиме клітинку карти
+    Sprite fenceSprt; // спрайт огорожі
+    Texture fenceTxtr; // текстура огорожі
+    Image fenceImg; // зображення для огорожі
 
     void drawMap();
 };
