@@ -58,14 +58,15 @@ void GUIView::displayField() {
 
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
     for (int i = 0; i < 400; i++) {
+//        rabbitSprt.setTextureRect(IntRect(0, 0, 32, 32));
+//        rabbitSprt.setPosition((1) * 32, (2) * 32);
+//        pWindow->draw(rabbitSprt);
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
             countOfRabbits =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
             for (int j = 0; j < countOfRabbits; j++) {
                 rabbitSprt.setTextureRect(IntRect(0, 0, 16, 16));
                 rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - щоб огорожа була по центру клітинки.
-                // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
-                // 41 = [1][2]
                 pWindow->draw(rabbitSprt);
             }
         }
@@ -75,8 +76,6 @@ void GUIView::displayField() {
             for (int j = 0; j < countOfWolvesW; j++) {
                 wolfWSprt.setTextureRect(IntRect(0, 0, 16, 16));
                 wolfWSprt.setPosition((i%20) * 32 + 16, (i/20) * 32 + 16);
-                // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
-                // 41 = [1][2]
                 pWindow->draw(wolfWSprt);
             }
         }
@@ -86,8 +85,6 @@ void GUIView::displayField() {
             for (int j = 0; j < countOfWolvesM; j++) {
                 wolfMSprt.setTextureRect(IntRect(0, 0, 16, 16));
                 wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16);
-                // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
-                // 41 = [1][2]
                 pWindow->draw(wolfMSprt);
             }
         }
@@ -112,8 +109,6 @@ void GUIView::drawMap() {
         if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
             fenceSprt.setTextureRect(IntRect(0, 0, 30, 16));
             fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - щоб огорожа була по центру клітинки.
-            // а от чи правильно обчислює позиції - на 100% не впевнений. Варто ще далі дослідити, протестувати.
-            // 41 = [1][2]
             pWindow->draw(fenceSprt);
         }
     }

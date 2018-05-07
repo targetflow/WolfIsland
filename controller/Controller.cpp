@@ -107,12 +107,24 @@ std::vector<int> Controller::calculateNeighbourCellsWithoutFences(int cellNumb) 
     listOfNeighbours.emplace_back(east(north(cellNumb)));
     listOfNeighbours.emplace_back(west(north(cellNumb)));
 
+//    std::cout << "LoN before: ";
+//    for (auto& cllNmb: listOfNeighbours) {
+//        std::cout << cllNmb << " ";
+//    }
+//    std::cout << std::endl;
+
     for (auto& cllNmb: listOfNeighbours) {
         if (field.getCells()->at(static_cast<unsigned long>(cllNmb)).isFence()) {
-            auto vec = listOfNeighbours;
-            vec.erase(std::remove(vec.begin(), vec.end(), cllNmb), vec.end());
+            // std::cout << "Fence at" << cllNmb << std::endl;
+            listOfNeighbours.erase(std::remove(listOfNeighbours.begin(), listOfNeighbours.end(), cllNmb), listOfNeighbours.end());
         }
     }
+
+//    std::cout << "LoN after: ";
+//    for (auto& cllNmb: listOfNeighbours) {
+//        std::cout << cllNmb << " ";
+//    }
+//    std::cout << std::endl;
     return listOfNeighbours;
 }
 
