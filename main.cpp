@@ -35,15 +35,8 @@ int main(){
                     window.close();
             }
             if (Keyboard::isKeyPressed(Keyboard::Right)){
-                if (clock.getElapsedTime().asSeconds() >= 1)//здійснюєм рух коли ми на 60 кадрі
-                {
-                    controller.execute(1);
-                    clock.restart();
-                } else //нічо не робим поки знову не настане 60 кадр із 60-ти за секунду
-                {
-                    Time sleepTime = seconds((1) - clock.getElapsedTime().asSeconds());
-                    sleep(sleepTime);
-                }
+                sf::sleep(delayTime);
+                controller.execute(1);
             }
 
             if ((Keyboard::isKeyPressed(Keyboard::Left))) {
