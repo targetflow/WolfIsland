@@ -14,6 +14,8 @@ int main(){
     const bool useGUI = true;
     const float FPS = 60.0f;
 
+    bool keepExecuting = false;
+
     if (useGUI) {
         // SFML Program starts here
         RenderWindow window(sf::VideoMode(640, 640), windowTitle);
@@ -32,7 +34,7 @@ int main(){
                 if (event.type == sf::Event::Closed)
                     window.close();
             }
-            if ((Keyboard::isKeyPressed(Keyboard::Right))){
+            if (Keyboard::isKeyPressed(Keyboard::Right)){
                 if (clock.getElapsedTime().asSeconds() >= 60.0f / FPS)//здійснюєм рух коли ми на 60 кадрі
                 {
                     controller.execute(1);
@@ -45,6 +47,10 @@ int main(){
             }
 
             if ((Keyboard::isKeyPressed(Keyboard::Left))) {
+                keepExecuting = true;  // увімкни вмикач
+            }
+
+            if (keepExecuting) {  // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 controller.execute(1);// робить рух можливим
                 sf::sleep(delayTime);
             }
