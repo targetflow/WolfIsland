@@ -24,23 +24,26 @@ int main(){
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
         Time delayTime = sf::seconds(1); // без цієї затримки натиснення клавіші побуджує більше ніж 1 виклик.
-        sf::Clock clock;
 
-        while (window.isOpen())
-        {
+        while (window.isOpen()) {
             sf::Event event {};
-            while (window.pollEvent(event))
-            {
+            while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed)
                     window.close();
             }
-            if (Keyboard::isKeyPressed(Keyboard::Right)){
+
+            if (Keyboard::isKeyPressed(Keyboard::Right)) {  //step-by-step
+                keepExecuting = false;
                 sf::sleep(delayTime);
                 controller.execute(1);
             }
 
-            if ((Keyboard::isKeyPressed(Keyboard::Left))) {
-                keepExecuting = !keepExecuting;  // змінити стан вмикача
+            if ((Keyboard::isKeyPressed(Keyboard::Left))) {  // start/continue
+                keepExecuting = true;
+            }
+
+            if ((Keyboard::isKeyPressed(Keyboard::Down))) {  // stop/pause
+                keepExecuting = false;
             }
 
             if (keepExecuting) {  // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
