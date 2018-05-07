@@ -47,7 +47,7 @@ int main(){
             }
 
             if ((Keyboard::isKeyPressed(Keyboard::Left))) {
-                keepExecuting = true;  // увімкни вмикач
+                keepExecuting = !keepExecuting;  // змінити стан вмикача
             }
 
             if (keepExecuting) {  // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
