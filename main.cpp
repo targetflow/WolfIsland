@@ -51,12 +51,10 @@ int main(){
             }
 
             if (keepExecuting) {  // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
-                controller.execute(1);// робить рух можливим
                 sf::sleep(delayTime);
+                controller.execute(1);// робить рух можливим
             }
-
-            window.clear();
-            controller.getPView()->displayField(); // draw map // потім це має бути по таймеру
+            //window.clear();
             window.display();
         }
     } else { // console mode
