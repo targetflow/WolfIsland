@@ -38,6 +38,10 @@ private:
     Sprite wolfWSprt; // спрайт вовчиці
     Texture wolfWTxtr;
     Image wolfWImg;
+    Sprite menuSprt; // спрайт вовчиці
+    Texture menuTxtr;
+    Image menuImg;
+
 
 
     void drawMap();

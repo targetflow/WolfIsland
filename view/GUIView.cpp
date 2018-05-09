@@ -11,6 +11,10 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     // Топ текстури: https://openclipart.org/search/
     // Ініціалізація відображення:
     // трави на карті
+            menuImg.loadFromFile("/home/katya/Downloads/menu.png");
+            menuTxtr.loadFromImage(menuImg);
+            menuSprt.setTexture(menuTxtr );
+
     grassImg.loadFromFile("../resources/textures/grass/orig/grass00.png"); //завантажуємо файл для карти
     grassTxtr.loadFromImage(grassImg); //заряжаємо текстуру зображенням
     grassSprt.setTexture(grassTxtr); //заливаємо текстуру спрайтом
@@ -101,7 +105,13 @@ void GUIView::drawMap() {
             grassSprt.setPosition(j * 32, i * 32); //по сути раскидывает квадратики, превращая в карту. то есть задает
             // каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один
             // квадрат
-            pWindow->draw(grassSprt); // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
+            pWindow->draw(grassSprt);
+            if(TileMap[i][j]=='1'){
+                menuSprt.setTextureRect(IntRect(0, 0, 32, 32));
+                menuSprt.setPosition(j * 32, i * 32);
+                pWindow->draw(menuSprt);
+
+            }// виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
         }
 
     // draw fences
