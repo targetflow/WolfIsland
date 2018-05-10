@@ -5,7 +5,7 @@
 #include "controller/Controller.h"
 using namespace std;
 
-int main(){
+int main() {
     sf::String windowTitle = "Wolves Island simulation";
     const int nRabbits = 12;
     const int nMWolves = 4;
@@ -39,6 +39,9 @@ int main(){
     sf::FloatRect boundPlay = PlayStep.getGlobalBounds();
     sf::FloatRect boundPause = Pause.getGlobalBounds();
     sf::FloatRect boundExit = Exit.getGlobalBounds();
+
+    Time delayTime = sf::seconds(1);
+
     bool keepExecuting = false;
     if (useGUI) {
         // SFML Program starts here
@@ -47,8 +50,6 @@ int main(){
 
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
-        Time delayTime = sf::seconds(1); // без цієї затримки натиснення клавіші побуджує більше ніж 1 виклик.
-
         while (window.isOpen()) {
             sf::Event event {};
             while (window.pollEvent(event)) {
@@ -56,47 +57,43 @@ int main(){
                 window.draw(AutoPlay);
                 window.draw(Pause);
                 window.draw(Exit);
-                    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-                    {
-                        sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    if (event.type == sf::Event::MouseButtonReleased) {
+                        if (event.mouseButton.button == sf::Mouse::Left) {
+                            sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-                        if (boundPlay.contains(mouse))//step game
-                        {
-                            sf::sleep(delayTime);
-                            controller.execute(1);
-                            keepExecuting = false;
-                        }
+                            if (boundPlay.contains(mouse)) {//step game
+                                sf::sleep(delayTime);
+                                controller.execute(1);
+                                keepExecuting = false;
+                            }
 
-                        if(boundAuto.contains(mouse))//automate start/continue
-                        {
-                            keepExecuting = !keepExecuting;
-                        }
+                            if (boundAuto.contains(mouse)) {//automate start/continue
+                                keepExecuting = !keepExecuting;
+                            }
 
-                        if(boundPause.contains(mouse))//pause/stop
-                        {
-                            keepExecuting = false;
+                            if (boundPause.contains(mouse)) {//pause/stop
+                                keepExecuting = false;
 
-                        }
+                            }
 
-                        if(boundExit.contains(mouse))//pause/stop
-                        {
-                            window.close();
+                            if (boundExit.contains(mouse)) {//pause/stop
+                                window.close();
 
+                            }
                         }
                     }
-                if (keepExecuting)
-                {  // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
-                    sf::sleep(delayTime);
-                    controller.execute(1);
-                    window.draw(PlayStep);
-                    window.draw(AutoPlay);
-                    window.draw(Pause);
-                    window.draw(Exit);
-                    window.display();
-                }
+
                 window.display();
             }
-
+            if (keepExecuting) {   // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
+                sf::sleep(delayTime);
+                controller.execute(1);
+                window.draw(PlayStep);
+                window.draw(AutoPlay);
+                window.draw(Pause);
+                window.draw(Exit);
+                window.display();
+            }
         }
 
     }
