@@ -11,7 +11,7 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     // Топ текстури: https://openclipart.org/search/
     // Ініціалізація відображення:
     // трави на карті
-            menuImg.loadFromFile("../resources/textures/menu/menu.png");
+            menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
             menuTxtr.loadFromImage(menuImg);
             menuSprt.setTexture(menuTxtr );
 
