@@ -57,43 +57,37 @@ int main() {
                 window.draw(AutoPlay);
                 window.draw(Pause);
                 window.draw(Exit);
-                    if (event.type == sf::Event::MouseButtonReleased) {
-                        if (event.mouseButton.button == sf::Mouse::Left) {
-                            sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                if (event.type == sf::Event::MouseButtonReleased) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-                            if (boundPlay.contains(mouse)) {//step game
-                                sf::sleep(delayTime);
-                                controller.execute(1);
-                                keepExecuting = false;
-                            }
-
-                            if (boundAuto.contains(mouse)) {//automate start/continue
-                                keepExecuting = !keepExecuting;
-                            }
-
-                            if (boundPause.contains(mouse)) {//pause/stop
-                                keepExecuting = false;
-
-                            }
-
-                            if (boundExit.contains(mouse)) {//pause/stop
-                                window.close();
-
-                            }
+                        if (boundPlay.contains(mouse)) { //step game
+                            sf::sleep(delayTime);
+                            controller.execute(1);
+                            keepExecuting = false;
+                        } else if (boundAuto.contains(mouse)) { //automate start/continue
+                            keepExecuting = !keepExecuting;
+                        } else if (boundPause.contains(mouse)) { //pause/stop
+                            keepExecuting = false;
+                        } else if (boundExit.contains(mouse)) { //pause/stop
+                            window.close();
                         }
                     }
+                }
 
                 window.display();
             }
-            if (keepExecuting) {   // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
+
+            if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sf::sleep(delayTime);
                 controller.execute(1);
-                window.draw(PlayStep);
-                window.draw(AutoPlay);
-                window.draw(Pause);
-                window.draw(Exit);
-                window.display();
             }
+
+            window.draw(PlayStep);
+            window.draw(AutoPlay);
+            window.draw(Pause);
+            window.draw(Exit);
+            window.display();
         }
 
     }
