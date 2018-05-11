@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <algorithm>
-#include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
 #include "../model/include/Field.h"
 #include "../view/ConsoleView.h"
 #include "../view/GUIView.h"

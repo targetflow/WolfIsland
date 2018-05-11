@@ -6,7 +6,7 @@
 #define CPP_GUIVIEW_H
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
 #include "../model/include/Field.h"
 #include "BaseView.h"
 #include "map.h"

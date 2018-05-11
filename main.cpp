@@ -47,7 +47,7 @@ int main() {
                         }
                         break;
 
-                    // windows resized:
+                    // window resized:
                     case Event::Resized:
                         controller.getPGUIView()->displayField();
                         break;
