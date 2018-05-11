@@ -60,7 +60,45 @@ GUIView::~GUIView() = default;
 
 void GUIView::displayField() {
     drawMap();
+    drawMenu();
+    drawAnimals();
+}
 
+void GUIView::drawMap() {
+    // draw grass
+    for (int i = 0; i < HEIGHT_MAP; i++)
+        for (int j = 0; j < WIDTH_MAP; j++) {
+            if (TileMap[i][j] == '0') {
+                grassSprt.setTextureRect(IntRect(0, 0, 32, 32));
+                grassSprt.setPosition(j * 32, i * 32); // розміщуємо текстури по карті, задаючи конкретну позицію кожній з
+                // них. Якщо без цього, то вся карта буде складатись лиш з одного квадрата 32*32.
+                pWindow->draw(grassSprt);
+            }
+        }
+
+    // draw fences
+    for (int i = 0; i < 400; i++) {
+        if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
+            fenceSprt.setTextureRect(IntRect(0, 0, 30, 16));
+            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - щоб огорожа була по центру клітинки.
+            pWindow->draw(fenceSprt);
+        }
+    }
+}
+
+void GUIView::drawMenu() {
+    // draw menu textures
+    for (int i = 0; i < HEIGHT_MAP; i++)
+        for (int j = 0; j < WIDTH_MAP; j++) {
+            if (TileMap[i][j] == '1') {
+                menuSprt.setTextureRect(IntRect(0, 0, 32, 32));
+                menuSprt.setPosition(j * 32, i * 32);
+                pWindow->draw(menuSprt);
+            } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
+        }
+}
+
+void GUIView::drawAnimals() {
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
     for (int i = 0; i < 400; i++) {
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
@@ -89,33 +127,6 @@ void GUIView::displayField() {
                 wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16);
                 pWindow->draw(wolfMSprt);
             }
-        }
-    }
-}
-
-void GUIView::drawMap() {
-    // draw grass
-    for (int i = 0; i < HEIGHT_MAP; i++)
-        for (int j = 0; j < WIDTH_MAP; j++)
-        {
-            if (TileMap[i][j] == '0') {
-                grassSprt.setTextureRect(IntRect(0, 0, 32, 32));
-                grassSprt.setPosition(j * 32, i * 32); // розміщуємо текстури по карті, задаючи конкретну позицію кожній з
-                // них. Якщо без цього, то вся карта буде складатись лиш з одного квадрата 32*32.
-                pWindow->draw(grassSprt);
-            } else if(TileMap[i][j]=='1'){
-                menuSprt.setTextureRect(IntRect(0, 0, 32, 32));
-                menuSprt.setPosition(j * 32, i * 32);
-                pWindow->draw(menuSprt);
-            } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
-        }
-
-    // draw fences
-    for (int i = 0; i < 400; i++) {
-        if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
-            fenceSprt.setTextureRect(IntRect(0, 0, 30, 16));
-            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - щоб огорожа була по центру клітинки.
-            pWindow->draw(fenceSprt);
         }
     }
 }

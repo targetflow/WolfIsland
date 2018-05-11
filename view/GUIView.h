@@ -42,9 +42,9 @@ private:
     Texture menuTxtr;
     Image menuImg;
 
-
-
     void drawMap();
+    void drawMenu();
+    void drawAnimals();
 };
 
 #endif //CPP_GUIVIEW_H
