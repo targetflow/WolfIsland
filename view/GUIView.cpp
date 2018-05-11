@@ -4,9 +4,10 @@
 
 #include "GUIView.h"
 
-GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
+GUIView::GUIView(Field *_pField, RenderWindow *_pWindow, tgui::Gui *_pTGUI) {
     this->pField = _pField;
     this->pWindow = _pWindow;
+    this->pTGUI = _pTGUI;
 
     initFieldTextures();
     initMenu();

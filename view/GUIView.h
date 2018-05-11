@@ -15,7 +15,7 @@ using namespace sf;
 
 class GUIView: public BaseView {
 public:
-    explicit GUIView(Field *_pField, RenderWindow *_pWindow);
+    explicit GUIView(Field *_pField, RenderWindow *_pWindow, tgui::Gui *_pTGUI);
     ~GUIView() override;
 
     RectangleShape* getBtnPlayStep();
@@ -25,6 +25,7 @@ public:
 private:
     Field* pField;
     RenderWindow* pWindow;
+    tgui::Gui *pTGUI;
 
     Sprite grassSprt; // спрайт карти
     Texture grassTxtr; // текстура карти
