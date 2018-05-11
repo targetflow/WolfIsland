@@ -16,7 +16,7 @@
 
 class Controller {
 public:
-    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, sf::RenderWindow *pWindow);
+    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, RenderWindow *pWindow);
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);

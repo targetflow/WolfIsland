@@ -3,10 +3,9 @@
 //
 
 #include "controller/Controller.h"
-using namespace std;
 
 int main() {
-    sf::String windowTitle = "Wolves Island simulation";
+    String windowTitle = "Wolves Island simulation";
     const int nRabbits = 12;
     const int nMWolves = 4;
     const int nWWolves = 3;
@@ -35,34 +34,34 @@ int main() {
     Exit.setOutlineThickness(6);
     Exit.setOutlineColor(sf::Color::Black);
 
-    sf::FloatRect boundAuto = AutoPlay.getGlobalBounds();
-    sf::FloatRect boundPlay = PlayStep.getGlobalBounds();
-    sf::FloatRect boundPause = Pause.getGlobalBounds();
-    sf::FloatRect boundExit = Exit.getGlobalBounds();
+    FloatRect boundAuto = AutoPlay.getGlobalBounds();
+    FloatRect boundPlay = PlayStep.getGlobalBounds();
+    FloatRect boundPause = Pause.getGlobalBounds();
+    FloatRect boundExit = Exit.getGlobalBounds();
 
-    Time delayTime = sf::seconds(1);
+    Time delayTime = seconds(1);
 
     bool keepExecuting = false;
     if (useGUI) {
         // SFML Program starts here
-        RenderWindow window(sf::VideoMode(896, 640), windowTitle);
+        RenderWindow window(VideoMode(896, 640), windowTitle);
         window.setFramerateLimit(FPS); // без цього комп іде на взрив, проц ппц
 
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
         while (window.isOpen()) {
-            sf::Event event {};
+            Event event {};
             while (window.pollEvent(event)) {
                 window.draw(PlayStep);
                 window.draw(AutoPlay);
                 window.draw(Pause);
                 window.draw(Exit);
-                if (event.type == sf::Event::MouseButtonReleased) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                if (event.type == Event::MouseButtonReleased) {
+                    if (event.mouseButton.button == Mouse::Left) {
+                        Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
 
                         if (boundPlay.contains(mouse)) { //step game
-                            sf::sleep(delayTime);
+                            sleep(delayTime);
                             controller.execute(1);
                             keepExecuting = false;
                         } else if (boundAuto.contains(mouse)) { //automate start/continue
@@ -79,7 +78,7 @@ int main() {
             }
 
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
-                sf::sleep(delayTime);
+                sleep(delayTime);
                 controller.execute(1);
             }
 
