@@ -10,11 +10,12 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
 
     // Топ текстури: https://openclipart.org/search/
     // Ініціалізація відображення:
-    // трави на карті
-            menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
-            menuTxtr.loadFromImage(menuImg);
-            menuSprt.setTexture(menuTxtr );
+    // меню
+    menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
+    menuTxtr.loadFromImage(menuImg);
+    menuSprt.setTexture(menuTxtr);
 
+    // трави на карті
     grassImg.loadFromFile("../resources/textures/grass/orig/grass00.png"); //завантажуємо файл для карти
     grassTxtr.loadFromImage(grassImg); //заряжаємо текстуру зображенням
     grassSprt.setTexture(grassTxtr); //заливаємо текстуру спрайтом
@@ -62,9 +63,6 @@ void GUIView::displayField() {
 
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
     for (int i = 0; i < 400; i++) {
-//        rabbitSprt.setTextureRect(IntRect(0, 0, 32, 32));
-//        rabbitSprt.setPosition((1) * 32, (2) * 32);
-//        pWindow->draw(rabbitSprt);
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
             countOfRabbits =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
@@ -100,18 +98,16 @@ void GUIView::drawMap() {
     for (int i = 0; i < HEIGHT_MAP; i++)
         for (int j = 0; j < WIDTH_MAP; j++)
         {
-            if (TileMap[i][j] == '0')
+            if (TileMap[i][j] == '0') {
                 grassSprt.setTextureRect(IntRect(0, 0, 32, 32));
-            grassSprt.setPosition(j * 32, i * 32); //по сути раскидывает квадратики, превращая в карту. то есть задает
-            // каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один
-            // квадрат
-            pWindow->draw(grassSprt);
-            if(TileMap[i][j]=='1'){
+                grassSprt.setPosition(j * 32, i * 32); // розміщуємо текстури по карті, задаючи конкретну позицію кожній з
+                // них. Якщо без цього, то вся карта буде складатись лиш з одного квадрата 32*32.
+                pWindow->draw(grassSprt);
+            } else if(TileMap[i][j]=='1'){
                 menuSprt.setTextureRect(IntRect(0, 0, 32, 32));
                 menuSprt.setPosition(j * 32, i * 32);
                 pWindow->draw(menuSprt);
-
-            }// виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
+            } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
         }
 
     // draw fences
