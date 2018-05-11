@@ -26,32 +26,42 @@ int main() {
 
         FloatRect boundPlay = controller.getPGUIView()->getBtnPlayStep()->getGlobalBounds();
         FloatRect boundAuto = controller.getPGUIView()->getSwitchAutoPlayOrPause()->getGlobalBounds();
+        Vector2f mousePosition;
 
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
-                if (event.type == Event::MouseButtonReleased) {
-                    if (event.mouseButton.button == Mouse::Left) {
-                        Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+                switch (event.type) {
+                    // left mouse button released
+                    case Event::MouseButtonReleased:
+                        if (event.mouseButton.button == Mouse::Left) {
+                            mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 
-                        if (boundPlay.contains(mouse)) { //step game
-                            sleep(delayTime);
-                            controller.execute(1);
-                            keepExecuting = false;
-                        } else if (boundAuto.contains(mouse)) { //automate start/continue
-                            keepExecuting = !keepExecuting;
+                            if (boundPlay.contains(mousePosition)) { //step game
+                                sleep(delayTime);
+                                controller.execute(1);
+                                keepExecuting = false;
+                            } else if (boundAuto.contains(mousePosition)) { //automate start/continue
+                                keepExecuting = !keepExecuting;
+                            }
                         }
-                    }
-                }
+                        break;
 
-                window.display();
+                    // window closed
+                    case Event::Closed:
+                        window.close();
+                        break;
+
+                    // we don't process other types of events
+                    default:
+                        break;
+                }
             }
 
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTime);
                 controller.execute(1);
             }
-
             window.display();
         }
     } else { // console mode
