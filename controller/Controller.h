@@ -24,7 +24,7 @@ public:
     std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
 
-    BaseView* getPView();
+    GUIView* getPGUIView();
 private:
     Field field;
     BaseView* pView;

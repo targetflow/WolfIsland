@@ -387,6 +387,6 @@ void Controller::Wolf_MMakeOffspring(){
     }
 }
 
-BaseView *Controller::getPView() {
-    return pView;
+GUIView *Controller::getPGUIView() {
+    return dynamic_cast<GUIView *>(pView);
 }

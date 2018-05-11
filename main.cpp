@@ -13,31 +13,6 @@ int main() {
     const int countOfSteps = 3;
     const bool useGUI = true;
     const int FPS = 60;
-    RectangleShape PlayStep(Vector2f(160,50));
-    PlayStep.setPosition(Vector2f(690,80));
-    PlayStep.setOutlineThickness(6);
-    PlayStep.setOutlineColor(sf::Color::Black );
-
-    RectangleShape AutoPlay(Vector2f(160,50));
-    AutoPlay.setPosition(690, 176);
-    AutoPlay.setOutlineThickness(6);
-    AutoPlay.setOutlineColor(sf::Color::Black );
-
-    RectangleShape Pause(Vector2f(160,50));
-    Pause.setPosition(690, 272);
-    Pause.setOutlineThickness(6);
-    Pause.setOutlineColor(sf::Color::Black);
-
-    RectangleShape Exit(Vector2f(55,55));
-    Exit.setPosition(830,10);
-    Exit.setFillColor(Color::Red);
-    Exit.setOutlineThickness(6);
-    Exit.setOutlineColor(sf::Color::Black);
-
-    FloatRect boundAuto = AutoPlay.getGlobalBounds();
-    FloatRect boundPlay = PlayStep.getGlobalBounds();
-    FloatRect boundPause = Pause.getGlobalBounds();
-    FloatRect boundExit = Exit.getGlobalBounds();
 
     Time delayTime = seconds(1);
 
@@ -49,13 +24,12 @@ int main() {
 
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
+        FloatRect boundPlay = controller.getPGUIView()->getBtnPlayStep()->getGlobalBounds();
+        FloatRect boundAuto = controller.getPGUIView()->getSwitchAutoPlayOrPause()->getGlobalBounds();
+
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
-                window.draw(PlayStep);
-                window.draw(AutoPlay);
-                window.draw(Pause);
-                window.draw(Exit);
                 if (event.type == Event::MouseButtonReleased) {
                     if (event.mouseButton.button == Mouse::Left) {
                         Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
@@ -66,10 +40,6 @@ int main() {
                             keepExecuting = false;
                         } else if (boundAuto.contains(mouse)) { //automate start/continue
                             keepExecuting = !keepExecuting;
-                        } else if (boundPause.contains(mouse)) { //pause/stop
-                            keepExecuting = false;
-                        } else if (boundExit.contains(mouse)) { //pause/stop
-                            window.close();
                         }
                     }
                 }
@@ -82,19 +52,12 @@ int main() {
                 controller.execute(1);
             }
 
-            window.draw(PlayStep);
-            window.draw(AutoPlay);
-            window.draw(Pause);
-            window.draw(Exit);
             window.display();
         }
-
-    }
-    else { // console mode
+    } else { // console mode
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, nullptr);
         controller.execute(countOfSteps);
     }
-
 }
 
 

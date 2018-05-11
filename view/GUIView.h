@@ -18,6 +18,9 @@ public:
     explicit GUIView(Field *_pField, RenderWindow *_pWindow);
     ~GUIView() override;
 
+    RectangleShape* getBtnPlayStep();
+    RectangleShape* getSwitchAutoPlayOrPause();
+
     void displayField() override;
 private:
     Field* pField;
@@ -41,6 +44,12 @@ private:
     Sprite menuSprt; // спрайт вовчиці
     Texture menuTxtr;
     Image menuImg;
+
+    RectangleShape btnPlayStep;
+    RectangleShape btnSwitchAutoPlayOrPause;
+
+    void initMenu();
+    void initFieldTextures();
 
     void drawMap();
     void drawMenu();

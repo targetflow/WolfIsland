@@ -8,25 +8,53 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     this->pField = _pField;
     this->pWindow = _pWindow;
 
-    // Топ текстури: https://openclipart.org/search/
-    // Ініціалізація відображення start ================================================================================
-    // меню
+    initFieldTextures();
+    initMenu();
+}
+
+GUIView::~GUIView() = default;
+
+void GUIView::displayField() {
+    drawMap();
+    drawMenu();
+    drawAnimals();
+}
+
+void GUIView::initMenu() {
+    // menu textures
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
     menuTxtr.loadFromImage(menuImg);
     menuSprt.setTexture(menuTxtr);
 
-    // трави на карті
+    // menu "buttons"
+    // Perform next step button
+    btnPlayStep.setSize(Vector2f(160,50));
+    btnPlayStep.setPosition(Vector2f(690,80));
+    btnPlayStep.setOutlineThickness(6);
+    btnPlayStep.setOutlineColor(sf::Color::Black );
+
+    // Switcher between (AutoPlay mode and pause) button
+    btnSwitchAutoPlayOrPause.setSize(Vector2f(160,50));
+    btnSwitchAutoPlayOrPause.setPosition(690, 176);
+    btnSwitchAutoPlayOrPause.setOutlineThickness(6);
+    btnSwitchAutoPlayOrPause.setOutlineColor(sf::Color::Black );
+}
+
+void GUIView::initFieldTextures() {
+    // Top textures src: https://openclipart.org/search/
+    // Display:
+    // grass
     grassImg.loadFromFile("../resources/textures/grass/orig/grass00.png"); //завантажуємо файл для карти
     grassTxtr.loadFromImage(grassImg); //заряжаємо текстуру зображенням
     grassSprt.setTexture(grassTxtr); //заливаємо текстуру спрайтом
 
-    // огорожі (текстури: https://pngtree.com/so/fence)
+    // fence (textures src: https://pngtree.com/so/fence)
     fenceImg.loadFromFile("../resources/textures/fence/processed/fence30x16.png");
     fenceTxtr.loadFromImage(fenceImg);
     fenceSprt.setTexture(fenceTxtr);
 
-    // кроля
-    // Варіанти текстур:
+    // rabbit
+    // texture variants:
     // https://openclipart.org/detail/190731/chinese-zodiac-rabbit
     rabbitImg.loadFromFile("../resources/textures/rabbit/processed/chinese-zodiac-rabbit-color-16x15.png"); // top 1
     // https://openclipart.org/detail/252511/pink-rabbit
@@ -38,31 +66,22 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     rabbitTxtr.loadFromImage(rabbitImg);
     rabbitSprt.setTexture(rabbitTxtr);
 
-    // вовка
-    // Варіанти текстур:
+    // wolfM
+    // texture variants:
     // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/Howling-Wolf-Silhouette-16x16.png"); // теж норм вовк
     // wolfMImg.loadFromFile("../resources/textures/WolfM/processed/doushouqi-wolf-16x16.png"); // так собі видно
     wolfMImg.loadFromFile("../resources/textures/WolfM/processed/wolf16x17.png"); // наш старий вовк, непогано видно.
     wolfMTxtr.loadFromImage(wolfMImg);
     wolfMSprt.setTexture(wolfMTxtr);
 
-    // вовчиці
-    // Варіанти текстур:
+    // wolfW
+    // texture variants:
     // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Multispectral-Gem-Howling-Wolf-16x17.png"); // райдужна - так собі видно
     // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Crescent-Moon-Wolf-16x17.png"); // "вою на луну" - взагалі не видно
     // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/dibujo-26-16x17.png"); // так собі, сіре на зеленому не дуже
     wolfWImg.loadFromFile("../resources/textures/WolfW/processed/blankwolfhead2-16x17.png");
     wolfWTxtr.loadFromImage(wolfWImg);
     wolfWSprt.setTexture(wolfWTxtr);
-    // Ініціалізація відображення end ==================================================================================
-}
-
-GUIView::~GUIView() = default;
-
-void GUIView::displayField() {
-    drawMap();
-    drawMenu();
-    drawAnimals();
 }
 
 void GUIView::drawMap() {
@@ -97,6 +116,10 @@ void GUIView::drawMenu() {
                 pWindow->draw(menuSprt);
             } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
         }
+
+    // draw menu "buttons"
+    pWindow->draw(btnPlayStep);
+    pWindow->draw(btnSwitchAutoPlayOrPause);
 }
 
 void GUIView::drawAnimals() {
@@ -135,5 +158,13 @@ void GUIView::drawAnimals() {
             }
         }
     }
+}
+
+RectangleShape *GUIView::getBtnPlayStep() {
+    return &btnPlayStep;
+}
+
+RectangleShape *GUIView::getSwitchAutoPlayOrPause() {
+    return &btnSwitchAutoPlayOrPause;
 }
 
