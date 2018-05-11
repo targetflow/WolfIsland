@@ -164,7 +164,7 @@ RectangleShape *GUIView::getBtnPlayStep() {
     return &btnPlayStep;
 }
 
-RectangleShape *GUIView::getSwitchAutoPlayOrPause() {
+RectangleShape *GUIView::getBtnSwitchAutoPlayOrPause() {
     return &btnSwitchAutoPlayOrPause;
 }
 

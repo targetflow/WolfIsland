@@ -19,7 +19,7 @@ public:
     ~GUIView() override;
 
     RectangleShape* getBtnPlayStep();
-    RectangleShape* getSwitchAutoPlayOrPause();
+    RectangleShape* getBtnSwitchAutoPlayOrPause();
 
     void displayField() override;
 private:

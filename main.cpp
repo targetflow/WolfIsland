@@ -25,7 +25,7 @@ int main() {
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
         FloatRect boundPlay = controller.getPGUIView()->getBtnPlayStep()->getGlobalBounds();
-        FloatRect boundAuto = controller.getPGUIView()->getSwitchAutoPlayOrPause()->getGlobalBounds();
+        FloatRect boundAuto = controller.getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
         Vector2f mousePosition;
 
         while (window.isOpen()) {
