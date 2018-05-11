@@ -19,8 +19,9 @@ int main() {
     bool keepExecuting = false;
     if (useGUI) {
         // SFML Program starts here
-        RenderWindow window(VideoMode(896, 640), windowTitle);
+        sf::RenderWindow window(VideoMode(896, 640), windowTitle);
         window.setFramerateLimit(FPS); // без цього комп іде на взрив, проц ппц
+        tgui::Gui gui{window}; // Create the gui and attach it to the window
 
         Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window);
 
@@ -61,12 +62,15 @@ int main() {
                     default:
                         break;
                 }
+
+                gui.handleEvent(event); // Pass the event to the widgets
             }
 
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTime);
                 controller.execute(1);
             }
+            gui.draw(); // Draw all widgets
             window.display();
         }
     } else { // console mode
