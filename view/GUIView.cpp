@@ -9,7 +9,7 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     this->pWindow = _pWindow;
 
     // Топ текстури: https://openclipart.org/search/
-    // Ініціалізація відображення:
+    // Ініціалізація відображення start ================================================================================
     // меню
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
     menuTxtr.loadFromImage(menuImg);
@@ -54,6 +54,7 @@ GUIView::GUIView(Field *_pField, RenderWindow *_pWindow) {
     wolfWImg.loadFromFile("../resources/textures/WolfW/processed/blankwolfhead2-16x17.png");
     wolfWTxtr.loadFromImage(wolfWImg);
     wolfWSprt.setTexture(wolfWTxtr);
+    // Ініціалізація відображення end ==================================================================================
 }
 
 GUIView::~GUIView() = default;
@@ -101,6 +102,7 @@ void GUIView::drawMenu() {
 void GUIView::drawAnimals() {
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
     for (int i = 0; i < 400; i++) {
+        // draw rabbits
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
             countOfRabbits =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
@@ -110,6 +112,8 @@ void GUIView::drawAnimals() {
                 pWindow->draw(rabbitSprt);
             }
         }
+
+        // draw wolvesW
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
             countOfWolvesW =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
@@ -119,6 +123,8 @@ void GUIView::drawAnimals() {
                 pWindow->draw(wolfWSprt);
             }
         }
+
+        // draw wolvesM
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
             countOfWolvesM =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
