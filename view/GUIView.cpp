@@ -39,6 +39,15 @@ void GUIView::initMenu() {
     btnSwitchAutoPlayOrPause.setPosition(690, 176);
     btnSwitchAutoPlayOrPause.setOutlineThickness(6);
     btnSwitchAutoPlayOrPause.setOutlineColor(sf::Color::Black );
+
+    // TGUI menu buttons
+    // Perform next step button
+    tgui::Button::Ptr pTgBtnPlayStep = tgui::Button::create();
+    pTgBtnPlayStep->setText("Perform 1 move");
+    pTgBtnPlayStep->setTextSize(16);
+    pTgBtnPlayStep->setSize(Vector2f(160,50));
+    pTgBtnPlayStep->setPosition(Vector2f(690,80));
+    pTGUI->add(pTgBtnPlayStep, "PlayStep");
 }
 
 void GUIView::initFieldTextures() {
