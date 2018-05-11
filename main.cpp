@@ -38,13 +38,18 @@ int main() {
                             mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 
                             if (boundPlay.contains(mousePosition)) { //step game
-                                sleep(delayTime);
+                                //sleep(delayTime);
                                 controller.execute(1);
                                 keepExecuting = false;
                             } else if (boundAuto.contains(mousePosition)) { //automate start/continue
                                 keepExecuting = !keepExecuting;
                             }
                         }
+                        break;
+
+                    // windows resized:
+                    case Event::Resized:
+                        controller.getPGUIView()->displayField();
                         break;
 
                     // window closed
