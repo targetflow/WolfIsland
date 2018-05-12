@@ -27,6 +27,7 @@ void Controller::execute() {
         FloatRect boundPlay = getPGUIView()->getBtnPlayStep()->getGlobalBounds();
         FloatRect boundAuto = getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
         Vector2f mousePosition;
+        TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
 
         while (window.isOpen()) {
             Event event {};
@@ -38,7 +39,6 @@ void Controller::execute() {
                             mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 
                             if (boundPlay.contains(mousePosition)) { //step game
-                                //sleep(delayTime);
                                 nextStep();
                                 keepExecuting = false;
                             } else if (boundAuto.contains(mousePosition)) { //automate start/continue
@@ -47,17 +47,17 @@ void Controller::execute() {
                         }
                         break;
 
-                        // window resized:
+                    // window resized:
                     case Event::Resized:
                         getPGUIView()->displayField();
                         break;
 
-                        // window closed
+                    // window closed
                     case Event::Closed:
                         window.close();
                         break;
 
-                        // we don't process other types of events
+                    // we don't process other types of events
                     default:
                         break;
                 }

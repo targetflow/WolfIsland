@@ -48,7 +48,6 @@ private:
 
     RectangleShape btnPlayStep;
     RectangleShape btnSwitchAutoPlayOrPause;
-
     tgui::Button::Ptr pTgBtnPlayStep;
 
     void initMenu();

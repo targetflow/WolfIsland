@@ -42,7 +42,7 @@ void GUIView::initMenu() {
 
     // TGUI menu buttons
     // Perform next step button
-    tgui::Button::Ptr pTgBtnPlayStep = tgui::Button::create();
+    pTgBtnPlayStep = tgui::Button::create();
     pTgBtnPlayStep->setText("Perform 1 move");
     pTgBtnPlayStep->setTextSize(16);
     pTgBtnPlayStep->setSize(Vector2f(160,50));
