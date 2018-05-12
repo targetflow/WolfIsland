@@ -16,7 +16,7 @@
 
 class Controller {
 public:
-    Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, RenderWindow *pWindow, tgui::Gui *pTGUI);
+    Controller();
     virtual ~Controller();
 
     void execute(int numberOfSteps = 0);
@@ -28,8 +28,18 @@ public:
 private:
     Field field;
     BaseView* pView;
-    int stepNumber;
+    int currentStepNumber;
+    String windowTitle;
+    int nRabbits;
+    int nMWolves;
+    int nWWolves;
+    int cOfFences;
+    int countOfStepsToPerform;
+    bool useGUI;
+    unsigned int FPS;
+    Time delayTimeInSeconds;
 
+    void initSimulationParams();
     void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
     void displayField();
     void nextStep();

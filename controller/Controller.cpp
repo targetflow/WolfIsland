@@ -4,12 +4,10 @@
 
 #include "Controller.h"
 
-Controller::Controller(int nRabbits, int nMWolves, int nWWolves, int cOfFences, sf::RenderWindow *pWindow,
-                       tgui::Gui *pTGUI) {
+Controller::Controller() {
     this->field = Field();
-    stepNumber = 0;
-
-    if(pWindow) {
+    initSimulationParams();
+    if(useGUI) {
         pView = new GUIView(&field, pWindow, pTGUI);
     } else {
         pView = new ConsoleView(&field);
@@ -22,6 +20,71 @@ Controller::~Controller() {
 }
 
 void Controller::execute(int numberOfSteps) {
+    // SFML Program starts here
+    sf::RenderWindow window(VideoMode(896, 640), windowTitle);
+    window.setFramerateLimit(FPS); // без цього комп іде на взрив, проц ппц
+    tgui::Gui tgui{window}; // Create the gui and attach it to the window
+    bool keepExecuting = false;
+
+    if (useGUI) {
+
+
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window, &tgui);
+
+        FloatRect boundPlay = controller.getPGUIView()->getBtnPlayStep()->getGlobalBounds();
+        FloatRect boundAuto = controller.getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
+        Vector2f mousePosition;
+
+        while (window.isOpen()) {
+            Event event {};
+            while (window.pollEvent(event)) {
+                switch (event.type) {
+                    // left mouse button released
+                    case Event::MouseButtonReleased:
+                        if (event.mouseButton.button == Mouse::Left) {
+                            mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
+
+                            if (boundPlay.contains(mousePosition)) { //step game
+                                //sleep(delayTime);
+                                controller.execute(1);
+                                keepExecuting = false;
+                            } else if (boundAuto.contains(mousePosition)) { //automate start/continue
+                                keepExecuting = !keepExecuting;
+                            }
+                        }
+                        break;
+
+                        // window resized:
+                    case Event::Resized:
+                        controller.getPGUIView()->displayField();
+                        break;
+
+                        // window closed
+                    case Event::Closed:
+                        window.close();
+                        break;
+
+                        // we don't process other types of events
+                    default:
+                        break;
+                }
+
+                tgui.handleEvent(event); // Pass the event to the widgets
+            }
+
+            if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
+                sleep(delayTime);
+                controller.execute(1);
+            }
+            tgui.draw(); // Draw all widgets
+            window.display();
+        }
+    } else { // console mode
+        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, nullptr, nullptr);
+        controller.execute(countOfSteps);
+    }
+
+    //old
     for (unsigned long i = 0; i < numberOfSteps; i++)
         nextStep();
 }
@@ -61,9 +124,9 @@ void Controller::nextStep() {
     wolfTryToEatOrDie();
     calculateMoveDecisions(); // фаза прийняття рішень
     performMoves(); // фаза переходів
-    stepNumber += 1;
+    currentStepNumber += 1;
 
-    std::cout << "Step №" << stepNumber << std::endl;
+    std::cout << "Step №" << currentStepNumber << std::endl;
     displayField();
 }
 
@@ -390,4 +453,18 @@ void Controller::Wolf_MMakeOffspring(){
 
 GUIView *Controller::getPGUIView() {
     return dynamic_cast<GUIView *>(pView);
+}
+
+void Controller::initSimulationParams() {
+    // later this data should be loaded from XML/JSON/FILE.
+    windowTitle = "Wolf Island simulation";
+    nRabbits = 12;
+    nMWolves = 4;
+    nWWolves = 3;
+    cOfFences = 5;
+    currentStepNumber = 0;
+    countOfStepsToPerform = 3;
+    useGUI = true;
+    FPS = 60;
+    delayTimeInSeconds = seconds(1);
 }
