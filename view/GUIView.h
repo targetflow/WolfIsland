@@ -44,6 +44,9 @@ private:
     Sprite menuSprt; // спрайт вовчиці
     Texture menuTxtr;
     Image menuImg;
+    Sprite numbersSprt[9]; // спрайти цифр
+    Texture numbersTxtr[9];
+    Image numbersImg[9];
 
     RectangleShape btnSwitchAutoPlayOrPause;
     tgui::Button::Ptr pTgBtnPlayStep;

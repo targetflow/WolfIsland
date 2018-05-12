@@ -87,6 +87,22 @@ void GUIView::initFieldTextures() {
     wolfWImg.loadFromFile("../resources/textures/WolfW/processed/blankwolfhead2-16x17.png");
     wolfWTxtr.loadFromImage(wolfWImg);
     wolfWSprt.setTexture(wolfWTxtr);
+
+    // numbers
+    // https://openclipart.org/detail/227860/coloring-page-pi-day-digits-of-pi-large
+    std::string pathToNumbersPictures;
+    for (unsigned int i = 0; i < 9; i ++) {
+        pathToNumbersPictures = "";
+        pathToNumbersPictures += "../resources/textures/numbers/processed/";
+        pathToNumbersPictures += std::to_string(i+1);
+        pathToNumbersPictures += "p.png";
+
+        numbersImg[i].loadFromFile(pathToNumbersPictures);
+        numbersTxtr[i].loadFromImage(numbersImg[i]);
+        numbersSprt[i].setTexture(numbersTxtr[i]);
+    }
+
+
 }
 
 void GUIView::drawMap() {
@@ -128,16 +144,24 @@ void GUIView::drawMenu() {
 
 void GUIView::drawAnimals() {
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
+    unsigned int index;
     for (int i = 0; i < 400; i++) {
         // draw rabbits
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->empty()) {
             countOfRabbits =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getRabbits()->size());
+            index = static_cast<unsigned int>(countOfRabbits-1);
             for (int j = 0; j < countOfRabbits; j++) {
                 rabbitSprt.setTextureRect(IntRect(0, 0, 16, 16));
                 rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - щоб огорожа була по центру клітинки.
                 pWindow->draw(rabbitSprt);
             }
+
+            // draw count
+            index = static_cast<unsigned int>(countOfRabbits-1);
+            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            numbersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32);
+            pWindow->draw(numbersSprt[index]);
         }
 
         // draw wolvesW
@@ -149,6 +173,12 @@ void GUIView::drawAnimals() {
                 wolfWSprt.setPosition((i%20) * 32 + 16, (i/20) * 32 + 16);
                 pWindow->draw(wolfWSprt);
             }
+
+            // draw count
+            index = static_cast<unsigned int>(countOfWolvesW-1);
+            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            numbersSprt[index].setPosition((i%20) * 32 + 24, (i/20) * 32 + 8);
+            pWindow->draw(numbersSprt[index]);
         }
 
         // draw wolvesM
@@ -160,6 +190,12 @@ void GUIView::drawAnimals() {
                 wolfMSprt.setPosition((i%20) * 32, (i/20) * 32 + 16);
                 pWindow->draw(wolfMSprt);
             }
+
+            // draw count
+            index = static_cast<unsigned int>(countOfWolvesM-1);
+            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            numbersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32 + 8);
+            pWindow->draw(numbersSprt[index]);
         }
     }
 }
