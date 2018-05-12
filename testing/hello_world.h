@@ -1,8 +1,0 @@
-//
-// Created by katya on 04/04/18.
-//
-
-#ifndef WOLF_ISLAND_CONSOLE_VERSION_HELLO_WORLD_H
-#define WOLF_ISLAND_CONSOLE_VERSION_HELLO_WORLD_H
-int hello_world();
-#endif //WOLF_ISLAND_CONSOLE_VERSION_HELLO_WORLD_H
