@@ -7,13 +7,7 @@
 Controller::Controller() {
     this->field = Field();
     initSimulationParams();
-
-    if(useGUI) {
-        initWindow();
-        pView = new GUIView(&field, &window, &TGUI);
-    } else {
-        pView = new ConsoleView(&field);
-    }
+    initView();
     initField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
@@ -125,8 +119,8 @@ void Controller::restartField() {
         if (field.getCells()->at(static_cast<unsigned long>(index)).isFence())
             field.getCells()->at(static_cast<unsigned long>(index)).setFence(false);
     }
-    currentStepNumber = 0;
-    initField(nMWolves, nRabbits, nWWolves, cOfFences);
+    initSimulationParams();
+    initField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
 void Controller::displayField() {
@@ -488,4 +482,13 @@ void Controller::initWindow() {
     window.create(VideoMode(896, 640), windowTitle);
     window.setFramerateLimit(FPS);
     TGUI.setWindow(window); // Create the gui and attach it to the window
+}
+
+void Controller::initView() {
+    if(useGUI) {
+        initWindow();
+        pView = new GUIView(&field, &window, &TGUI);
+    } else {
+        pView = new ConsoleView(&field);
+    }
 }

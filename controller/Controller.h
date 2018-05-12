@@ -59,6 +59,7 @@ private:
     // wolves stuff
     void wolfTryToEatOrDie();
     void Wolf_MMakeOffspring();
+    void initView();
 };
 
 #endif //CPP_CONTROLLER_H
