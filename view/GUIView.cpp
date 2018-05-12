@@ -52,6 +52,25 @@ void GUIView::initMenu() {
     pTgBtnReset->setPosition(Vector2f(690,204));
     pTGUI->add(pTgBtnReset, "Reset");
 
+    TextRabbit = tgui::TextBox::create ();
+    TextRabbit->setSize(96,32);
+    TextRabbit->setPosition(690,268);
+    pTGUI->add(TextRabbit,"nRabbit");
+
+    TextWolf_M = tgui::TextBox::create ();
+    TextWolf_M->setSize(96,32);
+    TextWolf_M->setPosition(690,332);
+    pTGUI->add(TextWolf_M,"nWolf_M");
+
+    TextWolf_W = tgui::TextBox::create ();
+    TextWolf_W->setSize(96,32);
+    TextWolf_W->setPosition(690,396);
+    pTGUI->add(TextWolf_W,"nWolf_W");
+
+    TextFence = tgui::TextBox::create ();
+    TextFence->setSize(96,32);
+    TextFence->setPosition(690,460);
+    pTGUI->add(TextFence,"cOfFences");
 }
 
 
