@@ -24,23 +24,13 @@ Controller::~Controller() {
 void Controller::execute() {
     bool keepExecuting = false;
     if (useGUI) {
-        FloatRect boundAuto = getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
-        Vector2f mousePosition;
+//        Vector2f mousePosition;
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
-
+        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting =!keepExecuting;}, keepExecuting  );
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
                 switch (event.type) {
-                    // left mouse button released
-                    case Event::MouseButtonReleased:
-                        if (event.mouseButton.button == Mouse::Left) {
-                            mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
-                            if (boundAuto.contains(mousePosition)) { //automate start/continue
-                                keepExecuting = !keepExecuting;
-                            }
-                        }
-                        break;
 
                     // window resized:
                     case Event::Resized:

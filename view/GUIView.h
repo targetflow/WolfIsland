@@ -18,7 +18,6 @@ public:
     explicit GUIView(Field *_pField, RenderWindow *_pWindow, tgui::Gui *_pTGUI);
     ~GUIView() override;
 
-    RectangleShape* getBtnSwitchAutoPlayOrPause();
 
     void displayField() override;
 private:
@@ -45,8 +44,10 @@ private:
     Texture menuTxtr;
     Image menuImg;
 
-    RectangleShape btnSwitchAutoPlayOrPause;
+
     tgui::Button::Ptr pTgBtnPlayStep;
+    tgui::Button::Ptr pTgBtnPlayAuto;
+
 
     void initMenu();
     void initFieldTextures();

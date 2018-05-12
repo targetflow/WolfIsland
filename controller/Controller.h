@@ -40,6 +40,7 @@ private:
     unsigned int FPS;
     Time delayTimeInSeconds;
 
+
     void initSimulationParams();
     void initWindow();
     void initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);

@@ -27,14 +27,6 @@ void GUIView::initMenu() {
     menuTxtr.loadFromImage(menuImg);
     menuSprt.setTexture(menuTxtr);
 
-    // menu "buttons"
-
-    // Switcher between (AutoPlay mode and pause) button
-    btnSwitchAutoPlayOrPause.setSize(Vector2f(160,50));
-    btnSwitchAutoPlayOrPause.setPosition(690, 176);
-    btnSwitchAutoPlayOrPause.setOutlineThickness(6);
-    btnSwitchAutoPlayOrPause.setOutlineColor(sf::Color::Black );
-
     // TGUI menu buttons
     // Perform next step button
     pTgBtnPlayStep = tgui::Button::create();
@@ -43,6 +35,16 @@ void GUIView::initMenu() {
     pTgBtnPlayStep->setSize(Vector2f(160,50));
     pTgBtnPlayStep->setPosition(Vector2f(690,80));
     pTGUI->add(pTgBtnPlayStep, "PlayStep");
+
+    //Perform auto button
+    pTgBtnPlayAuto = tgui::Button::create();
+    pTgBtnPlayAuto->setText("Auto play");
+    pTgBtnPlayAuto->setTextSize(16);
+    pTgBtnPlayAuto->setSize(Vector2f(160,50));
+    pTgBtnPlayAuto->setPosition(Vector2f(690,142));
+    pTGUI->add(pTgBtnPlayAuto, "PlayAuto");
+
+
 }
 
 void GUIView::initFieldTextures() {
@@ -123,7 +125,7 @@ void GUIView::drawMenu() {
         }
 
     // draw menu "buttons"
-    pWindow->draw(btnSwitchAutoPlayOrPause);
+
 }
 
 void GUIView::drawAnimals() {
@@ -164,7 +166,7 @@ void GUIView::drawAnimals() {
     }
 }
 
-RectangleShape *GUIView::getBtnSwitchAutoPlayOrPause() {
-    return &btnSwitchAutoPlayOrPause;
-}
+//RectangleShape *GUIView::getBtnSwitchAutoPlayOrPause() {
+//    return &btnSwitchAutoPlayOrPause;
+//}
 
