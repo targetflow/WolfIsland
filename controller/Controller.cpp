@@ -101,6 +101,10 @@ void Controller::displayField() {
 }
 
 void Controller::nextStep() {
+    if (useGUI) {
+        TGUI.get("PlayStep")->showWithEffect(tgui::ShowAnimationType::Fade, sf::milliseconds(900));
+    }
+
     // calculate decisions
     rabbitSpread();
     Wolf_MMakeOffspring();
