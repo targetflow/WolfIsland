@@ -23,10 +23,14 @@ Controller::~Controller() {
 
 void Controller::execute() {
     bool keepExecuting = false;
+//    bool restart = false;
     if (useGUI) {
-//        Vector2f mousePosition;
+
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
-        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting =!keepExecuting;}, keepExecuting  );
+        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting =!keepExecuting;}, keepExecuting);
+//        TGUI.get("Reset")->connect("clicked",[&restart](bool){ restart = true;}, restart);
+        TGUI.get("Reset")->connect("clicked",&Controller::deleteAnimals, this);
+
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
@@ -53,12 +57,29 @@ void Controller::execute() {
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTimeInSeconds);
                 nextStep();
+               //тут змінити текст на кнопці
+
             }
+
+
             TGUI.draw(); // Draw all widgets
             window.display();
         }
+
     } else { // console mode
         nextStep();
+    }
+}
+void Controller::deleteAnimals() {
+    for(int index = 0;index < 400;index++){
+        auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(index)).getRabbits();
+        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W();
+        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M();
+
+        rabbitVec->clear();
+        Wolf_MVec->clear();
+        Wolf_WVec->clear();
+//        initField(nMWolves, nRabbits , nWWolves ,cOfFences );
     }
 }
 

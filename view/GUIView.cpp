@@ -44,8 +44,16 @@ void GUIView::initMenu() {
     pTgBtnPlayAuto->setPosition(Vector2f(690,142));
     pTGUI->add(pTgBtnPlayAuto, "PlayAuto");
 
+    //Perform reset button
+    pTgBtnReset = tgui::Button::create();
+    pTgBtnReset->setText("Reset");
+    pTgBtnReset->setTextSize(16);
+    pTgBtnReset->setSize(Vector2f(160,50));
+    pTgBtnReset->setPosition(Vector2f(690,204));
+    pTGUI->add(pTgBtnReset, "Reset");
 
 }
+
 
 void GUIView::initFieldTextures() {
     // Top textures src: https://openclipart.org/search/

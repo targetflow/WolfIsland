@@ -44,9 +44,11 @@ private:
     Texture menuTxtr;
     Image menuImg;
 
-
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;
+    tgui::Button::Ptr pTgBtnReset;
+
+
 
 
     void initMenu();

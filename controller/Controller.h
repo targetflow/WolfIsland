@@ -14,6 +14,7 @@
 #include "../view/BaseView.h"
 #include "../utils/utils.h"
 
+
 class Controller {
 public:
     Controller();
@@ -46,6 +47,7 @@ private:
     void initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
     void displayField();
     void nextStep();
+    void deleteAnimals();
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
     void calculateMoveDecisions();
