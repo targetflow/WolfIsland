@@ -27,9 +27,9 @@ void Controller::execute() {
     if (useGUI) {
 
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
-        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting =!keepExecuting;}, keepExecuting);
+        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
 //        TGUI.get("Reset")->connect("clicked",[&restart](bool){ restart = true;}, restart);
-        TGUI.get("Reset")->connect("clicked",&Controller::deleteAnimals, this);
+        TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
 
         while (window.isOpen()) {
             Event event {};
@@ -57,8 +57,8 @@ void Controller::execute() {
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTimeInSeconds);
                 nextStep();
-               //тут змінити текст на кнопці
 
+               //тут змінити текст на кнопці
             }
 
 
@@ -68,18 +68,6 @@ void Controller::execute() {
 
     } else { // console mode
         nextStep();
-    }
-}
-void Controller::deleteAnimals() {
-    for(int index = 0;index < 400;index++){
-        auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(index)).getRabbits();
-        auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W();
-        auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M();
-
-        rabbitVec->clear();
-        Wolf_MVec->clear();
-        Wolf_WVec->clear();
-//        initField(nMWolves, nRabbits , nWWolves ,cOfFences );
     }
 }
 
@@ -103,8 +91,21 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
         field.getCells()->at(static_cast<unsigned long>(index)).setFence(true);
     }
 
-    std::cout << "Field initialized." << std::endl;
+    std::cout << "New field initialized." << std::endl;
     displayField();
+}
+
+void Controller::restartField() {
+    std::cout << "Restarting field ..." << std::endl;
+    for(int index = 0; index < 400; index++) {
+        field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->clear();
+        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->clear();
+        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->clear();
+        if (field.getCells()->at(static_cast<unsigned long>(index)).isFence())
+            field.getCells()->at(static_cast<unsigned long>(index)).setFence(false);
+    }
+    currentStepNumber = 0;
+    initField(nMWolves, nRabbits, nWWolves, cOfFences);
 }
 
 void Controller::displayField() {

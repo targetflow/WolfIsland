@@ -5,7 +5,6 @@
 #include "controller/Controller.h"
 
 int main() {
-
     Controller controller;
     controller.execute();
 }

@@ -45,9 +45,9 @@ private:
     void initSimulationParams();
     void initWindow();
     void initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
+    void restartField();
     void displayField();
     void nextStep();
-    void deleteAnimals();
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
     void calculateMoveDecisions();
