@@ -24,7 +24,6 @@ Controller::~Controller() {
 void Controller::execute() {
     bool keepExecuting = false;
     if (useGUI) {
-        FloatRect boundPlay = getPGUIView()->getBtnPlayStep()->getGlobalBounds();
         FloatRect boundAuto = getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
         Vector2f mousePosition;
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
@@ -37,11 +36,7 @@ void Controller::execute() {
                     case Event::MouseButtonReleased:
                         if (event.mouseButton.button == Mouse::Left) {
                             mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
-
-                            if (boundPlay.contains(mousePosition)) { //step game
-                                nextStep();
-                                keepExecuting = false;
-                            } else if (boundAuto.contains(mousePosition)) { //automate start/continue
+                            if (boundAuto.contains(mousePosition)) { //automate start/continue
                                 keepExecuting = !keepExecuting;
                             }
                         }

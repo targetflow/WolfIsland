@@ -28,11 +28,6 @@ void GUIView::initMenu() {
     menuSprt.setTexture(menuTxtr);
 
     // menu "buttons"
-    // Perform next step button
-    btnPlayStep.setSize(Vector2f(160,50));
-    btnPlayStep.setPosition(Vector2f(690,80));
-    btnPlayStep.setOutlineThickness(6);
-    btnPlayStep.setOutlineColor(sf::Color::Black );
 
     // Switcher between (AutoPlay mode and pause) button
     btnSwitchAutoPlayOrPause.setSize(Vector2f(160,50));
@@ -128,7 +123,6 @@ void GUIView::drawMenu() {
         }
 
     // draw menu "buttons"
-    pWindow->draw(btnPlayStep);
     pWindow->draw(btnSwitchAutoPlayOrPause);
 }
 
@@ -168,10 +162,6 @@ void GUIView::drawAnimals() {
             }
         }
     }
-}
-
-RectangleShape *GUIView::getBtnPlayStep() {
-    return &btnPlayStep;
 }
 
 RectangleShape *GUIView::getBtnSwitchAutoPlayOrPause() {
