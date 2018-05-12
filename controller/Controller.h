@@ -27,6 +27,8 @@ public:
     GUIView* getPGUIView();
 private:
     Field field;
+    sf::RenderWindow window;
+    tgui::Gui TGUI;
     BaseView* pView;
     int currentStepNumber;
     String windowTitle;
@@ -40,7 +42,8 @@ private:
     Time delayTimeInSeconds;
 
     void initSimulationParams();
-    void initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
+    void initWindow();
+    void initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
     void displayField();
     void nextStep();
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);

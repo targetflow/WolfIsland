@@ -7,12 +7,14 @@
 Controller::Controller() {
     this->field = Field();
     initSimulationParams();
+
     if(useGUI) {
-        pView = new GUIView(&field, pWindow, pTGUI);
+        initWindow();
+        pView = new GUIView(&field, &window, &TGUI);
     } else {
         pView = new ConsoleView(&field);
     }
-    initializeField(nRabbits, nWWolves, nMWolves, cOfFences);
+    initField(nRabbits, nWWolves, nMWolves, cOfFences);
 }
 
 Controller::~Controller() {
@@ -20,19 +22,10 @@ Controller::~Controller() {
 }
 
 void Controller::execute(int numberOfSteps) {
-    // SFML Program starts here
-    sf::RenderWindow window(VideoMode(896, 640), windowTitle);
-    window.setFramerateLimit(FPS); // без цього комп іде на взрив, проц ппц
-    tgui::Gui tgui{window}; // Create the gui and attach it to the window
     bool keepExecuting = false;
-
     if (useGUI) {
-
-
-        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, &window, &tgui);
-
-        FloatRect boundPlay = controller.getPGUIView()->getBtnPlayStep()->getGlobalBounds();
-        FloatRect boundAuto = controller.getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
+        FloatRect boundPlay = getPGUIView()->getBtnPlayStep()->getGlobalBounds();
+        FloatRect boundAuto = getPGUIView()->getBtnSwitchAutoPlayOrPause()->getGlobalBounds();
         Vector2f mousePosition;
 
         while (window.isOpen()) {
@@ -46,7 +39,7 @@ void Controller::execute(int numberOfSteps) {
 
                             if (boundPlay.contains(mousePosition)) { //step game
                                 //sleep(delayTime);
-                                controller.execute(1);
+                                nextStep();
                                 keepExecuting = false;
                             } else if (boundAuto.contains(mousePosition)) { //automate start/continue
                                 keepExecuting = !keepExecuting;
@@ -56,7 +49,7 @@ void Controller::execute(int numberOfSteps) {
 
                         // window resized:
                     case Event::Resized:
-                        controller.getPGUIView()->displayField();
+                        getPGUIView()->displayField();
                         break;
 
                         // window closed
@@ -69,27 +62,22 @@ void Controller::execute(int numberOfSteps) {
                         break;
                 }
 
-                tgui.handleEvent(event); // Pass the event to the widgets
+                TGUI.handleEvent(event); // Pass the event to the widgets
             }
 
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
-                sleep(delayTime);
-                controller.execute(1);
+                sleep(delayTimeInSeconds);
+                nextStep();
             }
-            tgui.draw(); // Draw all widgets
+            TGUI.draw(); // Draw all widgets
             window.display();
         }
     } else { // console mode
-        Controller controller(nRabbits, nMWolves, nWWolves, cOfFences, nullptr, nullptr);
-        controller.execute(countOfSteps);
-    }
-
-    //old
-    for (unsigned long i = 0; i < numberOfSteps; i++)
         nextStep();
+    }
 }
 
-void Controller::initializeField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
+void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
 {
     int index;
     for(int i = 0; i < nRabbits; i++) {
@@ -465,6 +453,12 @@ void Controller::initSimulationParams() {
     currentStepNumber = 0;
     countOfStepsToPerform = 3;
     useGUI = true;
-    FPS = 60;
+    FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
     delayTimeInSeconds = seconds(1);
+}
+
+void Controller::initWindow() {
+    window.create(VideoMode(896, 640), windowTitle);
+    window.setFramerateLimit(FPS);
+    TGUI.setWindow(window); // Create the gui and attach it to the window
 }
