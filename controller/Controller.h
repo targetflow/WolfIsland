@@ -19,7 +19,7 @@ public:
     Controller();
     virtual ~Controller();
 
-    void execute(int numberOfSteps = 0);
+    void execute();
     std::vector<int> makeListOfAvailableStepsForRabbit(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
@@ -36,7 +36,6 @@ private:
     int nMWolves;
     int nWWolves;
     int cOfFences;
-    int countOfStepsToPerform;
     bool useGUI;
     unsigned int FPS;
     Time delayTimeInSeconds;

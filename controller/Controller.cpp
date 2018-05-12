@@ -21,7 +21,7 @@ Controller::~Controller() {
     delete pView;
 }
 
-void Controller::execute(int numberOfSteps) {
+void Controller::execute() {
     bool keepExecuting = false;
     if (useGUI) {
         FloatRect boundPlay = getPGUIView()->getBtnPlayStep()->getGlobalBounds();
@@ -451,7 +451,6 @@ void Controller::initSimulationParams() {
     nWWolves = 3;
     cOfFences = 5;
     currentStepNumber = 0;
-    countOfStepsToPerform = 3;
     useGUI = true;
     FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
     delayTimeInSeconds = seconds(1);
