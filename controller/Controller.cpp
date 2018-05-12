@@ -74,21 +74,42 @@ void Controller::execute() {
 void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
 {
     int index;
-    for(int i = 0; i < nRabbits; i++) {
-        index = random_number(0, 399);
-        field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->emplace_back(Rabbit());
-    }
-    for(int i = 0; i < nWWolves; i++) {
-        index = random_number(0, 399);
-        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->emplace_back(Wolf_W());
-    }
-    for(int i = 0; i<nMWolves; i++){
-        index = random_number(0, 399);
-        field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->emplace_back(Wolf_M());
-    }
-    for(int i = 0; i < cOfFences; i++) {
+    bool animalAcquireHome = false;
+
+    for (int i = 0; i < cOfFences; i++) {
         index = random_number(0, 399);
         field.getCells()->at(static_cast<unsigned long>(index)).setFence(true);
+    }
+
+    for (int i = 0; i < nRabbits; i++) {
+        while (!animalAcquireHome) {
+            index = random_number(0, 399);
+            if (!field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
+                field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->emplace_back(Rabbit());
+                animalAcquireHome = true;
+            }
+        }
+        animalAcquireHome = false;
+    }
+    for (int i = 0; i < nWWolves; i++) {
+        while (!animalAcquireHome) {
+            index = random_number(0, 399);
+            if (!field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
+                field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->emplace_back(Wolf_W());
+                animalAcquireHome = true;
+            }
+        }
+        animalAcquireHome = false;
+    }
+    for (int i = 0; i<nMWolves; i++){
+        while (!animalAcquireHome) {
+            index = random_number(0, 399);
+            if (!field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
+                field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->emplace_back(Wolf_M());
+                animalAcquireHome = true;
+            }
+        }
+        animalAcquireHome = false;
     }
 
     std::cout << "New field initialized." << std::endl;
