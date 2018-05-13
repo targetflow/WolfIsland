@@ -17,11 +17,10 @@ Controller::~Controller() {
 
 void Controller::execute() {
     bool keepExecuting = false;
-    bool resume = true;
     if (useGUI) {
 
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
-        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting,&resume](bool){ keepExecuting = !keepExecuting , resume=!resume;}, keepExecuting);
+        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
 
         while (window.isOpen()) {
