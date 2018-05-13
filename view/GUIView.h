@@ -43,6 +43,9 @@ private:
     Sprite menuSprt; // спрайт вовчиці
     Texture menuTxtr;
     Image menuImg;
+    Sprite numbersSprt[9]; // спрайти цифр
+    Texture numbersTxtr[9];
+    Image numbersImg[9];
 
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;

@@ -128,6 +128,11 @@ void Controller::displayField() {
 }
 
 void Controller::nextStep() {
+    // animation. HAS A BUG: if you press on a button multiple times in a second, button corrupts.
+//    if (useGUI) {
+//        TGUI.get("PlayStep")->showWithEffect(tgui::ShowAnimationType::Fade, sf::milliseconds(900));
+//    }
+
     // calculate decisions
     rabbitSpread();
     Wolf_MMakeOffspring();
