@@ -52,25 +52,37 @@ void GUIView::initMenu() {
     pTgBtnReset->setPosition(Vector2f(690,204));
     pTGUI->add(pTgBtnReset, "Reset");
 
-    TextRabbit = tgui::TextBox::create ();
-    TextRabbit->setSize(96,32);
-    TextRabbit->setPosition(690,268);
-    pTGUI->add(TextRabbit,"nRabbit");
+    LabelRabbit = tgui::Label::create();
+    LabelRabbit->setPosition(760, 268);
+    LabelRabbit->setText("Rabbits:");
+    LabelRabbit->setTextColor(sf::Color::White );
+    LabelRabbit->setTextSize(18);
+    pTGUI->add(LabelRabbit, "labelRabbits");
 
-    TextWolf_M = tgui::TextBox::create ();
-    TextWolf_M->setSize(96,32);
-    TextWolf_M->setPosition(690,332);
-    pTGUI->add(TextWolf_M,"nWolf_M");
+//    TextRabbit = tgui::TextBox::create ();
+//    TextRabbit->setSize(96,32);
+//    TextRabbit->setPosition(690,268);
+//    pTGUI->add(TextRabbit,"nRabbit");
+//    TextRabbit->setText("12");
+//
+//    TextWolf_M = tgui::TextBox::create ();
+//    TextWolf_M->setSize(96,32);
+//    TextWolf_M->setPosition(690,332);
+//    pTGUI->add(TextWolf_M,"nWolf_M");
+//    TextWolf_M->setText("4");
+//
+//    TextWolf_W = tgui::TextBox::create ();
+//    TextWolf_W->setSize(96,32);
+//    TextWolf_W->setPosition(690,396);
+//    pTGUI->add(TextWolf_W,"nWolf_W");
+//    TextWolf_W->setText("3");
+//
+//    TextFence = tgui::TextBox::create ();
+//    TextFence->setSize(96,32);
+//    TextFence->setPosition(690,460);
+//    pTGUI->add(TextFence,"cOfFences");
+//    TextFence->setText("5");
 
-    TextWolf_W = tgui::TextBox::create ();
-    TextWolf_W->setSize(96,32);
-    TextWolf_W->setPosition(690,396);
-    pTGUI->add(TextWolf_W,"nWolf_W");
-
-    TextFence = tgui::TextBox::create ();
-    TextFence->setSize(96,32);
-    TextFence->setPosition(690,460);
-    pTGUI->add(TextFence,"cOfFences");
 }
 
 

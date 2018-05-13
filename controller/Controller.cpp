@@ -22,7 +22,6 @@ void Controller::execute() {
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
-
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
@@ -65,7 +64,10 @@ void Controller::execute() {
                 button_step->enable();
                 button_reset->enable();
             }
-
+            int rab=0;
+            rab = countOfRabbits();
+            tgui::Label::Ptr labelR = TGUI.get<tgui::Label>("labelRabbits");
+            labelR->setText("count of rabbits:" + rab);
 
             TGUI.draw(); // Draw all widgets
             window.display();
@@ -119,6 +121,14 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
 
     std::cout << "New field initialized." << std::endl;
     displayField();
+}
+
+int Controller::countOfRabbits(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->size();
+    }
+    return count;
 }
 
 void Controller::restartField() {

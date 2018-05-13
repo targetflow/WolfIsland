@@ -48,6 +48,7 @@ private:
     void restartField();
     void displayField();
     void nextStep();
+    int countOfRabbits();
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
     void calculateMoveDecisions();
