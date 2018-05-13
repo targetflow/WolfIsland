@@ -17,12 +17,11 @@ Controller::~Controller() {
 
 void Controller::execute() {
     bool keepExecuting = false;
-//    bool restart = false;
+    bool resume = true;
     if (useGUI) {
 
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
-        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
-//        TGUI.get("Reset")->connect("clicked",[&restart](bool){ restart = true;}, restart);
+        TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting,&resume](bool){ keepExecuting = !keepExecuting , resume=!resume;}, keepExecuting);
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
 
         while (window.isOpen()) {
@@ -54,6 +53,10 @@ void Controller::execute() {
                 tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
                 button_auto->setText("Pause");
 
+            }
+            if (!keepExecuting) {
+                tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
+                button_auto->setText("Play auto");
             }
 
 
