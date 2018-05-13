@@ -51,8 +51,9 @@ void Controller::execute() {
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTimeInSeconds);
                 nextStep();
+                tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
+                button_auto->setText("Pause");
 
-               //тут змінити текст на кнопці
             }
 
 
@@ -121,6 +122,9 @@ void Controller::restartField() {
     }
     initSimulationParams();
     initField(nRabbits, nWWolves, nMWolves, cOfFences);
+    tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
+    button_auto->setText("Auto Play");
+
 }
 
 void Controller::displayField() {
