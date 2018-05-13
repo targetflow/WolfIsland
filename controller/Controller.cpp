@@ -51,11 +51,19 @@ void Controller::execute() {
                 nextStep();
                 tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
                 button_auto->setText("Pause");
+                tgui::Button::Ptr button_step = TGUI.get<tgui::Button>("PlayStep");
+                tgui::Button::Ptr button_reset = TGUI.get<tgui::Button>("Reset");
+                button_step->disable();
+                button_reset->disable();
 
             }
             if (!keepExecuting) {
                 tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
                 button_auto->setText("Play auto");
+                tgui::Button::Ptr button_step = TGUI.get<tgui::Button>("PlayStep");
+                tgui::Button::Ptr button_reset = TGUI.get<tgui::Button>("Reset");
+                button_step->enable();
+                button_reset->enable();
             }
 
 
