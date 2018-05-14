@@ -64,10 +64,29 @@ void Controller::execute() {
                 button_step->enable();
                 button_reset->enable();
             }
-            int rab=0;
-            rab = countOfRabbits();
-            tgui::Label::Ptr labelR = TGUI.get<tgui::Label>("labelRabbits");
-            labelR->setText("count of rabbits:" + rab);
+            std::string rabbit;
+            rabbit = std::to_string(countOfRabbits());
+            tgui::Label::Ptr labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
+            labelRabbit->setText("current count of rabbits: "+rabbit);
+            labelRabbit->disable();
+
+            std::string wolf_w;
+            wolf_w = std::to_string(countOfWolf_W());
+            tgui::Label::Ptr labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
+            labelWolf_W->setText("current count of wolfess: "+wolf_w);
+            labelWolf_W->disable();
+
+            std::string wolf_m;
+            wolf_m = std::to_string(countOfWolf_M());
+            tgui::Label::Ptr labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
+            labelWolf_M->setText("current count of wolves: "+wolf_m);
+            labelWolf_M->disable();
+
+            std::string fence;
+            fence = std::to_string(countOfFences());
+            tgui::Label::Ptr labelFences = TGUI.get<tgui::Label>("labelFences");
+            labelFences->setText("count of fences: "+fence);
+            labelFences->disable();
 
             TGUI.draw(); // Draw all widgets
             window.display();
@@ -130,6 +149,32 @@ int Controller::countOfRabbits(){
     }
     return count;
 }
+
+int Controller::countOfWolf_M(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->size();
+    }
+    return count;
+}
+
+int Controller::countOfWolf_W(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->size();
+    }
+    return count;
+}
+int Controller::countOfFences(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()){
+            count++;
+        }
+    }
+    return count;
+}
+
 
 void Controller::restartField() {
     std::cout << "Restarting field ..." << std::endl;
