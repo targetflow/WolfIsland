@@ -47,11 +47,10 @@ private:
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;
     tgui::Button::Ptr pTgBtnReset;
-//    tgui::TextBox::Ptr TextRabbit;
-//    tgui::TextBox::Ptr TextWolf_M;
-//    tgui::TextBox::Ptr TextWolf_W;
-//    tgui::TextBox::Ptr TextFence;
     tgui::Label::Ptr LabelRabbit;
+    tgui::Label::Ptr LabelWolf_W;
+    tgui::Label::Ptr LabelWolf_M;
+    tgui::Label::Ptr LabelFences;
 
 
 
