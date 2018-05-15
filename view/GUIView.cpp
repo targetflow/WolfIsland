@@ -38,25 +38,25 @@ void GUIView::initMenu() {
     // Perform next step button
     pTgBtnPlayStep = tgui::Button::create();
     pTgBtnPlayStep->setText(L"Здійснити крок");
-    pTgBtnPlayStep->setTextSize(16);
-    pTgBtnPlayStep->setSize(Vector2f(160,50));
-    pTgBtnPlayStep->setPosition(Vector2f(690,80));
+    pTgBtnPlayStep->setTextSize(15);
+    pTgBtnPlayStep->setSize(Vector2f(180, 50));
+    pTgBtnPlayStep->setPosition(Vector2f(680, 55));
     pTGUI->add(pTgBtnPlayStep, "PlayStep");
 
     //Perform auto button
     pTgBtnPlayAuto = tgui::Button::create();
     pTgBtnPlayAuto->setText(L"Увімкнути симуляцію");
-    pTgBtnPlayAuto->setTextSize(16);
-    pTgBtnPlayAuto->setSize(Vector2f(160,50));
-    pTgBtnPlayAuto->setPosition(Vector2f(690,142));
+    pTgBtnPlayAuto->setTextSize(15);
+    pTgBtnPlayAuto->setSize(Vector2f(180, 50));
+    pTgBtnPlayAuto->setPosition(Vector2f(680, 117));
     pTGUI->add(pTgBtnPlayAuto, "PlayAuto");
 
     //Perform reset button
     pTgBtnReset = tgui::Button::create();
     pTgBtnReset->setText(L"Скинути симуляцію");
-    pTgBtnReset->setTextSize(16);
-    pTgBtnReset->setSize(Vector2f(160,50));
-    pTgBtnReset->setPosition(Vector2f(690,204));
+    pTgBtnReset->setTextSize(15);
+    pTgBtnReset->setSize(Vector2f(180, 50));
+    pTgBtnReset->setPosition(Vector2f(680, 179));
     pTGUI->add(pTgBtnReset, "Reset");
 
     //display current step
