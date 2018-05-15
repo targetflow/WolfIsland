@@ -22,23 +22,22 @@ public:
     std::vector<int> makeListOfAvailableStepsForRabbit(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_W(int cellNumb);
     std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
-
     GUIView* getPGUIView();
 private:
     Field field;
     sf::RenderWindow window;
     tgui::Gui TGUI;
     BaseView* pView;
+    // init parameters
     int currentStepNumber;
     String windowTitle;
-    int nRabbits;
-    int nMWolves;
-    int nWWolves;
-    int cOfFences;
+    int initNumbOfRabbits;
+    int initNumbOfMWolves;
+    int initNumbOfWWolves;
+    int initNumbOfFences;
     bool useGUI;
     unsigned int FPS;
     Time delayTimeInSeconds;
-
 
     void initSimulationParams();
     void initWindow();
@@ -46,8 +45,9 @@ private:
     void restartField();
     void displayField();
     void nextStep();
-    std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
 
+    // moves
+    std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
     void calculateMoveDecisions();
     void performMoves();
 
@@ -58,6 +58,12 @@ private:
     void wolfTryToEatOrDie();
     void Wolf_MMakeOffspring();
     void initView();
+
+    // global current field parameters calculation
+    int countOfRabbitsOnField();
+    int countOfWolf_WOnField();
+    int countOfWolf_MOnField();
+    int countOfFencesOnField();
 };
 
 #endif //CPP_CONTROLLER_H

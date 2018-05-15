@@ -22,6 +22,13 @@ void GUIView::displayField() {
 }
 
 void GUIView::initMenu() {
+    // font for all lables
+    // you can choose another here: https://www.fontsquirrel.com/fonts/list/popular
+    // or here: https://www.1001freefonts.com/
+    lablesFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf"); // top1
+//    lablesFont.loadFromFile("../resources/fonts/caviar-dreams/CaviarDreams.ttf"); // 50-50.
+
+
     // menu textures
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
     menuTxtr.loadFromImage(menuImg);
@@ -30,47 +37,83 @@ void GUIView::initMenu() {
     // TGUI menu buttons
     // Perform next step button
     pTgBtnPlayStep = tgui::Button::create();
-    pTgBtnPlayStep->setText("Perform 1 move");
-    pTgBtnPlayStep->setTextSize(16);
-    pTgBtnPlayStep->setSize(Vector2f(160,50));
-    pTgBtnPlayStep->setPosition(Vector2f(690,80));
+    pTgBtnPlayStep->setText(L"Здійснити крок");
+    pTgBtnPlayStep->setTextSize(15);
+    pTgBtnPlayStep->setSize(Vector2f(180, 50));
+    pTgBtnPlayStep->setPosition(Vector2f(680, 55));
     pTGUI->add(pTgBtnPlayStep, "PlayStep");
 
     //Perform auto button
     pTgBtnPlayAuto = tgui::Button::create();
-    pTgBtnPlayAuto->setText("Auto play");
-    pTgBtnPlayAuto->setTextSize(16);
-    pTgBtnPlayAuto->setSize(Vector2f(160,50));
-    pTgBtnPlayAuto->setPosition(Vector2f(690,142));
+    pTgBtnPlayAuto->setText(L"Увімкнути симуляцію");
+    pTgBtnPlayAuto->setTextSize(15);
+    pTgBtnPlayAuto->setSize(Vector2f(180, 50));
+    pTgBtnPlayAuto->setPosition(Vector2f(680, 117));
     pTGUI->add(pTgBtnPlayAuto, "PlayAuto");
 
     //Perform reset button
     pTgBtnReset = tgui::Button::create();
-    pTgBtnReset->setText("Reset");
-    pTgBtnReset->setTextSize(16);
-    pTgBtnReset->setSize(Vector2f(160,50));
-    pTgBtnReset->setPosition(Vector2f(690,204));
+    pTgBtnReset->setText(L"Скинути симуляцію");
+    pTgBtnReset->setTextSize(15);
+    pTgBtnReset->setSize(Vector2f(180, 50));
+    pTgBtnReset->setPosition(Vector2f(680, 179));
     pTGUI->add(pTgBtnReset, "Reset");
 
-    TextRabbit = tgui::TextBox::create ();
-    TextRabbit->setSize(96,32);
-    TextRabbit->setPosition(690,268);
-    pTGUI->add(TextRabbit,"nRabbit");
+    // TGUI labels
+    // menu
+    LabelMenu = tgui::Label::create();
+    LabelMenu->setPosition(743, 20);
+    LabelMenu->setText(L"Меню");
+    LabelMenu->setTextColor(sf::Color::Yellow);
+    LabelMenu->setTextStyle(sf::Text::Underlined);
+    LabelMenu->setFont(lablesFont);
+    LabelMenu->setTextSize(16);
+    pTGUI->add(LabelMenu, "labelMenu");
 
-    TextWolf_M = tgui::TextBox::create ();
-    TextWolf_M->setSize(96,32);
-    TextWolf_M->setPosition(690,332);
-    pTGUI->add(TextWolf_M,"nWolf_M");
+    // indicators
+    LabelIndicators = tgui::Label::create();
+    LabelIndicators->setPosition(725, 250);
+    LabelIndicators->setText(L"Показники");
+    LabelIndicators->setTextColor(sf::Color::Yellow);
+    LabelIndicators->setTextStyle(sf::Text::Underlined);
+    LabelIndicators->setFont(lablesFont);
+    LabelIndicators->setTextSize(16);
+    pTGUI->add(LabelIndicators, "labelIndicators");
 
-    TextWolf_W = tgui::TextBox::create ();
-    TextWolf_W->setSize(96,32);
-    TextWolf_W->setPosition(690,396);
-    pTGUI->add(TextWolf_W,"nWolf_W");
+    //display current step
+    LabelCurrentStep = tgui::Label::create();
+    LabelCurrentStep->setPosition(653, 280);
+    LabelCurrentStep->setTextColor(sf::Color::White);
+    LabelCurrentStep->setTextSize(16);
+    pTGUI->add(LabelCurrentStep, "labelCurrentStep");
 
-    TextFence = tgui::TextBox::create ();
-    TextFence->setSize(96,32);
-    TextFence->setPosition(690,460);
-    pTGUI->add(TextFence,"cOfFences");
+    //display count of rabbits
+    LabelRabbit = tgui::Label::create();
+    LabelRabbit->setPosition(653, 305);
+    LabelRabbit->setTextColor(sf::Color::White);
+    LabelRabbit->setTextSize(16);
+    pTGUI->add(LabelRabbit, "labelRabbits");
+
+    //display count of Wolf_W
+    LabelWolf_W = tgui::Label::create();
+    LabelWolf_W->setPosition(653, 330);
+    LabelWolf_W->setTextColor(sf::Color::White);
+    LabelWolf_W->setTextSize(16);
+    pTGUI->add(LabelWolf_W, "labelWolf_W");
+
+    //display count of Wolf_M
+    LabelWolf_M = tgui::Label::create();
+    LabelWolf_M->setPosition(653, 355);
+    LabelWolf_M->setTextColor(sf::Color::White);
+    LabelWolf_M->setTextSize(16);
+    pTGUI->add(LabelWolf_M, "labelWolf_M");
+
+    //display count of Fences
+    LabelFences = tgui::Label::create();
+    LabelFences->setPosition(653, 380);
+    LabelFences->setTextColor(sf::Color::White);
+    LabelFences->setTextSize(16);
+    pTGUI->add(LabelFences, "labelFences");
 }
 
 

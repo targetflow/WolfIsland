@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <TGUI/TGUI.hpp>
+#include <TGUI/Font.hpp>
 #include "../model/include/Field.h"
 #include "BaseView.h"
 #include "map.h"
@@ -24,6 +25,8 @@ private:
     Field* pField;
     RenderWindow* pWindow;
     tgui::Gui *pTGUI;
+
+    sf::Font lablesFont;
 
     Sprite grassSprt; // спрайт карти
     Texture grassTxtr; // текстура карти
@@ -50,13 +53,13 @@ private:
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;
     tgui::Button::Ptr pTgBtnReset;
-    tgui::TextBox::Ptr TextRabbit;
-    tgui::TextBox::Ptr TextWolf_M;
-    tgui::TextBox::Ptr TextWolf_W;
-    tgui::TextBox::Ptr TextFence;
-
-
-
+    tgui::Label::Ptr LabelMenu;
+    tgui::Label::Ptr LabelIndicators;
+    tgui::Label::Ptr LabelRabbit;
+    tgui::Label::Ptr LabelWolf_W;
+    tgui::Label::Ptr LabelWolf_M;
+    tgui::Label::Ptr LabelFences;
+    tgui::Label::Ptr LabelCurrentStep;
 
     void initMenu();
     void initFieldTextures();
