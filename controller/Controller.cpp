@@ -343,7 +343,6 @@ void Controller::performMoves()
                     (*it).setChosenMoveDirection(-2);
                     it = Wolf_WVec->erase(it);
                 }
-
             }
         }
 
@@ -385,7 +384,8 @@ void Controller::rabbitSpread() {
 }
 
 void Controller::wolfTryToEatOrDie() {
-    std::vector<Wolf_W>::iterator it;
+    std::vector<Wolf_W>::iterator itW;
+    std::vector<Wolf_M>::iterator itM;
 
     for (int cellNumber = 0; cellNumber < 400; cellNumber++){
 
@@ -397,28 +397,20 @@ void Controller::wolfTryToEatOrDie() {
                 if (!rabbitVec->empty()) {
                     wolf_w.setHealth(wolf_w.getHealth()+1) ;
                     rabbitVec->pop_back();
-                }
-                else {
-//                    std::cout << "B: " << wolf_w.getHealth() << std::endl;
+                } else {
                     wolf_w.setHealth(static_cast<float>(wolf_w.getHealth() - 0.1));
-//                    std::cout << "A: " << wolf_w.getHealth() << std::endl;
                 }
             }
-
-            for ( it = Wolf_WVec->begin(); it != Wolf_WVec->end(); ) {
-                if ( (*it).getHealth() <= 0.0f ) {
-                    //delete * it;
-                    it = Wolf_WVec->erase(it);
-                }
-                else {
-                    ++it;
+            for (itW = Wolf_WVec->begin(); itW != Wolf_WVec->end();) {
+                if ((*itW).getHealth() <= 0.0f) {
+                    itW = Wolf_WVec->erase(itW);
+                } else {
+                    ++itW;
                 }
             }
-
         }
-        //Wolf_M
 
-        std::vector<Wolf_M>::iterator iter;
+        //Wolf_M
         auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_M();
         if (!Wolf_MVec->empty()) {
             for (auto& wolf_m: *Wolf_MVec) {
@@ -426,24 +418,18 @@ void Controller::wolfTryToEatOrDie() {
                 if (!rabbitVec->empty()) {
                     wolf_m.setHealth(wolf_m.getHealth()+1) ;
                     rabbitVec->pop_back();
-                }
-                else {
+                } else {
                     wolf_m.setHealth(static_cast<float>(wolf_m.getHealth() - 0.1));
                 }
             }
-
-            for ( iter = Wolf_MVec->begin(); iter != Wolf_MVec->end(); ) {
-                if ( (*iter).getHealth() == 0.0f ) {
-                    //delete * iter;
-                    iter = Wolf_MVec->erase(iter);
-                }
-                else {
-                    ++iter;
+            for (itM = Wolf_MVec->begin(); itM != Wolf_MVec->end();) {
+                if ((*itM).getHealth() <= 0.0f) {
+                    itM = Wolf_MVec->erase(itM);
+                } else {
+                    ++itM;
                 }
             }
-
         }
-
     }
     std::cout << "TryToEatOfDie off" << std::endl;
 }
