@@ -20,3 +20,7 @@ if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(WolfIsland ${TGUI_LIBRARY} ${SFML_LIBRARIES})
 endif()
+
+set(RAPIDJSON_INCLUDEDIR "/usr/include/rapidjson")
+find_package(rapidjson REQUIRED)
+include_directories("${RAPIDJSON_INCLUDE_DIRS}")
