@@ -82,35 +82,35 @@ void GUIView::initMenu() {
 
     //display current step
     LabelCurrentStep = tgui::Label::create();
-    LabelCurrentStep->setPosition(648, 280);
+    LabelCurrentStep->setPosition(653, 280);
     LabelCurrentStep->setTextColor(sf::Color::White);
     LabelCurrentStep->setTextSize(16);
     pTGUI->add(LabelCurrentStep, "labelCurrentStep");
 
     //display count of rabbits
     LabelRabbit = tgui::Label::create();
-    LabelRabbit->setPosition(648, 305);
+    LabelRabbit->setPosition(653, 305);
     LabelRabbit->setTextColor(sf::Color::White);
     LabelRabbit->setTextSize(16);
     pTGUI->add(LabelRabbit, "labelRabbits");
 
     //display count of Wolf_W
     LabelWolf_W = tgui::Label::create();
-    LabelWolf_W->setPosition(648, 330);
+    LabelWolf_W->setPosition(653, 330);
     LabelWolf_W->setTextColor(sf::Color::White);
     LabelWolf_W->setTextSize(16);
     pTGUI->add(LabelWolf_W, "labelWolf_W");
 
     //display count of Wolf_M
     LabelWolf_M = tgui::Label::create();
-    LabelWolf_M->setPosition(648, 355);
+    LabelWolf_M->setPosition(653, 355);
     LabelWolf_M->setTextColor(sf::Color::White);
     LabelWolf_M->setTextSize(16);
     pTGUI->add(LabelWolf_M, "labelWolf_M");
 
     //display count of Fences
     LabelFences = tgui::Label::create();
-    LabelFences->setPosition(648, 380);
+    LabelFences->setPosition(653, 380);
     LabelFences->setTextColor(sf::Color::White);
     LabelFences->setTextSize(16);
     pTGUI->add(LabelFences, "labelFences");
