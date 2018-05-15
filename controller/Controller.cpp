@@ -328,18 +328,20 @@ void Controller::performMoves()
 
         // Wolf_W
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
+        auto it = Wolf_WVec->begin();
         if(!Wolf_WVec->empty())
         {
-            for (auto &wolf_w:*Wolf_WVec)
+            for (; it != Wolf_WVec->end();)
             {
-                int wolf_w_decision = wolf_w.getChosenMoveDirection();
-                if(wolf_w_decision == cellNumb or wolf_w_decision < 0)
+                auto wolf_w_decision = static_cast<unsigned long>((*it).getChosenMoveDirection());
+                if(wolf_w_decision == cellNumb or wolf_w_decision < 0) {
+                    ++it;
                     continue;
-                else{
-                    field.getCells()->at(static_cast<unsigned long>(wolf_w_decision)).getWolf_W()->emplace_back(Wolf_W());//додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
-                    Wolf_WVec->pop_back();//видаляєм останній елемент з вектора
-                    wolf_w.setChosenMoveDirection(-2);
-
+                } else {
+                    //додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
+                    field.getCells()->at(wolf_w_decision).getWolf_W()->emplace_back((*it));
+                    it = Wolf_WVec->erase(it);
+                    (*it).setChosenMoveDirection(-2);
                 }
 
             }
@@ -395,12 +397,14 @@ void Controller::wolfTryToEatOrDie() {
                     rabbitVec->pop_back();
                 }
                 else {
+//                    std::cout << "B: " << wolf_w.getHealth() << std::endl;
                     wolf_w.setHealth(static_cast<float>(wolf_w.getHealth() - 0.1));
+//                    std::cout << "A: " << wolf_w.getHealth() << std::endl;
                 }
             }
 
             for ( it = Wolf_WVec->begin(); it != Wolf_WVec->end(); ) {
-                if ( (*it).getHealth() == 0.0f ) {
+                if ( (*it).getHealth() <= 0.0f ) {
                     //delete * it;
                     it = Wolf_WVec->erase(it);
                 }
