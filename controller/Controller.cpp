@@ -48,21 +48,13 @@ void Controller::execute() {
             if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
                 sleep(delayTimeInSeconds);
                 nextStep();
-                tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
-                button_auto->setText("Pause");
-                tgui::Button::Ptr button_step = TGUI.get<tgui::Button>("PlayStep");
-                tgui::Button::Ptr button_reset = TGUI.get<tgui::Button>("Reset");
-                button_step->disable();
-                button_reset->disable();
-
-            }
-            if (!keepExecuting) {
-                tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
-                button_auto->setText("Play auto");
-                tgui::Button::Ptr button_step = TGUI.get<tgui::Button>("PlayStep");
-                tgui::Button::Ptr button_reset = TGUI.get<tgui::Button>("Reset");
-                button_step->enable();
-                button_reset->enable();
+                TGUI.get<tgui::Button>("PlayAuto")->setText("Pause");
+                TGUI.get<tgui::Button>("PlayStep")->disable();
+                TGUI.get<tgui::Button>("Reset")->disable();
+            } else {
+                TGUI.get<tgui::Button>("PlayAuto")->setText("Play auto");
+                TGUI.get<tgui::Button>("PlayStep")->enable();
+                TGUI.get<tgui::Button>("Reset")->enable();
             }
             std::string rabbit;
             rabbit = std::to_string(countOfRabbits());
@@ -165,16 +157,16 @@ int Controller::countOfWolf_W(){
     }
     return count;
 }
+
 int Controller::countOfFences(){
     int count=0;
     for(int index = 0; index < 400; index++) {
-        if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()){
+        if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
             count++;
         }
     }
     return count;
 }
-
 
 void Controller::restartField() {
     std::cout << "Restarting field ..." << std::endl;
@@ -187,9 +179,7 @@ void Controller::restartField() {
     }
     initSimulationParams();
     initField(nRabbits, nWWolves, nMWolves, cOfFences);
-    tgui::Button::Ptr button_auto = TGUI.get<tgui::Button>("PlayAuto");
-    button_auto->setText("Auto Play");
-
+    TGUI.get<tgui::Button>("PlayAuto")->setText("Auto Play");
 }
 
 void Controller::displayField() {
@@ -304,8 +294,6 @@ void Controller::calculateMoveDecisions()
             }
         }
     }
-
-
     std::cout << "Calc end" << std::endl;
 }
 

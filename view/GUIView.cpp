@@ -79,9 +79,6 @@ void GUIView::initMenu() {
     LabelFences->setTextColor(sf::Color::White );
     LabelFences->setTextSize(18);
     pTGUI->add(LabelFences, "labelFences");
-
-
-
 }
 
 

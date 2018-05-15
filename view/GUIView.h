@@ -52,9 +52,6 @@ private:
     tgui::Label::Ptr LabelWolf_M;
     tgui::Label::Ptr LabelFences;
 
-
-
-
     void initMenu();
     void initFieldTextures();
 
