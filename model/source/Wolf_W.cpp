@@ -6,6 +6,7 @@
 
 Wolf_W::Wolf_W() {
     chosenMoveDirection = -1;
+    health = 1;
 }
 
 Wolf_W::~Wolf_W() = default;
