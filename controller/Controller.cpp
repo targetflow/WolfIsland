@@ -328,40 +328,34 @@ void Controller::performMoves()
 
         // Wolf_W
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
-        auto it = Wolf_WVec->begin();
-        if(!Wolf_WVec->empty())
-        {
-            for (; it != Wolf_WVec->end();)
-            {
-                auto wolf_w_decision = static_cast<unsigned long>((*it).getChosenMoveDirection());
-                if(wolf_w_decision == cellNumb or wolf_w_decision < 0) {
-                    ++it;
+        if(!Wolf_WVec->empty()) {
+            for (auto itW = Wolf_WVec->begin(); itW != Wolf_WVec->end();) {
+                auto wolf_w_decision = static_cast<unsigned long>((*itW).getChosenMoveDirection());
+                if (wolf_w_decision == cellNumb or wolf_w_decision < 0) {
+                    ++itW;
                     continue;
                 } else {
                     //додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
-                    field.getCells()->at(wolf_w_decision).getWolf_W()->emplace_back((*it));
-                    (*it).setChosenMoveDirection(-2);
-                    it = Wolf_WVec->erase(it);
+                    field.getCells()->at(wolf_w_decision).getWolf_W()->emplace_back((*itW));
+                    (*itW).setChosenMoveDirection(-2);
+                    itW = Wolf_WVec->erase(itW);
                 }
             }
         }
 
         //Wolf_M
         auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M();
-        if(!Wolf_MVec->empty())
-        {
-            for (auto &wolf_m:*Wolf_MVec)
-            {
-                int wolf_m_decision = wolf_m.getChosenMoveDirection();
-                if(wolf_m_decision == cellNumb or wolf_m_decision < 0)
+        if(!Wolf_MVec->empty()) {
+            for (auto itM = Wolf_MVec->begin(); itM != Wolf_MVec->end();) {
+                auto wolf_m_decision = static_cast<unsigned long>((*itM).getChosenMoveDirection());
+                if (wolf_m_decision == cellNumb or wolf_m_decision < 0) {
+                    ++itM;
                     continue;
-                else{
-                    field.getCells()->at(static_cast<unsigned long>(wolf_m_decision)).getWolf_M()->emplace_back(Wolf_M());//додаєм вовка в вектор вовків по вказаному номеру клітини
-                    Wolf_MVec->pop_back();//видаляєм останній елемент з вектора
-                    wolf_m.setChosenMoveDirection(-2);
-
+                } else {
+                    field.getCells()->at(wolf_m_decision).getWolf_M()->emplace_back((*itM));
+                    (*itM).setChosenMoveDirection(-2);
+                    itM = Wolf_MVec->erase(itM);
                 }
-
             }
         }
     }
