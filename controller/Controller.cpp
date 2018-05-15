@@ -53,11 +53,11 @@ void Controller::execute() {
             if (keepExecuting) {
                 sleep(delayTimeInSeconds);
                 nextStep();
-                TGUI.get<tgui::Button>("PlayAuto")->setText("Pause");
+                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Зупинити симуляцію");
                 TGUI.get<tgui::Button>("PlayStep")->disable();
                 TGUI.get<tgui::Button>("Reset")->disable();
             } else {
-                TGUI.get<tgui::Button>("PlayAuto")->setText("Play auto");
+                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Увімкнути симуляцію");
                 TGUI.get<tgui::Button>("PlayStep")->enable();
                 TGUI.get<tgui::Button>("Reset")->enable();
             }
@@ -66,19 +66,19 @@ void Controller::execute() {
             labelCurrentStep->setText(L"Поточний крок: " + std::to_string(currentStepNumber));
 
             labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
-            labelRabbit->setText("Current count of rabbits: " + std::to_string(countOfRabbitsOnField()));
+            labelRabbit->setText(L"Кількість кролів на полі: " + std::to_string(countOfRabbitsOnField()));
             labelRabbit->disable();
 
             labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
-            labelWolf_W->setText("Current count of wolfess: " + std::to_string(countOfWolf_WOnField()));
+            labelWolf_W->setText(L"Кількість вовчиць на полі: " + std::to_string(countOfWolf_WOnField()));
             labelWolf_W->disable();
 
             labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
-            labelWolf_M->setText("Current count of wolves: " + std::to_string(countOfWolf_MOnField()));
+            labelWolf_M->setText(L"Кількість вовків на полі: " + std::to_string(countOfWolf_MOnField()));
             labelWolf_M->disable();
 
             labelFences = TGUI.get<tgui::Label>("labelFences");
-            labelFences->setText("Count of fences: " + std::to_string(countOfFencesOnField()));
+            labelFences->setText(L"Кількість огорож на полі: " + std::to_string(countOfFencesOnField()));
             labelFences->disable();
 
             TGUI.draw(); // Draw all widgets
@@ -91,7 +91,7 @@ void Controller::execute() {
 
 void Controller::initSimulationParams() {
     // later this data should be loaded from XML/JSON/FILE.
-    windowTitle = "Wolf Island simulation";
+    windowTitle = L"Вовчий острів";
     initNumbOfRabbits = 12;
     initNumbOfMWolves = 4;
     initNumbOfWWolves = 3;

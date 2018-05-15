@@ -37,7 +37,7 @@ void GUIView::initMenu() {
     // TGUI menu buttons
     // Perform next step button
     pTgBtnPlayStep = tgui::Button::create();
-    pTgBtnPlayStep->setText("Perform 1 move");
+    pTgBtnPlayStep->setText(L"Здійснити крок");
     pTgBtnPlayStep->setTextSize(16);
     pTgBtnPlayStep->setSize(Vector2f(160,50));
     pTgBtnPlayStep->setPosition(Vector2f(690,80));
@@ -45,7 +45,7 @@ void GUIView::initMenu() {
 
     //Perform auto button
     pTgBtnPlayAuto = tgui::Button::create();
-    pTgBtnPlayAuto->setText("Auto play");
+    pTgBtnPlayAuto->setText(L"Увімкнути симуляцію");
     pTgBtnPlayAuto->setTextSize(16);
     pTgBtnPlayAuto->setSize(Vector2f(160,50));
     pTgBtnPlayAuto->setPosition(Vector2f(690,142));
@@ -53,7 +53,7 @@ void GUIView::initMenu() {
 
     //Perform reset button
     pTgBtnReset = tgui::Button::create();
-    pTgBtnReset->setText("Reset");
+    pTgBtnReset->setText(L"Скинути симуляцію");
     pTgBtnReset->setTextSize(16);
     pTgBtnReset->setSize(Vector2f(160,50));
     pTgBtnReset->setPosition(Vector2f(690,204));
