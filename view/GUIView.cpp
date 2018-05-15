@@ -231,7 +231,6 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfRabbits-1);
-
             // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
             if (index > 8)
                 index = 8;
@@ -252,6 +251,9 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfWolvesW-1);
+            // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
+            if (index > 8)
+                index = 8;
             numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
             numbersSprt[index].setPosition((i%20) * 32 + 24, (i/20) * 32 + 8);
             pWindow->draw(numbersSprt[index]);
@@ -269,6 +271,9 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfWolvesM-1);
+            // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
+            if (index > 8)
+                index = 8;
             numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
             numbersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32 + 8);
             pWindow->draw(numbersSprt[index]);
