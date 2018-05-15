@@ -8,7 +8,7 @@ Controller::Controller() {
     this->field = Field();
     initSimulationParams();
     initView();
-    initField(nRabbits, nWWolves, nMWolves, cOfFences);
+    initField(initNumbOfRabbits, initNumbOfWWolves, initNumbOfMWolves, initNumbOfFences);
 }
 
 Controller::~Controller() {
@@ -18,15 +18,20 @@ Controller::~Controller() {
 void Controller::execute() {
     bool keepExecuting = false;
     if (useGUI) {
-
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
+
+        tgui::Label::Ptr labelRabbit;
+        tgui::Label::Ptr labelWolf_W;
+        tgui::Label::Ptr labelWolf_M;
+        tgui::Label::Ptr labelFences;
+
+        // main loop
         while (window.isOpen()) {
             Event event {};
             while (window.pollEvent(event)) {
                 switch (event.type) {
-
                     // window resized:
                     case Event::Resized:
                         getPGUIView()->displayField();
@@ -41,11 +46,10 @@ void Controller::execute() {
                     default:
                         break;
                 }
-
                 TGUI.handleEvent(event); // Pass the event to the widgets
             }
 
-            if (keepExecuting) { // якщо вмикач увімкнено, "подавай світло" (допоки вмикач не буде вимкнено)
+            if (keepExecuting) {
                 sleep(delayTimeInSeconds);
                 nextStep();
                 TGUI.get<tgui::Button>("PlayAuto")->setText("Pause");
@@ -56,28 +60,21 @@ void Controller::execute() {
                 TGUI.get<tgui::Button>("PlayStep")->enable();
                 TGUI.get<tgui::Button>("Reset")->enable();
             }
-            std::string rabbit;
-            rabbit = std::to_string(countOfRabbits());
-            tgui::Label::Ptr labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
-            labelRabbit->setText("current count of rabbits: "+rabbit);
+
+            labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
+            labelRabbit->setText("Current count of rabbits: " + std::to_string(countOfRabbitsOnField()));
             labelRabbit->disable();
 
-            std::string wolf_w;
-            wolf_w = std::to_string(countOfWolf_W());
-            tgui::Label::Ptr labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
-            labelWolf_W->setText("current count of wolfess: "+wolf_w);
+            labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
+            labelWolf_W->setText("Current count of wolfess: " + std::to_string(countOfWolf_WOnField()));
             labelWolf_W->disable();
 
-            std::string wolf_m;
-            wolf_m = std::to_string(countOfWolf_M());
-            tgui::Label::Ptr labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
-            labelWolf_M->setText("current count of wolves: "+wolf_m);
+            labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
+            labelWolf_M->setText("Current count of wolves: " + std::to_string(countOfWolf_MOnField()));
             labelWolf_M->disable();
 
-            std::string fence;
-            fence = std::to_string(countOfFences());
-            tgui::Label::Ptr labelFences = TGUI.get<tgui::Label>("labelFences");
-            labelFences->setText("count of fences: "+fence);
+            labelFences = TGUI.get<tgui::Label>("labelFences");
+            labelFences->setText("Count of fences: " + std::to_string(countOfFencesOnField()));
             labelFences->disable();
 
             TGUI.draw(); // Draw all widgets
@@ -134,7 +131,7 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
     displayField();
 }
 
-int Controller::countOfRabbits(){
+int Controller::countOfRabbitsOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
         count+=field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->size();
@@ -142,7 +139,7 @@ int Controller::countOfRabbits(){
     return count;
 }
 
-int Controller::countOfWolf_M(){
+int Controller::countOfWolf_MOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
         count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->size();
@@ -150,7 +147,7 @@ int Controller::countOfWolf_M(){
     return count;
 }
 
-int Controller::countOfWolf_W(){
+int Controller::countOfWolf_WOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
         count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->size();
@@ -158,7 +155,7 @@ int Controller::countOfWolf_W(){
     return count;
 }
 
-int Controller::countOfFences(){
+int Controller::countOfFencesOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
         if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
@@ -178,7 +175,7 @@ void Controller::restartField() {
             field.getCells()->at(static_cast<unsigned long>(index)).setFence(false);
     }
     initSimulationParams();
-    initField(nRabbits, nWWolves, nMWolves, cOfFences);
+    initField(initNumbOfRabbits, initNumbOfWWolves, initNumbOfMWolves, initNumbOfFences);
     TGUI.get<tgui::Button>("PlayAuto")->setText("Auto Play");
 }
 
@@ -525,10 +522,10 @@ GUIView *Controller::getPGUIView() {
 void Controller::initSimulationParams() {
     // later this data should be loaded from XML/JSON/FILE.
     windowTitle = "Wolf Island simulation";
-    nRabbits = 12;
-    nMWolves = 4;
-    nWWolves = 3;
-    cOfFences = 5;
+    initNumbOfRabbits = 12;
+    initNumbOfMWolves = 4;
+    initNumbOfWWolves = 3;
+    initNumbOfFences = 5;
     currentStepNumber = 0;
     useGUI = true;
     FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
