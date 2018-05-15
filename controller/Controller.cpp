@@ -293,7 +293,7 @@ void Controller::calculateMoveDecisions()
             }
         }
     }
-    std::cout << "Calc end" << std::endl;
+    std::cout << "Calc move decisions end" << std::endl;
 }
 
 void Controller::performMoves()
@@ -340,8 +340,8 @@ void Controller::performMoves()
                 } else {
                     //додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
                     field.getCells()->at(wolf_w_decision).getWolf_W()->emplace_back((*it));
-                    it = Wolf_WVec->erase(it);
                     (*it).setChosenMoveDirection(-2);
+                    it = Wolf_WVec->erase(it);
                 }
 
             }
@@ -366,6 +366,7 @@ void Controller::performMoves()
             }
         }
     }
+    std::cout << "Perf moves off" << std::endl;
 }
 
 void Controller::rabbitSpread() {
@@ -380,6 +381,7 @@ void Controller::rabbitSpread() {
             }
         }
     }
+    std::cout << "Rabbit spread off" << std::endl;
 }
 
 void Controller::wolfTryToEatOrDie() {
@@ -443,6 +445,7 @@ void Controller::wolfTryToEatOrDie() {
         }
 
     }
+    std::cout << "TryToEatOfDie off" << std::endl;
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
@@ -519,6 +522,7 @@ void Controller::Wolf_MMakeOffspring(){
         }
 
     }
+    std::cout << "Make Offspring off" << std::endl;
 }
 
 GUIView *Controller::getPGUIView() {
