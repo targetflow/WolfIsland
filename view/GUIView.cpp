@@ -22,6 +22,13 @@ void GUIView::displayField() {
 }
 
 void GUIView::initMenu() {
+    // font for all lables
+    // you can choose another here: https://www.fontsquirrel.com/fonts/list/popular
+    // or here: https://www.1001freefonts.com/
+    lablesFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf"); // top1
+//    lablesFont.loadFromFile("../resources/fonts/caviar-dreams/CaviarDreams.ttf"); // 50-50.
+
+
     // menu textures
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
     menuTxtr.loadFromImage(menuImg);
@@ -51,6 +58,15 @@ void GUIView::initMenu() {
     pTgBtnReset->setSize(Vector2f(160,50));
     pTgBtnReset->setPosition(Vector2f(690,204));
     pTGUI->add(pTgBtnReset, "Reset");
+
+    //display current step
+    LabelCurrentStep = tgui::Label::create();
+    LabelCurrentStep->setPosition(648, 270);
+    LabelCurrentStep->setTextColor(sf::Color::Yellow);
+    LabelCurrentStep->setTextSize(16);
+    LabelCurrentStep->setTextStyle(sf::Text::Underlined);
+    LabelCurrentStep->setFont(lablesFont);
+    pTGUI->add(LabelCurrentStep, "labelCurrentStep");
 
     //display count of rabbits
     LabelRabbit = tgui::Label::create();
