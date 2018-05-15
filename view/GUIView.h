@@ -50,6 +50,8 @@ private:
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;
     tgui::Button::Ptr pTgBtnReset;
+    tgui::Label::Ptr LabelMenu;
+    tgui::Label::Ptr LabelIndicators;
     tgui::Label::Ptr LabelRabbit;
     tgui::Label::Ptr LabelWolf_W;
     tgui::Label::Ptr LabelWolf_M;
