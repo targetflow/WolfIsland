@@ -22,6 +22,7 @@ void Controller::execute() {
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
 
+        tgui::Label::Ptr labelCurrentStep;
         tgui::Label::Ptr labelRabbit;
         tgui::Label::Ptr labelWolf_W;
         tgui::Label::Ptr labelWolf_M;
@@ -61,6 +62,9 @@ void Controller::execute() {
                 TGUI.get<tgui::Button>("Reset")->enable();
             }
 
+            labelCurrentStep = TGUI.get<tgui::Label>("labelCurrentStep");
+            labelCurrentStep->setText(L"Поточний крок: " + std::to_string(currentStepNumber));
+
             labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
             labelRabbit->setText("Current count of rabbits: " + std::to_string(countOfRabbitsOnField()));
             labelRabbit->disable();
@@ -80,9 +84,36 @@ void Controller::execute() {
             TGUI.draw(); // Draw all widgets
             window.display();
         }
-
     } else { // console mode
         nextStep();
+    }
+}
+
+void Controller::initSimulationParams() {
+    // later this data should be loaded from XML/JSON/FILE.
+    windowTitle = "Wolf Island simulation";
+    initNumbOfRabbits = 12;
+    initNumbOfMWolves = 4;
+    initNumbOfWWolves = 3;
+    initNumbOfFences = 5;
+    currentStepNumber = 0;
+    useGUI = true;
+    FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
+    delayTimeInSeconds = seconds(1);
+}
+
+void Controller::initWindow() {
+    window.create(VideoMode(896, 640), windowTitle);
+    window.setFramerateLimit(FPS);
+    TGUI.setWindow(window); // Create the gui and attach it to the window
+}
+
+void Controller::initView() {
+    if(useGUI) {
+        initWindow();
+        pView = new GUIView(&field, &window, &TGUI);
+    } else {
+        pView = new ConsoleView(&field);
     }
 }
 
@@ -129,40 +160,6 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
 
     std::cout << "New field initialized." << std::endl;
     displayField();
-}
-
-int Controller::countOfRabbitsOnField(){
-    int count=0;
-    for(int index = 0; index < 400; index++) {
-        count+=field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->size();
-    }
-    return count;
-}
-
-int Controller::countOfWolf_MOnField(){
-    int count=0;
-    for(int index = 0; index < 400; index++) {
-        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->size();
-    }
-    return count;
-}
-
-int Controller::countOfWolf_WOnField(){
-    int count=0;
-    for(int index = 0; index < 400; index++) {
-        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->size();
-    }
-    return count;
-}
-
-int Controller::countOfFencesOnField(){
-    int count=0;
-    for(int index = 0; index < 400; index++) {
-        if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
-            count++;
-        }
-    }
-    return count;
 }
 
 void Controller::restartField() {
@@ -519,30 +516,36 @@ GUIView *Controller::getPGUIView() {
     return dynamic_cast<GUIView *>(pView);
 }
 
-void Controller::initSimulationParams() {
-    // later this data should be loaded from XML/JSON/FILE.
-    windowTitle = "Wolf Island simulation";
-    initNumbOfRabbits = 12;
-    initNumbOfMWolves = 4;
-    initNumbOfWWolves = 3;
-    initNumbOfFences = 5;
-    currentStepNumber = 0;
-    useGUI = true;
-    FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
-    delayTimeInSeconds = seconds(1);
-}
-
-void Controller::initWindow() {
-    window.create(VideoMode(896, 640), windowTitle);
-    window.setFramerateLimit(FPS);
-    TGUI.setWindow(window); // Create the gui and attach it to the window
-}
-
-void Controller::initView() {
-    if(useGUI) {
-        initWindow();
-        pView = new GUIView(&field, &window, &TGUI);
-    } else {
-        pView = new ConsoleView(&field);
+int Controller::countOfRabbitsOnField(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getRabbits()->size();
     }
+    return count;
+}
+
+int Controller::countOfWolf_MOnField(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_M()->size();
+    }
+    return count;
+}
+
+int Controller::countOfWolf_WOnField(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        count+=field.getCells()->at(static_cast<unsigned long>(index)).getWolf_W()->size();
+    }
+    return count;
+}
+
+int Controller::countOfFencesOnField(){
+    int count=0;
+    for(int index = 0; index < 400; index++) {
+        if(field.getCells()->at(static_cast<unsigned long>(index)).isFence()) {
+            count++;
+        }
+    }
+    return count;
 }
