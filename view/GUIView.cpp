@@ -169,12 +169,14 @@ void GUIView::initFieldTextures() {
         pathToNumbersPictures += std::to_string(i+1);
         pathToNumbersPictures += "p.png";
 
-        numbersImg[i].loadFromFile(pathToNumbersPictures);
-        numbersTxtr[i].loadFromImage(numbersImg[i]);
-        numbersSprt[i].setTexture(numbersTxtr[i]);
+        countersImg[i].loadFromFile(pathToNumbersPictures);
+        countersTxtr[i].loadFromImage(countersImg[i]);
+        countersSprt[i].setTexture(countersTxtr[i]);
     }
-
-
+    // add "+" sprite for displaying more then 9 animals
+    countersImg[9].loadFromFile("../resources/textures/numbers/processed/plus.png");
+    countersTxtr[9].loadFromImage(countersImg[9]);
+    countersSprt[9].setTexture(countersTxtr[9]);
 }
 
 void GUIView::drawMap() {
@@ -209,9 +211,6 @@ void GUIView::drawMenu() {
                 pWindow->draw(menuSprt);
             } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
         }
-
-    // draw menu "buttons"
-
 }
 
 void GUIView::drawAnimals() {
@@ -231,12 +230,11 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfRabbits-1);
-            // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
-            if (index > 8)
-                index = 8;
-            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
-            numbersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32);
-            pWindow->draw(numbersSprt[index]);
+            if (index > 9)
+                index = 9; // when there are more then 9 animals of specific type in the cell - always show "+" sprite.
+            countersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            countersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32);
+            pWindow->draw(countersSprt[index]);
         }
 
         // draw wolvesW
@@ -251,12 +249,11 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfWolvesW-1);
-            // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
-            if (index > 8)
-                index = 8;
-            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
-            numbersSprt[index].setPosition((i%20) * 32 + 24, (i/20) * 32 + 8);
-            pWindow->draw(numbersSprt[index]);
+            if (index > 9)
+                index = 9; // when there are more then 9 animals of specific type in the cell - always show "+" sprite.
+            countersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            countersSprt[index].setPosition((i%20) * 32 + 24, (i/20) * 32 + 8);
+            pWindow->draw(countersSprt[index]);
         }
 
         // draw wolvesM
@@ -271,12 +268,11 @@ void GUIView::drawAnimals() {
 
             // draw count
             index = static_cast<unsigned int>(countOfWolvesM-1);
-            // TODO: change next 2 lines to Sprite "+" (when animals are more than 9)
-            if (index > 8)
-                index = 8;
-            numbersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
-            numbersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32 + 8);
-            pWindow->draw(numbersSprt[index]);
+            if (index > 9)
+                index = 9; // when there are more then 9 animals of specific type in the cell - always show "+" sprite.
+            countersSprt[index].setTextureRect(IntRect(0, 0, 8, 8));
+            countersSprt[index].setPosition((i%20) * 32 + 16, (i/20) * 32 + 8);
+            pWindow->draw(countersSprt[index]);
         }
     }
 }
