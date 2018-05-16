@@ -9,3 +9,13 @@ int random_number(int begin, int end){
     std::uniform_int_distribution<int> uni(begin, end);
     return uni(rng);
 }
+
+// according to: https://stackoverflow.com/a/32697209/8219611
+std::wstring stringToWstring(const std::string& t_str) {
+    //setup converter
+    typedef std::codecvt_utf8<wchar_t> convert_type;
+    std::wstring_convert<convert_type, wchar_t> converter;
+
+    //use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
+    return converter.from_bytes(t_str);
+}
