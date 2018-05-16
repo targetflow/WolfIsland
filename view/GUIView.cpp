@@ -22,12 +22,10 @@ void GUIView::displayField() {
 }
 
 void GUIView::initMenu() {
-    // font for all lables
-    // you can choose another here: https://www.fontsquirrel.com/fonts/list/popular
+    // you can choose fonts here: https://www.fontsquirrel.com/fonts/list/popular
     // or here: https://www.1001freefonts.com/
-    lablesFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf"); // top1
-//    lablesFont.loadFromFile("../resources/fonts/caviar-dreams/CaviarDreams.ttf"); // 50-50.
-
+    // font for general lables
+    lablesFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf");
 
     // menu textures
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
@@ -278,8 +276,3 @@ void GUIView::drawAnimals() {
         }
     }
 }
-
-//RectangleShape *GUIView::getBtnSwitchAutoPlayOrPause() {
-//    return &btnSwitchAutoPlayOrPause;
-//}
-
