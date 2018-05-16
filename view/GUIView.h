@@ -26,7 +26,7 @@ private:
     RenderWindow* pWindow;
     tgui::Gui *pTGUI;
 
-    sf::Font lablesFont;
+    sf::Font labelsFont;
 
     Sprite grassSprt; // спрайт карти
     Texture grassTxtr; // текстура карти

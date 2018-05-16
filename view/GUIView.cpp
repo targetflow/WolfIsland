@@ -25,7 +25,7 @@ void GUIView::initMenu() {
     // you can choose fonts here: https://www.fontsquirrel.com/fonts/list/popular
     // or here: https://www.1001freefonts.com/
     // font for general lables
-    lablesFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf");
+    labelsFont.loadFromFile("../resources/fonts/open-sans/OpenSans-Semibold.ttf");
 
     // menu textures
     menuImg.loadFromFile("../resources/textures/menu/tile_black.png");
@@ -64,7 +64,7 @@ void GUIView::initMenu() {
     LabelMenu->setText(L"Меню");
     LabelMenu->setTextColor(sf::Color::Yellow);
     LabelMenu->setTextStyle(sf::Text::Underlined);
-    LabelMenu->setFont(lablesFont);
+    LabelMenu->setFont(labelsFont);
     LabelMenu->setTextSize(16);
     pTGUI->add(LabelMenu, "labelMenu");
 
@@ -74,7 +74,7 @@ void GUIView::initMenu() {
     LabelIndicators->setText(L"Показники");
     LabelIndicators->setTextColor(sf::Color::Yellow);
     LabelIndicators->setTextStyle(sf::Text::Underlined);
-    LabelIndicators->setFont(lablesFont);
+    LabelIndicators->setFont(labelsFont);
     LabelIndicators->setTextSize(16);
     pTGUI->add(LabelIndicators, "labelIndicators");
 
