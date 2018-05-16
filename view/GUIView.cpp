@@ -162,19 +162,21 @@ void GUIView::initFieldTextures() {
 
     // numbers
     // https://openclipart.org/detail/227860/coloring-page-pi-day-digits-of-pi-large
-    std::string pathToNumbersPictures;
+    std::string pathToNumbersImgs;
+    std::string baseNumbersImgPath = "../resources/textures/numbers/processed/";
     for (unsigned int i = 0; i < 9; i ++) {
-        pathToNumbersPictures = "";
-        pathToNumbersPictures += "../resources/textures/numbers/processed/";
-        pathToNumbersPictures += std::to_string(i+1);
-        pathToNumbersPictures += "p.png";
+        pathToNumbersImgs = "";
+        pathToNumbersImgs += baseNumbersImgPath;
+        pathToNumbersImgs += "red/";
+        pathToNumbersImgs += std::to_string(i+1);
+        pathToNumbersImgs += ".png";
 
-        countersImg[i].loadFromFile(pathToNumbersPictures);
+        countersImg[i].loadFromFile(pathToNumbersImgs);
         countersTxtr[i].loadFromImage(countersImg[i]);
         countersSprt[i].setTexture(countersTxtr[i]);
     }
     // add "+" sprite for displaying more then 9 animals
-    countersImg[9].loadFromFile("../resources/textures/numbers/processed/plus.png");
+    countersImg[9].loadFromFile(baseNumbersImgPath + "red/plus.png");
     countersTxtr[9].loadFromImage(countersImg[9]);
     countersSprt[9].setTexture(countersTxtr[9]);
 }
