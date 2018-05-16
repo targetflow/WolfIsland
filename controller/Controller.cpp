@@ -90,16 +90,23 @@ void Controller::execute() {
 }
 
 void Controller::initSimulationParams() {
-    // later this data should be loaded from XML/JSON/FILE.
-    windowTitle = L"Вовчий острів";
-    initNumbOfRabbits = 12;
-    initNumbOfMWolves = 4;
-    initNumbOfWWolves = 3;
-    initNumbOfFences = 5;
+    // load params from JSON
+    FILE* fp = fopen("../config/initParams.json", "r");
+    char readBuffer[65536];
+    rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+    rapidjson::Document d;
+    d.ParseStream(is);
+    fclose(fp);
+
     currentStepNumber = 0;
-    useGUI = true;
-    FPS = 60; // оптимально, щоб комп був в нормі. З дефолтним значенням проц взлітає.
-    delayTimeInSeconds = seconds(1);
+    useGUI = d["generalProgramParams"]["useGUI"].GetBool();
+    initNumbOfRabbits = d["simulationParams"]["numberOfRabbits"].GetUint();
+    initNumbOfMWolves = d["simulationParams"]["numberOfMWolves"].GetUint();
+    initNumbOfWWolves = d["simulationParams"]["numberOfWWolves"].GetUint();
+    initNumbOfFences = d["simulationParams"]["numberOfFences"].GetUint();
+    windowTitle = stringToWstring(d["mainWindowParams"]["windowTitle"].GetString());
+    FPS = d["mainWindowParams"]["FPS"].GetUint(); // 60 оптимально.
+    delayTimeInSeconds = seconds(d["mainWindowParams"]["delayTimeInSeconds"].GetUint());
 }
 
 void Controller::initWindow() {

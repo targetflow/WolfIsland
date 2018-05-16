@@ -6,6 +6,8 @@
 #define CPP_CONTROLLER_H
 
 #include <iostream>
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
 #include "../model/include/Field.h"
 #include "../view/ConsoleView.h"
 #include "../view/GUIView.h"

@@ -1,0 +1,18 @@
+{
+  "simulationParams": {
+    "numberOfRabbits": 12,
+    "numberOfMWolves": 4,
+    "numberOfWWolves": 3,
+    "numberOfFences": 5
+  },
+  "mainWindowParams": {
+    "windowTitle": "Вовчий острів",
+    "FPS": 60,
+    "delayTimeInSeconds": 1
+  },
+  "generalProgramParams": {
+    "useGUI": true
+  }
+}
+
+
