@@ -1,6 +1,7 @@
 //
 // Created by Alex Orlovskyi on 25.04.18.
 //
+//This file describes methods for small specific tasks, that do not concern the point of the project.
 
 #ifndef CPP_UTILS_H
 #define CPP_UTILS_H
