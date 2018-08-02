@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../../utils/utils.h"
 
+//This file describes methods and variables which determine actual behavior of a rabbit in the field.
 class Rabbit: public Animal{
 private:
     int chosenMoveDirection;

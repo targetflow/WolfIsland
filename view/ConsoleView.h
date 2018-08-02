@@ -1,7 +1,7 @@
 //
 // Created by Alex Orlovskyi on 22.04.18.
 //
-
+//This file describes methods that allow you to display the program in console mode.
 #ifndef CPP_CONSOLEVIEW_H
 #define CPP_CONSOLEVIEW_H
 

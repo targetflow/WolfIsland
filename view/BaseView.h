@@ -1,7 +1,7 @@
 //
 // Created by Alex Orlovskyi on 05.05.18.
 //
-
+//This file only initializes one base method, that describe how to show the program.
 #ifndef WOLF_ISLAND_CONSOLE_GAME_BASEVIEW_H
 #define WOLF_ISLAND_CONSOLE_GAME_BASEVIEW_H
 

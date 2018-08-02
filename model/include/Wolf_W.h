@@ -7,6 +7,7 @@
 #include "Wolf.h"
 #include "../../utils/utils.h"
 
+//This file consists of methods that describe the behavior of a female wolf.
 class Wolf_W: public Wolf{
 private:
     int chosenMoveDirection;
