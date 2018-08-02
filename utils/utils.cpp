@@ -2,6 +2,7 @@
 // Created by katya on 24/04/18.
 //
 #include "utils.h"
+
 // returns random number, according to [begin, end] interval
 int random_number(int begin, int end){
     // creates generator that produces non-deterministic random numbers

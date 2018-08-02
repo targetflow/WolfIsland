@@ -1,7 +1,8 @@
 //
 // Created by katya on 20/04/18.
 //
-
+// This file contains information about Cell property - fence presence, describes what kind of Animals
+// can be in one Cell and vector with Cell coordinates.
 #ifndef CPP_CELL_H
 #define CPP_CELL_H
 #include "Wolf_W.h"

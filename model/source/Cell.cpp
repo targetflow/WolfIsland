@@ -4,19 +4,23 @@
 
 #include "../include/Cell.h"
 
+//inserts cell coordinates and set default _isFence value.
 Cell::Cell(std::vector<int> acquiredCoordinates)
 {
     for(int i = 0; i < 2; i++)
     {
-        coordinates.emplace_back(acquiredCoordinates[i]); //pass actual coords here
+        coordinates.emplace_back(acquiredCoordinates[i]); //pass actual coordinates here.
     }
+
     _isFence = false;
 }
 
+//clean Cell and every Cell properties.
 Cell::~Cell()
 {
     coordinates.clear();
     rabbits.clear();
+
 }
 
 void Cell::setFence(bool isFence) {

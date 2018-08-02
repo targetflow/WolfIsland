@@ -1,7 +1,7 @@
 //
 // Created by katya on 20/04/18.
 //
-
+// This file initializes variables, which are related to each of the agents presented in the project
 #ifndef CPP_ANIMAL_H
 #define CPP_ANIMAL_H
 #include <vector>
