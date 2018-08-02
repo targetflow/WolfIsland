@@ -15,11 +15,13 @@ Cell::Cell(std::vector<int> acquiredCoordinates)
     _isFence = false;
 }
 
-//clean Cell and every Cell properties.
+//clean Cell and every Cell property.
 Cell::~Cell()
 {
     coordinates.clear();
     rabbits.clear();
+    wolf_w.clear();
+    wolf_m.clear();
 
 }
 
