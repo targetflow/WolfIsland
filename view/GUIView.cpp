@@ -185,8 +185,7 @@ void GUIView::drawMap() {
         for (int j = 0; j < WIDTH_MAP; j++) {
             if (TileMap[i][j] == '0') {
                 grassSprt.setTextureRect(IntRect(0, 0, 32, 32));
-                grassSprt.setPosition(j * 32, i * 32); // розміщуємо текстури по карті, задаючи конкретну позицію кожній з
-                // них. Якщо без цього, то вся карта буде складатись лиш з одного квадрата 32*32.
+                grassSprt.setPosition(j * 32, i * 32); //place textures on the map, setting a specific position for each of them
                 pWindow->draw(grassSprt);
             }
         }
@@ -195,7 +194,7 @@ void GUIView::drawMap() {
     for (int i = 0; i < 400; i++) {
         if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
             fenceSprt.setTextureRect(IntRect(0, 0, 30, 16));
-            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - щоб огорожа була по центру клітинки.
+            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - in order for the fence to be in the center of the cell.
             pWindow->draw(fenceSprt);
         }
     }
@@ -209,7 +208,7 @@ void GUIView::drawMenu() {
                 menuSprt.setTextureRect(IntRect(0, 0, 32, 32));
                 menuSprt.setPosition(j * 32, i * 32);
                 pWindow->draw(menuSprt);
-            } // виводимо спрайт на екран в поточній заданій позиції (задається вище ^ ^)
+            } // draw sprite in specific position
         }
 }
 
@@ -224,7 +223,7 @@ void GUIView::drawAnimals() {
             index = static_cast<unsigned int>(countOfRabbits-1);
             for (int j = 0; j < countOfRabbits; j++) {
                 rabbitSprt.setTextureRect(IntRect(0, 0, 16, 16));
-                rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - щоб огорожа була по центру клітинки.
+                rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - in order for the fence to be in the center of the cell.
                 pWindow->draw(rabbitSprt);
             }
 
@@ -237,7 +236,7 @@ void GUIView::drawAnimals() {
             pWindow->draw(countersSprt[index]);
         }
 
-        // draw wolvesW
+        // draw female wolf
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
             countOfWolvesW =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
@@ -256,7 +255,7 @@ void GUIView::drawAnimals() {
             pWindow->draw(countersSprt[index]);
         }
 
-        // draw wolvesM
+        // draw male wolf
         if (!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
             countOfWolvesM =
                 static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());

@@ -1,6 +1,7 @@
 //
 // Created by katya on 08/05/18.
 //
+//This file describes the methods that are performed when interacting with the program menu.
 
 #ifndef WOLF_ISLAND_CONSOLE_GAME_MENU_H
 #define WOLF_ISLAND_CONSOLE_GAME_MENU_H
