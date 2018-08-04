@@ -1,9 +1,9 @@
 //
 // Created by Alex Orlovskyi on 21.04.18.
 //
-
 #include "Controller.h"
 
+//performs basic methods for creating a program window
 Controller::Controller() {
     this->field = Field();
     initSimulationParams();
@@ -15,13 +15,20 @@ Controller::~Controller() {
     delete pView;
 }
 
+//controls the execution of the program in console and GUI mode
 void Controller::execute() {
+
+    //variable to indicate 'pause' and 'continue'
     bool keepExecuting = false;
     if (useGUI) {
+        //perform one step when "PLayStep" button is clicked
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
+        //change indicate variable keepExecuting to true when "PlayAuto" so program will be able to work automatically
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
+        //restart program executing whn "Reset" button is pressed
         TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
 
+        //labels to show information about current state of the field
         tgui::Label::Ptr labelCurrentStep;
         tgui::Label::Ptr labelRabbit;
         tgui::Label::Ptr labelWolf_W;
@@ -53,30 +60,39 @@ void Controller::execute() {
             if (keepExecuting) {
                 sleep(delayTimeInSeconds);
                 nextStep();
+
+                //if "PlayAuto" button clicked, text will change to "Зупинити симуляцію"
                 TGUI.get<tgui::Button>("PlayAuto")->setText(L"Зупинити симуляцію");
                 TGUI.get<tgui::Button>("PlayStep")->disable();
                 TGUI.get<tgui::Button>("Reset")->disable();
-            } else {
+            }
+                //if "PlayAuto" button clicked one more time, text will change to "Увімкнути симуляцію"
+            else {
                 TGUI.get<tgui::Button>("PlayAuto")->setText(L"Увімкнути симуляцію");
                 TGUI.get<tgui::Button>("PlayStep")->enable();
                 TGUI.get<tgui::Button>("Reset")->enable();
             }
 
+            //fill "labelCurrentStep" label with text and number of current step
             labelCurrentStep = TGUI.get<tgui::Label>("labelCurrentStep");
             labelCurrentStep->setText(L"Поточний крок: " + std::to_string(currentStepNumber));
 
+            //fill "labelRabbits" label with text and count of rabbit on field
             labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
             labelRabbit->setText(L"Кількість кролів на полі: " + std::to_string(countOfRabbitsOnField()));
             labelRabbit->disable();
 
+            //fill "labelWolf_W" label with text and count of female wolf on field
             labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
             labelWolf_W->setText(L"Кількість вовчиць на полі: " + std::to_string(countOfWolf_WOnField()));
             labelWolf_W->disable();
 
+            //fill "labelWolf_M" label with text and count of male wolf on field
             labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
             labelWolf_M->setText(L"Кількість вовків на полі: " + std::to_string(countOfWolf_MOnField()));
             labelWolf_M->disable();
 
+            //fill "labelFences" label with text and count of fences on field
             labelFences = TGUI.get<tgui::Label>("labelFences");
             labelFences->setText(L"Кількість огорож на полі: " + std::to_string(countOfFencesOnField()));
             labelFences->disable();
@@ -98,6 +114,7 @@ void Controller::initSimulationParams() {
     d.ParseStream(is);
     fclose(fp);
 
+    //extract necessary information from the file
     currentStepNumber = 0;
     useGUI = d["generalProgramParams"]["useGUI"].GetBool();
     initNumbOfRabbits = d["simulationParams"]["numberOfRabbits"].GetUint();
@@ -105,7 +122,7 @@ void Controller::initSimulationParams() {
     initNumbOfWWolves = d["simulationParams"]["numberOfWWolves"].GetUint();
     initNumbOfFences = d["simulationParams"]["numberOfFences"].GetUint();
     windowTitle = stringToWstring(d["mainWindowParams"]["windowTitle"].GetString());
-    FPS = d["mainWindowParams"]["FPS"].GetUint(); // 60 оптимально.
+    FPS = d["mainWindowParams"]["FPS"].GetUint(); // 60 optimally.
     delayTimeInSeconds = seconds(d["mainWindowParams"]["delayTimeInSeconds"].GetUint());
 }
 
@@ -115,6 +132,7 @@ void Controller::initWindow() {
     TGUI.setWindow(window); // Create the gui and attach it to the window
 }
 
+//initializes the program window due to selected playback parameter
 void Controller::initView() {
     if(useGUI) {
         initWindow();
@@ -124,16 +142,20 @@ void Controller::initView() {
     }
 }
 
+//initializes the field
 void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences)
 {
     int index;
+    //variable to indicate if animal was already set on field
     bool animalAcquireHome = false;
 
+    //set some fences to the random cells on field
     for (int i = 0; i < cOfFences; i++) {
         index = random_number(0, 399);
         field.getCells()->at(static_cast<unsigned long>(index)).setFence(true);
     }
 
+    //set some rabbits to the random cells on field
     for (int i = 0; i < nRabbits; i++) {
         while (!animalAcquireHome) {
             index = random_number(0, 399);
@@ -144,6 +166,8 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
         }
         animalAcquireHome = false;
     }
+
+    //set some female wolf to the random cells on field
     for (int i = 0; i < nWWolves; i++) {
         while (!animalAcquireHome) {
             index = random_number(0, 399);
@@ -154,6 +178,8 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
         }
         animalAcquireHome = false;
     }
+
+    //set some male wolf to the random cells on field
     for (int i = 0; i<nMWolves; i++){
         while (!animalAcquireHome) {
             index = random_number(0, 399);
@@ -168,7 +194,7 @@ void Controller::initField(int nRabbits, int nWWolves, int nMWolves, int cOfFenc
     std::cout << "New field initialized." << std::endl;
     displayField();
 }
-
+//clears every animal vector, change fence presence indicator to false and initializes field and parameters one more time
 void Controller::restartField() {
     std::cout << "Restarting field ..." << std::endl;
     for(int index = 0; index < 400; index++) {
@@ -197,20 +223,21 @@ void Controller::nextStep() {
     rabbitSpread();
     Wolf_MMakeOffspring();
     wolfTryToEatOrDie();
-    calculateMoveDecisions(); // фаза прийняття рішень
-    performMoves(); // фаза переходів
+    calculateMoveDecisions(); // decision making phase
+    performMoves(); // moves phase
     currentStepNumber += 1;
 
     std::cout << "Step №" << currentStepNumber << std::endl;
     displayField();
 }
 
+//makes list of the nearest cells where rabbit is available
 std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
-    auto neighbourCells = calculateNeighbourCellsWithoutFences(cellNumb); // (інти) номери доступних клітин з поточної
+    auto neighbourCells = calculateNeighbourCellsWithoutFences(cellNumb); // available cell numbers from the current cell
     std::vector<int> listOfAvailableStepsForWolf_W;
     bool rabbitExplored = false;
     for (auto& cllNmb: neighbourCells) {
-        // якщо є хочаб один заєць на горизонті
+        //if there is at least one rabbit in the nearest cells
         if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
         {
             listOfAvailableStepsForWolf_W.emplace_back(cllNmb);
@@ -223,12 +250,14 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_W(int cellNumb) {
         return neighbourCells;
 }
 
+//makes list of eight closest cells to the current cell
 std::vector<int> Controller::makeListOfAvailableStepsForRabbit(int cellNumb) {
     auto listOfAvailableStepsForRabbit = calculateNeighbourCellsWithoutFences(cellNumb);
     listOfAvailableStepsForRabbit.emplace_back(cellNumb);
     return listOfAvailableStepsForRabbit;
 }
 
+//makes vector from neighbour cell numbers, which do not have a fence
 std::vector<int> Controller::calculateNeighbourCellsWithoutFences(int cellNumb) {
     std::vector<int> listOfNeighbours;
     // lambdas
@@ -237,6 +266,7 @@ std::vector<int> Controller::calculateNeighbourCellsWithoutFences(int cellNumb) 
     auto north = [](int numb) { return numb < 20 ? numb + 380 : numb - 20; };
     auto south = [](int numb) { return numb > 379 ? numb - 380 : numb + 20; };
 
+    //create list of cells where potentially can be fences
     listOfNeighbours.emplace_back(east(cellNumb));
     listOfNeighbours.emplace_back(west(cellNumb));
     listOfNeighbours.emplace_back(north(cellNumb));
@@ -246,27 +276,16 @@ std::vector<int> Controller::calculateNeighbourCellsWithoutFences(int cellNumb) 
     listOfNeighbours.emplace_back(east(north(cellNumb)));
     listOfNeighbours.emplace_back(west(north(cellNumb)));
 
-//    std::cout << "LoN before: ";
-//    for (auto& cllNmb: listOfNeighbours) {
-//        std::cout << cllNmb << " ";
-//    }
-//    std::cout << std::endl;
-
+    //erase cells with fences
     for (auto& cllNmb: listOfNeighbours) {
         if (field.getCells()->at(static_cast<unsigned long>(cllNmb)).isFence()) {
-            // std::cout << "Fence at" << cllNmb << std::endl;
             listOfNeighbours.erase(std::remove(listOfNeighbours.begin(), listOfNeighbours.end(), cllNmb), listOfNeighbours.end());
         }
     }
-
-//    std::cout << "LoN after: ";
-//    for (auto& cllNmb: listOfNeighbours) {
-//        std::cout << cllNmb << " ";
-//    }
-//    std::cout << std::endl;
     return listOfNeighbours;
 }
 
+//decides where the animals go
 void Controller::calculateMoveDecisions()
 {
     std::cout << "Calc start" << std::endl;
@@ -303,6 +322,7 @@ void Controller::calculateMoveDecisions()
     std::cout << "Calc move decisions end" << std::endl;
 }
 
+//performs moves according to chosen paths
 void Controller::performMoves()
 {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++)
@@ -315,52 +335,66 @@ void Controller::performMoves()
             {
                 std::cout << "Curr cell: " << cellNumb << std::endl;
                 std::cout << "Curr v size: " << rabbitVec->size() << std::endl;
-                // якщо заєць вирішує лишитись тут же, то скіпнути виконання поточної ітерації щоб уникнути зайвих операцій
                 int rabbitDecision = rabbit.getChosenMoveDirection();
                 std::cout << "Rabbit decision is: " << rabbitDecision << std::endl;
+                //if rabbit has decided not to go anywhere or has already completed the movement, skip this operation
                 if(rabbitDecision == cellNumb or rabbitDecision < 0)
                     continue;
                 else {
+                    //get list of rabbits from destination cell
                     auto *destRabbitList = field.getCells()->at(static_cast<unsigned long>(rabbitDecision)).getRabbits();
                     std::cout << "Rabbit decision - go to: " << rabbitDecision << std::endl;
                     std::cout << "Dest v size: " << destRabbitList->size() << std::endl;
+                    //move a rabbit
                     destRabbitList->insert(destRabbitList->end(), std::make_move_iterator(rabbitVec->begin()), std::make_move_iterator(rabbitVec->begin()+1));
                     std::cout << "Dest v size after insertion: " << destRabbitList->size() << std::endl;
+                    //erase this rabbit from current cell
                     rabbitVec->erase(rabbitVec->begin(), rabbitVec->begin()+1);
                     std::cout << "Curr v size after deletion: " << rabbitVec->size() << std::endl;
-                    rabbit.setChosenMoveDirection(-2); // впевнитись, що цей кріль вже не буде задіяний в move на поточній ітерації.
+                    rabbit.setChosenMoveDirection(-2);// make sure that this rabbit is no longer involved in the move on the current iteration.
                 }
             }
         }
 
         // Wolf_W
+        //get list of female wolf from current cell
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
         if(!Wolf_WVec->empty()) {
             for (auto itW = Wolf_WVec->begin(); itW != Wolf_WVec->end();) {
+                //get chosen destination from every female wolf
                 auto wolf_w_decision = static_cast<unsigned long>((*itW).getChosenMoveDirection());
+                //if female wolf has decided not to go anywhere or has already completed the movement, skip this operation
                 if (wolf_w_decision == cellNumb or wolf_w_decision < 0) {
                     ++itW;
                     continue;
                 } else {
-                    //додаєм вовчицю в вектор вовчиць по вказаному номеру клітини
+                    //move a female wolf
                     field.getCells()->at(wolf_w_decision).getWolf_W()->emplace_back((*itW));
+                    //make sure that this female wolf is no longer involved in the move on the current iteration.
                     (*itW).setChosenMoveDirection(-2);
+                    //erase from current cell
                     itW = Wolf_WVec->erase(itW);
                 }
             }
         }
 
         //Wolf_M
+        //get list of male wolf from current cell
         auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M();
         if(!Wolf_MVec->empty()) {
             for (auto itM = Wolf_MVec->begin(); itM != Wolf_MVec->end();) {
+                //get chosen destination from every male wolf
                 auto wolf_m_decision = static_cast<unsigned long>((*itM).getChosenMoveDirection());
+                //if male wolf has decided not to go anywhere or has already completed the movement, skip this operation
                 if (wolf_m_decision == cellNumb or wolf_m_decision < 0) {
                     ++itM;
                     continue;
                 } else {
+                    //move a male wolf
                     field.getCells()->at(wolf_m_decision).getWolf_M()->emplace_back((*itM));
+                    //make sure that this male wolf is no longer involved in the move on the current iteration.
                     (*itM).setChosenMoveDirection(-2);
+                    //erase from current cell
                     itM = Wolf_MVec->erase(itM);
                 }
             }
@@ -369,11 +403,15 @@ void Controller::performMoves()
     std::cout << "Perf moves off" << std::endl;
 }
 
+//spreads rabbits
 void Controller::rabbitSpread() {
     for(int cellNumb = 0; cellNumb < 400; cellNumb++) {
+        //pseudo-random generator to decide if rabbit will spread(1==yes)
         if(random_number(1, 5) == 1) {
+            //get list of rabbits from current cell
             auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits();
             if(rabbitVec->size() == 1) {
+                //insert one more rabbit
                 field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->emplace_back(Rabbit());
             }
             else {
@@ -384,6 +422,7 @@ void Controller::rabbitSpread() {
     std::cout << "Rabbit spread off" << std::endl;
 }
 
+//allows the wolf to eat and check if wolf is ready to die
 void Controller::wolfTryToEatOrDie() {
     std::vector<Wolf_W>::iterator itW;
     std::vector<Wolf_M>::iterator itM;
@@ -394,14 +433,19 @@ void Controller::wolfTryToEatOrDie() {
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_W();
         if (!Wolf_WVec->empty()) {
             for (auto& wolf_w: *Wolf_WVec) {
+                // if there are at least one rabbit
                 auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getRabbits();
                 if (!rabbitVec->empty()) {
-                    wolf_w.setHealth(wolf_w.getHealth()+1) ;
+                    //If a wolf eats a rabbit, he will get +1 point to health
+                    wolf_w.setHealth(wolf_w.getHealth()+1);
+                    //the rabbit is dying
                     rabbitVec->pop_back();
                 } else {
+                    //If a wolf hasn't eaten a rabbit, health will decrease by 0.1 points
                     wolf_w.setHealth(static_cast<float>(wolf_w.getHealth() - 0.1));
                 }
             }
+            //if wolf has 0 health point, he will die
             for (itW = Wolf_WVec->begin(); itW != Wolf_WVec->end();) {
                 if ((*itW).getHealth() <= 0.0f) {
                     itW = Wolf_WVec->erase(itW);
@@ -415,14 +459,19 @@ void Controller::wolfTryToEatOrDie() {
         auto Wolf_MVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getWolf_M();
         if (!Wolf_MVec->empty()) {
             for (auto& wolf_m: *Wolf_MVec) {
+                // if there are at least one rabbit
                 auto rabbitVec = field.getCells()->at(static_cast<unsigned long>(cellNumber)).getRabbits();
                 if (!rabbitVec->empty()) {
-                    wolf_m.setHealth(wolf_m.getHealth()+1) ;
+                    //If a wolf eats a rabbit, he will get +1 point to health
+                    wolf_m.setHealth(wolf_m.getHealth()+1);
+                    //the rabbit is dying
                     rabbitVec->pop_back();
                 } else {
+                    //If a wolf hasn't eaten a rabbit, health will decrease by 0.1 points
                     wolf_m.setHealth(static_cast<float>(wolf_m.getHealth() - 0.1));
                 }
             }
+            //if wolf has 0 health point, he will die
             for (itM = Wolf_MVec->begin(); itM != Wolf_MVec->end();) {
                 if ((*itM).getHealth() <= 0.0f) {
                     itM = Wolf_MVec->erase(itM);
@@ -436,10 +485,13 @@ void Controller::wolfTryToEatOrDie() {
 }
 
 std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
+    //get 8 nearest cells from current cell
     auto neighbourCells = calculateNeighbourCellsWithoutFences(cellNumb);
     std::vector<int> listOfAvailableStepsForWolf_M;
+    //variable to indicate if there is at least one female wolf among the nearest cells
     bool Wolf_WExplored = false;
     for (auto& cllNmb: neighbourCells){
+        //if there is at least one female wolf, add this cell to the "available" list
         if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getWolf_W()->empty()){
             listOfAvailableStepsForWolf_M.emplace_back(cllNmb);
             Wolf_WExplored = true;
@@ -448,10 +500,12 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
     if(Wolf_WExplored){
         return listOfAvailableStepsForWolf_M;
     }
-    //якщо не знайшли в одному із восьми квадратів вовчицю, то перевіряєм на наявність кролів, якщо і кролів немає - то повертаєм просто список клітин куди можна піти
+    //if female wolf wasn't explored, try to find rabbits
     else{
+        //variable to indicate if there is at least one rabbit among the nearest cells
         bool rabbitExplored = false;
             for (auto& cllNmb: neighbourCells) {
+                //if there is at least one rabbit, add this cell to the "available" list
                 if (!field.getCells()->at(static_cast<unsigned long>(cllNmb)).getRabbits()->empty())
                 {
                     listOfAvailableStepsForWolf_M.emplace_back(cllNmb);
@@ -461,6 +515,7 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
         if(rabbitExplored){
             return listOfAvailableStepsForWolf_M;
             }
+            //if no test hasn't worked, return the nearest cells
         else{
             return neighbourCells;
             }
@@ -468,6 +523,7 @@ std::vector<int> Controller::makeListOfAvailableStepsForWolf_M(int cellNumb) {
     }
 }
 
+//a method that checks the possibility of making offspring and executes it
 void Controller::Wolf_MMakeOffspring(){
     for (int cellNumb = 0; cellNumb < 399;cellNumb++){
         auto Wolf_WVec = field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W();
@@ -475,19 +531,24 @@ void Controller::Wolf_MMakeOffspring(){
         int Wolf_WSize = static_cast<int>(Wolf_WVec->size());
         int Wolf_MSize = static_cast<int>(Wolf_MVec->size());
         bool wolf_wFound = false;
+        //check if female wolf is in current cell
         if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_W()->empty()){
             wolf_wFound = true;
         }
         bool wolf_mFound = false;
+        //check if male wolf is in current cell
         if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getWolf_M()->empty()){
             wolf_mFound = true;
         }
+        //check if rabbit is in current cell
         bool rabbitFound = false;
         if(!field.getCells()->at(static_cast<unsigned long>(cellNumb)).getRabbits()->empty()){
             rabbitFound = true;
         }
         int BabyCount = 0;
         if(wolf_wFound && wolf_mFound && !rabbitFound){
+
+            //The three tests below check the number of full pairs and the number of children that can be born
             if(Wolf_MSize == Wolf_WSize){
                 BabyCount = Wolf_MSize;
             }
@@ -497,6 +558,7 @@ void Controller::Wolf_MMakeOffspring(){
             if(Wolf_MSize < Wolf_WSize){
                 BabyCount = Wolf_MSize;
             }
+            //randomly decide, who should be born(0== female wolf, 1==male wolf)
             for(int baby = 0; baby < BabyCount; baby++){
                 int gender = random_number(0,1);
                 if(gender == 0){
@@ -512,10 +574,12 @@ void Controller::Wolf_MMakeOffspring(){
     std::cout << "Make Offspring off" << std::endl;
 }
 
+//gets GUI View pointer
 GUIView *Controller::getPGUIView() {
     return dynamic_cast<GUIView *>(pView);
 }
 
+//counts how much rabbits are on the field
 int Controller::countOfRabbitsOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
@@ -524,6 +588,7 @@ int Controller::countOfRabbitsOnField(){
     return count;
 }
 
+//counts how much male wolf are on the field
 int Controller::countOfWolf_MOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
@@ -532,6 +597,7 @@ int Controller::countOfWolf_MOnField(){
     return count;
 }
 
+//counts how much female wolf are on the field
 int Controller::countOfWolf_WOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {
@@ -540,6 +606,7 @@ int Controller::countOfWolf_WOnField(){
     return count;
 }
 
+//counts how much fencess are on the field
 int Controller::countOfFencesOnField(){
     int count=0;
     for(int index = 0; index < 400; index++) {

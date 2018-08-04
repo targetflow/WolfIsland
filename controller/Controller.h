@@ -1,7 +1,7 @@
 //
 // Created by Alex Orlovskyi on 21.04.18.
 //
-
+//This file describes methods that determine how the program behaves, binds all the basic processes to each other and performs the steps in the program.
 #ifndef CPP_CONTROLLER_H
 #define CPP_CONTROLLER_H
 
