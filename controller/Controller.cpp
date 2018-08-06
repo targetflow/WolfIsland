@@ -25,8 +25,8 @@ void Controller::execute() {
         TGUI.get("PlayStep")->connect("clicked", &Controller::nextStep, this);
         //change indicate variable keepExecuting to true when "PlayAuto" so program will be able to work automatically
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
-        //restart program executing whn "Reset" button is pressed
-        TGUI.get("Reset")->connect("clicked", &Controller::restartField, this);
+        //restart program executing when "Reset simulation" button is pressed
+        TGUI.get("Reset simulation")->connect("clicked", &Controller::restartField, this);
 
         //labels to show information about current state of the field
         tgui::Label::Ptr labelCurrentStep;
@@ -62,39 +62,39 @@ void Controller::execute() {
                 nextStep();
 
                 //if "PlayAuto" button clicked, text will change to "Зупинити симуляцію"
-                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Зупинити симуляцію");
+                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Stop simulation");
                 TGUI.get<tgui::Button>("PlayStep")->disable();
                 TGUI.get<tgui::Button>("Reset")->disable();
             }
                 //if "PlayAuto" button clicked one more time, text will change to "Увімкнути симуляцію"
             else {
-                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Увімкнути симуляцію");
+                TGUI.get<tgui::Button>("PlayAuto")->setText(L"Auto simulation");
                 TGUI.get<tgui::Button>("PlayStep")->enable();
                 TGUI.get<tgui::Button>("Reset")->enable();
             }
 
             //fill "labelCurrentStep" label with text and number of current step
             labelCurrentStep = TGUI.get<tgui::Label>("labelCurrentStep");
-            labelCurrentStep->setText(L"Поточний крок: " + std::to_string(currentStepNumber));
+            labelCurrentStep->setText(L"Current step: " + std::to_string(currentStepNumber));
 
             //fill "labelRabbits" label with text and count of rabbit on field
             labelRabbit = TGUI.get<tgui::Label>("labelRabbits");
-            labelRabbit->setText(L"Кількість кролів на полі: " + std::to_string(countOfRabbitsOnField()));
+            labelRabbit->setText(L"Count of rabbits: " + std::to_string(countOfRabbitsOnField()));
             labelRabbit->disable();
 
-            //fill "labelWolf_W" label with text and count of female wolf on field
+            //fill "labelWolf_W" label with text and count of female wolves on field
             labelWolf_W = TGUI.get<tgui::Label>("labelWolf_W");
-            labelWolf_W->setText(L"Кількість вовчиць на полі: " + std::to_string(countOfWolf_WOnField()));
+            labelWolf_W->setText(L"Count of female wolves: " + std::to_string(countOfWolf_WOnField()));
             labelWolf_W->disable();
 
-            //fill "labelWolf_M" label with text and count of male wolf on field
+            //fill "labelWolf_M" label with text and count of male wolves on field
             labelWolf_M = TGUI.get<tgui::Label>("labelWolf_M");
-            labelWolf_M->setText(L"Кількість вовків на полі: " + std::to_string(countOfWolf_MOnField()));
+            labelWolf_M->setText(L"Count of male wolves: " + std::to_string(countOfWolf_MOnField()));
             labelWolf_M->disable();
 
             //fill "labelFences" label with text and count of fences on field
             labelFences = TGUI.get<tgui::Label>("labelFences");
-            labelFences->setText(L"Кількість огорож на полі: " + std::to_string(countOfFencesOnField()));
+            labelFences->setText(L"Count of fences: " + std::to_string(countOfFencesOnField()));
             labelFences->disable();
 
             TGUI.draw(); // Draw all widgets
