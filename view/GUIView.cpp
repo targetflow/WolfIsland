@@ -35,7 +35,7 @@ void GUIView::initMenu() {
     // TGUI menu buttons
     // Perform next step button
     pTgBtnPlayStep = tgui::Button::create();
-    pTgBtnPlayStep->setText(L"Здійснити крок");
+    pTgBtnPlayStep->setText(L"Step");
     pTgBtnPlayStep->setTextSize(15);
     pTgBtnPlayStep->setSize(Vector2f(180, 50));
     pTgBtnPlayStep->setPosition(Vector2f(680, 55));
@@ -43,7 +43,7 @@ void GUIView::initMenu() {
 
     //Perform auto button
     pTgBtnPlayAuto = tgui::Button::create();
-    pTgBtnPlayAuto->setText(L"Увімкнути симуляцію");
+    pTgBtnPlayAuto->setText(L"Auto simulation");
     pTgBtnPlayAuto->setTextSize(15);
     pTgBtnPlayAuto->setSize(Vector2f(180, 50));
     pTgBtnPlayAuto->setPosition(Vector2f(680, 117));
@@ -51,17 +51,17 @@ void GUIView::initMenu() {
 
     //Perform reset button
     pTgBtnReset = tgui::Button::create();
-    pTgBtnReset->setText(L"Скинути симуляцію");
+    pTgBtnReset->setText(L"Reset simulation");
     pTgBtnReset->setTextSize(15);
     pTgBtnReset->setSize(Vector2f(180, 50));
     pTgBtnReset->setPosition(Vector2f(680, 179));
-    pTGUI->add(pTgBtnReset, "Reset");
+    pTGUI->add(pTgBtnReset, "Reset simulation");
 
     // TGUI labels
     // menu
     LabelMenu = tgui::Label::create();
     LabelMenu->setPosition(743, 20);
-    LabelMenu->setText(L"Меню");
+    LabelMenu->setText(L"Menu");
     LabelMenu->setTextColor(sf::Color::Yellow);
     LabelMenu->setTextStyle(sf::Text::Underlined);
     LabelMenu->setFont(labelsFont);
@@ -71,7 +71,7 @@ void GUIView::initMenu() {
     // indicators
     LabelIndicators = tgui::Label::create();
     LabelIndicators->setPosition(725, 250);
-    LabelIndicators->setText(L"Показники");
+    LabelIndicators->setText(L"Indicators");
     LabelIndicators->setTextColor(sf::Color::Yellow);
     LabelIndicators->setTextStyle(sf::Text::Underlined);
     LabelIndicators->setFont(labelsFont);
