@@ -22,6 +22,7 @@
 #define CPP_GUIVIEW_H
 
 #include <iostream>
+
 #include <TGUI/TGUI.hpp>
 #include <TGUI/Font.hpp>
 #include "../model/include/Field.h"

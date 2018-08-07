@@ -20,6 +20,7 @@
 
 #ifndef SFML_TEST_MAP_H
 #define SFML_TEST_MAP_H
+
 #include <SFML/Graphics.hpp>
 
 const int HEIGHT_MAP = 28;

@@ -22,6 +22,7 @@
 
 #ifndef CPP_UTILS_H
 #define CPP_UTILS_H
+
 #include <random>
 #include <codecvt>
 #include <iomanip>

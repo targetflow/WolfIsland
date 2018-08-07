@@ -20,9 +20,9 @@
 
 #ifndef CPP_WOLF_H
 #define CPP_WOLF_H
+
 #include "Animal.h"
 
-//This file describe wolf-like animal behaviour.
 class Wolf: public Animal{
 public:
     virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps) = 0;

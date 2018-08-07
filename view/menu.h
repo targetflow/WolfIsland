@@ -21,10 +21,9 @@
 #ifndef WOLF_ISLAND_CONSOLE_GAME_MENU_H
 #define WOLF_ISLAND_CONSOLE_GAME_MENU_H
 
-
 #include "SFML/Graphics.hpp"
-using namespace sf;
 
+using namespace sf;
 
 #define MAX_NUMBER_OF_ITEMS 3
 

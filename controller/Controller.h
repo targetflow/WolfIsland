@@ -22,6 +22,7 @@
 #define CPP_CONTROLLER_H
 
 #include <iostream>
+
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
 #include "../model/include/Field.h"
@@ -29,7 +30,6 @@
 #include "../view/GUIView.h"
 #include "../view/BaseView.h"
 #include "../utils/utils.h"
-
 
 class Controller {
 public:

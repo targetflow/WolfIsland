@@ -20,9 +20,11 @@
 
 #ifndef CPP_FIELD_H
 #define CPP_FIELD_H
+
+#include <vector>
+
 #include "Cell.h"
 #include "Rabbit.h"
-#include <vector>
 
 class Field{
 private:

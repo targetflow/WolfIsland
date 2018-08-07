@@ -22,6 +22,7 @@
 #define CPP_CONSOLEVIEW_H
 
 #include <iostream>
+
 #include "../model/include/Field.h"
 #include "BaseView.h"
 

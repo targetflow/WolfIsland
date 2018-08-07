@@ -20,10 +20,10 @@
 
 #ifndef CPP_WOLF_M_H
 #define CPP_WOLF_M_H
+
 #include "Wolf.h"
 #include "../../utils/utils.h"
 
-//This file consists of methods that describe the behavior of a male wolf.
 class Wolf_M: public Wolf{
 private:
     float health;

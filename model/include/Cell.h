@@ -20,10 +20,12 @@
 
 #ifndef CPP_CELL_H
 #define CPP_CELL_H
+
+#include <vector>
+
 #include "Wolf_W.h"
 #include "Wolf_M.h"
 #include "Rabbit.h"
-#include <vector>
 
 class Cell{
 private:

@@ -20,12 +20,13 @@
 
 #ifndef CPP_RABBIT_H
 #define CPP_RABBIT_H
-#include "Animal.h"
+
 #include <vector>
 #include <iostream>
+
+#include "Animal.h"
 #include "../../utils/utils.h"
 
-//This file describes methods and variables which determine actual behavior of a rabbit in the field.
 class Rabbit: public Animal{
 private:
     int chosenMoveDirection;
