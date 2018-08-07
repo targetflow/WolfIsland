@@ -27,16 +27,19 @@
 #include "Animal.h"
 #include "../../utils/utils.h"
 
+// Rabbit - class for rabbit-agents, that describe their common properties
 class Rabbit: public Animal{
 private:
+    // selected, by some properties, the path to which the rabbit choose to go
     int chosenMoveDirection;
 public:
     Rabbit();
     ~Rabbit();
+    // chooses on which cell from the list of currently available cells
+    // on the field to move at the next step
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);
-    void spread();
 protected:
 };
 #endif //CPP_RABBIT_H

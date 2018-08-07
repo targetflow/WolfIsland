@@ -26,8 +26,11 @@
 #include "Cell.h"
 #include "Rabbit.h"
 
+// Field - class which is responsible for the creation of the field and the determination of the coordinates
+// of each cell on the field
 class Field{
 private:
+    // contains cells that fill the field
     std::vector<Cell> cells;
 public:
     Field();
