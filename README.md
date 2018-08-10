@@ -3,7 +3,7 @@
 
 <h1 align="center">
   <br>
-  <img src="https://github.com/path-to/logo.png" alt="WolfIsland" width="160">
+  <img src="https://github.com/targetflow/WolfIsland/blob/master/resources/logo/logowolf.ico" alt="WolfIsland" width="160">
 </h1>
 
 <h4 align="center">A desktop app for WolfIsland environment modeling based on <a href="https://www.sfml-dev.org" target="_blank">SFML</a>.</h4>
@@ -14,7 +14,7 @@ watch for changes in their population.
 
 ## Demo
 
-![wolf-island-demo](https://github.com/path-to/X.gif)
+![wolf-island-demo](https://github.com/targetflow/WolfIsland/blob/master/resources/gif/wolfisland-gif.gif)
 
 ## Motivation
 The project exists in purpose to show the ecosystem of the island and what is happening there, 
