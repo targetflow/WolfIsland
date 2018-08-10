@@ -9,7 +9,7 @@
 <h4 align="center">A desktop app for WolfIsland environment modeling based on <a href="https://www.sfml-dev.org" target="_blank">SFML</a>.</h4>
 
 
-Simulate artificial the life of animals in closed environment by changing the parameters and 
+Simulate artificial life of animals in closed environment by changing the parameters and 
 watch for changes in their population.
 
 ## Demo
