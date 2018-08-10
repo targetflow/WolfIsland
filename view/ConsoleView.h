@@ -31,13 +31,11 @@ class ConsoleView: public BaseView {
 public:
     explicit ConsoleView(Field* _pField);
     ~ConsoleView() override;
+
     // displays all game-window elements
     void displayField() override;
 
 private:
-    // field pointer for easier use in game displaying
-    Field* pField;
+    Field* pField; // field pointer for easier use in game displaying
 };
-
-
 #endif //CPP_CONSOLEVIEW_H

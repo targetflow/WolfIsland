@@ -167,9 +167,14 @@ void GUIView::initFieldTextures() {
 
     // wolfW
     // texture variants:
-    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Multispectral-Gem-Howling-Wolf-16x17.png"); // райдужна - так собі видно
-    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Crescent-Moon-Wolf-16x17.png"); // "вою на луну" - взагалі не видно
-    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/dibujo-26-16x17.png"); // так собі, сіре на зеленому не дуже
+    // райдужна - так собі видно:
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Multispectral-Gem-Howling-Wolf-16x17.png");
+
+    // "вою на луну" - взагалі не видно
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/Crescent-Moon-Wolf-16x17.png");
+
+    // так собі, сіре на зеленому не дуже
+    // wolfWImg.loadFromFile("../resources/textures/WolfW/processed/dibujo-26-16x17.png");
     wolfWImg.loadFromFile("../resources/textures/WolfW/processed/blankwolfhead2-16x17.png");
     wolfWTxtr.loadFromImage(wolfWImg);
     wolfWSprt.setTexture(wolfWTxtr);
@@ -189,6 +194,7 @@ void GUIView::initFieldTextures() {
         countersTxtr[i].loadFromImage(countersImg[i]);
         countersSprt[i].setTexture(countersTxtr[i]);
     }
+
     // add "+" sprite for displaying more then 9 animals
     countersImg[9].loadFromFile(baseNumbersImgPath + "red/plus.png");
     countersTxtr[9].loadFromImage(countersImg[9]);
@@ -201,7 +207,8 @@ void GUIView::drawMap() {
         for (int j = 0; j < WIDTH_MAP; j++) {
             if (TileMap[i][j] == '0') {
                 grassSprt.setTextureRect(IntRect(0, 0, 32, 32));
-                grassSprt.setPosition(j * 32, i * 32); //place textures on the map, setting a specific position for each of them
+                grassSprt.setPosition(j * 32, i * 32); //place textures on the map,
+                                                       //setting a specific position for each of them
                 pWindow->draw(grassSprt);
             }
         }
@@ -210,7 +217,8 @@ void GUIView::drawMap() {
     for (int i = 0; i < 400; i++) {
         if (pField->getCells()->at(static_cast<unsigned long>(i)).isFence()) {
             fenceSprt.setTextureRect(IntRect(0, 0, 30, 16));
-            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - in order for the fence to be in the center of the cell.
+            fenceSprt.setPosition((i%20) * 32, (i/20) * 32 + 7); // +7 - in order for the fence to be in the center
+                                                                 // of the cell.
             pWindow->draw(fenceSprt);
         }
     }
@@ -239,7 +247,8 @@ void GUIView::drawAnimals() {
             index = static_cast<unsigned int>(countOfRabbits-1);
             for (int j = 0; j < countOfRabbits; j++) {
                 rabbitSprt.setTextureRect(IntRect(0, 0, 16, 16));
-                rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - in order for the fence to be in the center of the cell.
+                rabbitSprt.setPosition((i%20) * 32, (i/20) * 32); // +7 - in order for the fence to be in the center
+                                                                  // of the cell.
                 pWindow->draw(rabbitSprt);
             }
 

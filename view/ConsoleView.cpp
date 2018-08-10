@@ -27,11 +27,10 @@ ConsoleView::ConsoleView(Field *_pField) {
 ConsoleView::~ConsoleView() = default;
 
 void ConsoleView::displayField() {
-    // variable that displays what is in the cell
-    std::string fieldView;
-    // variable that fill the cell with needed content
-    std::string cellContent;
+    std::string fieldView; // variable that displays what is in the cell
+    std::string cellContent; // variable that fill the cell with needed content
     int countOfRabbits, countOfWolvesW, countOfWolvesM;
+
     for (int i = 0; i < 400; i++) {
         //construct Cell contents
         // fill cell, that contain fence with "F" content
@@ -46,6 +45,7 @@ void ConsoleView::displayField() {
                     cellContent += "R";
                 }
             }
+
             // fill cell, that contain female wolf with "W" content
             if(!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->empty()) {
                 countOfWolvesW = static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_W()->size());
@@ -53,6 +53,7 @@ void ConsoleView::displayField() {
                     cellContent += "W";
                 }
             }
+
             // fill cell, that contain male wolf with "M" content
             if(!pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->empty()) {
                 countOfWolvesM = static_cast<int>(pField->getCells()->at(static_cast<unsigned long>(i)).getWolf_M()->size());
@@ -60,6 +61,7 @@ void ConsoleView::displayField() {
                     cellContent += "M";
                 }
             }
+
             // fill empty cell with " " content
             if (cellContent.empty()) {
                 cellContent = " ";

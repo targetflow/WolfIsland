@@ -25,6 +25,7 @@
 class BaseView {
  public:
     virtual ~BaseView(){}
+
     // displays all game-window elements
     virtual void displayField() = 0;
  protected:
