@@ -1,9 +1,20 @@
-# :wolf: Wolf Island - environments modeling software 
-Build the life of animals in Wolf Island by changing the parameters and watch for changes in population
+# :wolf: WolfIsland
+[![cpp-standard-style](https://img.shields.io/badge/code%20style-Google-brightgreen.svg?style=flat)](https://google.github.io/styleguide/cppguide.html)
+
+<h1 align="center">
+  <br>
+  <img src="https://github.com/path-to/logo.png" alt="WolfIsland" width="160">
+</h1>
+
+<h4 align="center">A desktop app for WolfIsland environment modeling based on <a href="https://www.sfml-dev.org" target="_blank">SFML</a>.</h4>
+
+
+Simulate artificial the life of animals in closed environment by changing the parameters and 
+watch for changes in their population.
 
 ## Demo
 
-TBD
+![wolf-island-demo](https://github.com/path-to/X.gif)
 
 ## Motivation
 The project exists in purpose to show the ecosystem of the island and what is happening there, 
