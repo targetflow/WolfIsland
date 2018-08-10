@@ -22,7 +22,7 @@
 #define CPP_WOLF_W_H
 
 #include "Wolf.h"
-#include "../../../utils/utils.h"
+#include "../../utils/utils.h"
 
 // Wolf_W - class for female wolf-agents, that describe their common properties
 class Wolf_W: public Wolf{

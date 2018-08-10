@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  =========================================================================== */
 
-#include "controller/Controller.h"
+#include "src/controller/Controller.h"
 
 int main() {
     // WolfIsland Simulation is fully managed by its Controller, so we need one to get it started.

@@ -22,7 +22,7 @@
 #define CPP_WOLF_M_H
 
 #include "Wolf.h"
-#include "../../../utils/utils.h"
+#include "../../utils/utils.h"
 
 // Wolf_M - class for male wolf-agents, that describe their common properties
 class Wolf_M: public Wolf {

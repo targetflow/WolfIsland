@@ -25,7 +25,7 @@
 #include <iostream>
 
 #include "Animal.h"
-#include "../../../utils/utils.h"
+#include "../../utils/utils.h"
 
 // Rabbit - class for rabbit-agents, that describes their common properties
 class Rabbit: public Animal {
