@@ -21,8 +21,9 @@
 #include "controller/Controller.h"
 
 int main() {
+    // WolfIsland Simulation is fully managed by its Controller, so we need one to get it started.
     Controller controller;
-    controller.execute();
+    controller.execute(); // main delegates simulation execution to controller
 }
 
 
