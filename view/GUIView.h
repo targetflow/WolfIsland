@@ -31,12 +31,13 @@
 
 using namespace sf;
 
+// GUIView - class for GUI mode game presentation
 class GUIView: public BaseView {
 public:
     explicit GUIView(Field *_pField, RenderWindow *_pWindow, tgui::Gui *_pTGUI);
     ~GUIView() override;
 
-
+    // displays all game-window elements
     void displayField() override;
 private:
     Field* pField;
@@ -49,25 +50,25 @@ private:
     Texture grassTxtr; // field texture
     Image grassImg; // picture of grass for the field
     Sprite fenceSprt; // fence sprite
-    Texture fenceTxtr;
-    Image fenceImg;
+    Texture fenceTxtr; // fence texture
+    Image fenceImg; // fence image
     Sprite rabbitSprt; // rabbit sprite
-    Texture rabbitTxtr;
-    Image rabbitImg;
+    Texture rabbitTxtr; // rabbit texture
+    Image rabbitImg; // rabbit image
     Sprite wolfMSprt; // male wolf sprite
-    Texture wolfMTxtr;
-    Image wolfMImg;
+    Texture wolfMTxtr; // male wolf texture
+    Image wolfMImg; // male wolf image
     Sprite wolfWSprt; // female wolf sprite
-    Texture wolfWTxtr;
-    Image wolfWImg;
+    Texture wolfWTxtr; // female wolf texture
+    Image wolfWImg; // female wolf image
     Sprite menuSprt; // menu sprite
-    Texture menuTxtr;
-    Image menuImg;
+    Texture menuTxtr; // menu texture
+    Image menuImg; // menu image
     Sprite countersSprt[10]; // digits sprite
-    Texture countersTxtr[10];
-    Image countersImg[10];
+    Texture countersTxtr[10]; // digits texture
+    Image countersImg[10]; // digits images
 
-//buttons and labels initialization
+    // buttons and labels initialization
     tgui::Button::Ptr pTgBtnPlayStep;
     tgui::Button::Ptr pTgBtnPlayAuto;
     tgui::Button::Ptr pTgBtnReset;
@@ -79,11 +80,11 @@ private:
     tgui::Label::Ptr LabelFences;
     tgui::Label::Ptr LabelCurrentStep;
 
-//sets labels and buttons to the menu and fills it with textures
+    // sets labels and buttons to the menu and fills it with textures
     void initMenu();
     void initFieldTextures();
 
-//draws all simulation window
+    // draws all game elements
     void drawMap();
     void drawMenu();
     void drawAnimals();

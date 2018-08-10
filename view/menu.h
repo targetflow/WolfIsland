@@ -27,12 +27,14 @@ using namespace sf;
 
 #define MAX_NUMBER_OF_ITEMS 3
 
+// Menu - class to control interaction with the menu
 class Menu
 {
 public:
     Menu(float width, float height);
     ~Menu();
 
+    // draws all menu items
     void draw(sf::RenderWindow &window);
     void MoveUp();
     void MoveDown();
