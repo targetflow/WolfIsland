@@ -27,14 +27,19 @@
 #include "Wolf_M.h"
 #include "Rabbit.h"
 
-// This file contains information about Cell property - fence presence, describes what kind of Animals
-// can be in one Cell and vector with Cell coordinates.
+// Cell - a class that describes the contents of each cell(400) in field(20x20), its coordinates
+// and animals that live on each of them
 class Cell{
 private:
+    // contains valid cell coordinates
     std::vector <int> coordinates;
+    // contains rabbit-objects who now live in current cell
     std::vector <Rabbit> rabbits;
+    // contains female wolf-objects who now live in current cell
     std::vector <Wolf_W> wolf_w;
+    // contains male wolf-objects who now live in current cell
     std::vector <Wolf_M> wolf_m;
+    // indicates the presence of the fence in current cell
     bool _isFence;
 
 public:
