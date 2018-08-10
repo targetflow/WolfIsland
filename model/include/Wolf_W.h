@@ -27,18 +27,19 @@
 // Wolf_W - class for female wolf-agents, that describe their common properties
 class Wolf_W: public Wolf{
 private:
-    // contains how much health this agent has now (if < 0 - it dies)
-    int chosenMoveDirection;
-    // selected, by some properties, the path to which the wolf choose to go
-    float health;
+    float health; // contains how much health this agent has now (if < 0 - it dies)
+    int chosenMoveDirection; // path (cell numb), which is chosen by the Wolf_M (according to some properties) to go
+
 public:
     Wolf_W();
     ~Wolf_W();
     float getHealth();
     void setHealth(float _health);
+
     // chooses on which cell from the list of currently available cells
     // on the field to move at the next step
     int chooseMoveDirection(std::vector<int> listOfAvailableSteps);
+
     int getChosenMoveDirection();
     void setChosenMoveDirection(int direction);
 protected:

@@ -31,16 +31,11 @@
 // and animals that live on each of them
 class Cell{
 private:
-    // contains valid cell coordinates
-    std::vector <int> coordinates;
-    // contains rabbit-objects who now live in current cell
-    std::vector <Rabbit> rabbits;
-    // contains female wolf-objects who now live in current cell
-    std::vector <Wolf_W> wolf_w;
-    // contains male wolf-objects who now live in current cell
-    std::vector <Wolf_M> wolf_m;
-    // indicates the presence of the fence in current cell
-    bool _isFence;
+    std::vector <int> coordinates; // contains valid cell coordinates
+    std::vector <Rabbit> rabbits; // contains rabbit-objects who now live in current cell
+    std::vector <Wolf_W> wolf_w; // contains female wolf-objects who now live in current cell
+    std::vector <Wolf_M> wolf_m; // contains male wolf-objects who now live in current cell
+    bool _isFence; // indicates the presence of the fence in current cell
 
 public:
     Cell(std::vector <int> acquiredCoordinates);

@@ -24,15 +24,14 @@
 #include "Animal.h"
 
 // Wolf - abstract base class for every wolf-agent in a model.
-class Wolf: public Animal{
+class Wolf: public Animal {
 public:
     // chooses on which cell from the list of currently available cells
     // on the field to move at the next step
     virtual int chooseMoveDirection(std::vector<int> listOfAvailableSteps) = 0;
+
 protected:
-    // contains how much health this agent has now (if < 0 - it dies)
-    float health;
-    // selected, by some properties, the path to which the wolf choose to go
-    int chosenMoveDirection = -1;
+    float health; // contains how much health this agent has now (if < 0 - it dies)
+    int chosenMoveDirection = -1; // path (cell numb), which is chosen by the wolf (according to some properties) to go
 };
 #endif //CPP_WOLF_H

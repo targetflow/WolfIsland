@@ -28,14 +28,15 @@
 
 // Field - class which is responsible for the creation of the field and the determination of the coordinates
 // of each cell on the field
-class Field{
+class Field {
 private:
-    // contains cells that fill the field
-    std::vector<Cell> cells;
+    std::vector<Cell> cells; // contains cells that fill the field
+
 public:
     Field();
     ~Field();
     std::vector<Cell>* getCells();
+
 protected:
 };
 

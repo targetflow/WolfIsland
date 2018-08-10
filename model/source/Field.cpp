@@ -25,9 +25,11 @@ Field::Field()
     for(int i = 0; i < 400; i++)
     {
         std::vector <int> acquiredCoordinates;
+
         // calculates actual cell coordinates
         acquiredCoordinates.emplace_back((i/20) + 1);
         acquiredCoordinates.emplace_back((i%20) + 1);
+
         // add to every cell in vector of cells coordinates that correspond to the placement on the field
         cells.emplace_back(Cell(acquiredCoordinates));
     }
