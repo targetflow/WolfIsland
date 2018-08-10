@@ -71,7 +71,7 @@ void GUIView::initMenu() {
     pTgBtnReset->setTextSize(15);
     pTgBtnReset->setSize(Vector2f(180, 50));
     pTgBtnReset->setPosition(Vector2f(680, 179));
-    pTGUI->add(pTgBtnReset, "Reset simulation");
+    pTGUI->add(pTgBtnReset, "ResetSimulation");
 
     // TGUI labels
     // menu

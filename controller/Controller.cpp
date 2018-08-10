@@ -43,7 +43,7 @@ void Controller::execute() {
         //change indicate variable keepExecuting to true when "PlayAuto" so program will be able to work automatically
         TGUI.get("PlayAuto")->connect("clicked", [&keepExecuting](bool){ keepExecuting = !keepExecuting;}, keepExecuting);
         //restart program executing when "Reset simulation" button is pressed
-        TGUI.get("Reset simulation")->connect("clicked", &Controller::restartField, this);
+        TGUI.get("ResetSimulation")->connect("clicked", &Controller::restartField, this);
 
         //labels to show information about current state of the field
         tgui::Label::Ptr labelCurrentStep;
@@ -81,13 +81,13 @@ void Controller::execute() {
                 //if "PlayAuto" button clicked, text will change to "Зупинити симуляцію"
                 TGUI.get<tgui::Button>("PlayAuto")->setText(L"Stop simulation");
                 TGUI.get<tgui::Button>("PlayStep")->disable();
-                TGUI.get<tgui::Button>("Reset")->disable();
+                TGUI.get<tgui::Button>("ResetSimulation")->disable();
             }
                 //if "PlayAuto" button clicked one more time, text will change to "Увімкнути симуляцію"
             else {
                 TGUI.get<tgui::Button>("PlayAuto")->setText(L"Auto simulation");
                 TGUI.get<tgui::Button>("PlayStep")->enable();
-                TGUI.get<tgui::Button>("Reset")->enable();
+                TGUI.get<tgui::Button>("ResetSimulation")->enable();
             }
 
             //fill "labelCurrentStep" label with text and number of current step
