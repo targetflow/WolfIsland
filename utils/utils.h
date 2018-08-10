@@ -29,6 +29,7 @@
 
 // selects one random number from a given interval
 int random_number(int begin, int end);
+
 // converts string to wstring
 std::wstring stringToWstring(const std::string& t_str);
 

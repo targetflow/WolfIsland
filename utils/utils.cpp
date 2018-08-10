@@ -23,8 +23,10 @@
 int random_number(int begin, int end){
     // creates generator that produces non-deterministic random numbers
     std::random_device rd;
+
     // Standard mersenne_twister_engine seeded with rd()
     std::mt19937 rng(rd());
+
     // Produces random integer values, uniformly distributed on the closed interval [a, b]
     std::uniform_int_distribution<int> uni(begin, end);
     return uni(rng);
