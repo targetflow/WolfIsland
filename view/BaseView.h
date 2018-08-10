@@ -21,9 +21,11 @@
 #ifndef WOLF_ISLAND_CONSOLE_GAME_BASEVIEW_H
 #define WOLF_ISLAND_CONSOLE_GAME_BASEVIEW_H
 
+// BaseView - abstract base class for game presentation
 class BaseView {
  public:
     virtual ~BaseView(){}
+    // displays all game-window elements
     virtual void displayField() = 0;
  protected:
     BaseView(){}

@@ -26,14 +26,16 @@
 #include "../model/include/Field.h"
 #include "BaseView.h"
 
+// ConsoleView - class for console mode game presentation
 class ConsoleView: public BaseView {
 public:
     explicit ConsoleView(Field* _pField);
     ~ConsoleView() override;
-
+    // displays all game-window elements
     void displayField() override;
 
 private:
+    // field pointer for easier use in game displaying
     Field* pField;
 };
 
