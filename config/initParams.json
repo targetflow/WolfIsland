@@ -6,7 +6,7 @@
     "numberOfFences": 5
   },
   "mainWindowParams": {
-    "windowTitle": "Вовчий острів",
+    "windowTitle": "Wolf Island",
     "FPS": 60,
     "delayTimeInSeconds": 1
   },
