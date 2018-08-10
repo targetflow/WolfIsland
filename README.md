@@ -23,7 +23,12 @@ positive and harmful changes in the population of animals that live there.
 
 ## Features
 
-TBD
+- [x] Step-by-step simulation
+- [x] Auto simulation
+- [x] 1-click simulation restart
+- [x] Ease of agent counting in the field
+- [x] Settings editing via external .json file
+- [ ] Feel free to add more stuff. Look at [open issues](https://github.com/targetflow/WolfIsland/issues) 
 
 ## Getting Started
 
