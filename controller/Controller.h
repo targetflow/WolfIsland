@@ -42,7 +42,8 @@ public:
 
     // controls the execution of the program in console and GUI mode
     void execute();
-    //makes list of eight closest cells from the current cell
+
+    //makes list of closest cells from the current cell (which are not blocked by fences)
     std::vector<int> makeListOfAvailableStepsForRabbit(int cellNumb);
 
     // makes list of the nearest cells where rabbit is available
@@ -50,62 +51,61 @@ public:
 
     // makes list of the nearest cells where at least one female wolf or rabbit is available
     std::vector<int> makeListOfAvailableStepsForWolf_M(int cellNumb);
-    GUIView* getPGUIView();
+
+    GUIView* getPGUIView(); // pointer which helps us to call GUIView from Controller
 private:
-    Field field;
-    sf::RenderWindow window;
-    tgui::Gui TGUI;
-    BaseView* pView;
+    Field field; // main simulation field
+    sf::RenderWindow window;  // main window
+    tgui::Gui TGUI; // TGUI elements controller
+    BaseView* pView; // pointer which helps us to call gui/console view according to user's choise made in config
 
     // init parameters
     int currentStepNumber;
     String windowTitle;
-    // contains count of rabbits on field
-    int initNumbOfRabbits;
-    // contains count of male wolves on field
-    int initNumbOfMWolves;
-    // contains count of male wolves on field
-    int initNumbOfWWolves;
-    // contains count of fences on field
-    int initNumbOfFences;
-    // indicates play mode (GUI or console)
-    bool useGUI;
-    // contains frame rate
-    unsigned int FPS;
-    // contains performance delay in seconds
-    Time delayTimeInSeconds;
+    int initNumbOfRabbits; // contains count of rabbits on field
+    int initNumbOfMWolves; // contains count of male wolves on field
+    int initNumbOfWWolves; // contains count of male wolves on field
+    int initNumbOfFences; // contains count of fences on field
+    bool useGUI; // indicates play mode (GUI or console)
+    unsigned int FPS; // contains simulation's frame rate
+    Time delayTimeInSeconds; // contains performance delay in seconds
 
     // fill basic simulation parameters by extracting necessary information from the file
     void initSimulationParams();
+
     // creates the gui and attach it to the window
     void initWindow();
+
     // initializes the field with counts of animals and fences
     void initField(int nRabbits, int nWWolves, int nMWolves, int cOfFences);
-    // clears current game data and initializes field and parameters one more time
+
+    // clears current game data and initializes field and parameters one more time from config.initParams.json
     void restartField();
-    // displays field
+
+    // draw all field elements and display it on output channel (monitor)
     void displayField();
-    // performs next step in program
+
+    // performs next step in simulation
     void nextStep();
 
     // moves
-
     // makes vector from neighbour cell numbers, which do not have a fence
     std::vector<int> calculateNeighbourCellsWithoutFences(int cellNumb);
-    // decides where the animals should go
+
+    // decides where the animal agents should go at next step
     void calculateMoveDecisions();
-    // performs moves according to chosen paths
+
+    // performs moves for agents according to chosen paths
     void performMoves();
 
     // rabbits stuff
-
     // spreads rabbits
     void rabbitSpread();
 
     // wolves stuff
-
     // allows the wolf to eat and check if wolf is ready to die
     void wolfTryToEatOrDie();
+
     // checks the possibility of making offspring and executes it
     void Wolf_MMakeOffspring();
 
@@ -113,13 +113,15 @@ private:
     void initView();
 
     // global current field parameters calculation
-
     // counts how much rabbits are on the field
     int countOfRabbitsOnField();
+
     //counts how much female wolves are on the field
     int countOfWolf_WOnField();
+
     //counts how much male wolves are on the field
     int countOfWolf_MOnField();
+
     //counts how much fences are on the field
     int countOfFencesOnField();
 };
