@@ -28,11 +28,11 @@
 
 #include "rapidjson/document.h"
 #include "rapidjson/filereadstream.h"
-#include "../model/include/Field.h"
-#include "../view/ConsoleView.h"
-#include "../view/GUIView.h"
-#include "../view/BaseView.h"
-#include "../utils/utils.h"
+#include "../../model/include/Field.h"
+#include "../../view/ConsoleView.h"
+#include "../../view/GUIView.h"
+#include "../../view/BaseView.h"
+#include "../../utils/utils.h"
 
 // Controller - class that accepts input and converts it to commands for the model and view
 class Controller {

@@ -18,23 +18,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  =========================================================================== */
 
-#ifndef CPP_WOLF_M_H
-#define CPP_WOLF_M_H
+#ifndef CPP_RABBIT_H
+#define CPP_RABBIT_H
 
-#include "Wolf.h"
-#include "../../utils/utils.h"
+#include <vector>
+#include <iostream>
 
-// Wolf_M - class for male wolf-agents, that describe their common properties
-class Wolf_M: public Wolf {
+#include "Animal.h"
+#include "../../../utils/utils.h"
+
+// Rabbit - class for rabbit-agents, that describes their common properties
+class Rabbit: public Animal {
 private:
-    float health; // contains how much health this agent has now (if < 0 - it dies)
-    int chosenMoveDirection; // path (cell numb), which is chosen by the Wolf_M (according to some properties) to go
+    int chosenMoveDirection; // path (cell numb), which is chosen by the rabbit (according to some properties) to go
 
 public:
-    Wolf_M();
-    ~Wolf_M();
-    float getHealth();
-    void setHealth(float _health);
+    Rabbit();
+    ~Rabbit();
 
     // chooses on which cell from the list of currently available cells
     // on the field to move at the next step
@@ -44,4 +44,4 @@ public:
     void setChosenMoveDirection(int direction);
 protected:
 };
-#endif //CPP_WOLF_M_H
+#endif //CPP_RABBIT_H

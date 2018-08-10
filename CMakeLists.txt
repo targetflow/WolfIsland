@@ -22,9 +22,9 @@ cmake_minimum_required(VERSION 3.8)
 project(WolfIsland)
 
 set(CMAKE_CXX_STANDARD 11)
-set(SOURCE_FILES main.cpp controller/Controller.cpp model/source/Field.cpp model/source/Cell.cpp
-        model/source/Rabbit.cpp model/source/Wolf_M.cpp model/source/Wolf_W.cpp view/ConsoleView.cpp
-        view/GUIView.cpp utils/utils.cpp)
+set(SOURCE_FILES main.cpp src/controller/Controller.cpp src/model/source/Field.cpp src/model/source/Cell.cpp
+        src/model/source/Rabbit.cpp src/model/source/Wolf_M.cpp src/model/source/Wolf_W.cpp src/view/ConsoleView.cpp
+        src/view/GUIView.cpp src/utils/utils.cpp)
 add_executable(WolfIsland ${SOURCE_FILES} main.cpp)
 
 # Detect and add SFML
